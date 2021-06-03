@@ -11,5 +11,82 @@
 #
 # Both `a` and `b` are iterables, and the result must be iterable too. Don't use lists! Use `yield`.
 # Both `a` and `b` are sorted, and the result must be sorted too.
+
+from pushback import PushBackIterator
+
+# Without PushBackIterator
+
+
+def merge_ugly(a, b):
+    def next_or_none(it):
+        try:
+            return next(it)
+        except StopIteration:
+            return None
+
+    a = iter(a)
+    b = iter(b)
+
+    x = next_or_none(a)
+    y = next_or_none(b)
+
+    while x is not None and y is not None:
+        if x <= y:
+            yield x
+            x = next_or_none(a)
+        else:
+            yield y
+            y = next_or_none(b)
+
+    if x is not None:
+        yield x
+    if y is not None:
+        yield y
+
+    yield from a
+    yield from b
+
+
+# Using PushBackIterator
+
+
 def merge(a, b):
-    pass
+    a = PushBackIterator(iter(a))
+    b = PushBackIterator(iter(b))
+    while True:
+        try:
+            x = next(a)
+        except StopIteration:
+            break
+        try:
+            y = next(b)
+        except StopIteration:
+            a.push_back(x)
+            break
+        if x <= y:
+            yield x
+            b.push_back(y)
+        else:
+            yield y
+            a.push_back(x)
+    yield from a
+    yield from b
+
+
+# Using PushBackIteretor with implemented has_next method
+
+
+def merge_better(a, b):
+    a = PushBackIterator(iter(a))
+    b = PushBackIterator(iter(b))
+    while a.has_next() and b.has_next():
+        x = next(a)
+        y = next(b)
+        if x <= y:
+            yield x
+            b.push_back(y)
+        else:
+            yield y
+            a.push_back(x)
+    yield from a
+    yield from b
