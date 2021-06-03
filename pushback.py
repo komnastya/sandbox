@@ -15,9 +15,10 @@ class PushBackIterator:
         self.added_elements.append(element)
 
     def has_next(self):
+        if self.added_elements:
+            return True
         try:
-            a = next(self)
-            self.push_back(a)
+            self.push_back(next(self.iterator))
             return True
         except StopIteration:
             return False
