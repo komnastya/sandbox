@@ -13,3 +13,11 @@ class PushBackIterator:
 
     def push_back(self, element):
         self.added_elements.append(element)
+
+    def has_next(self):
+        try:
+            a = next(self)
+            self.push_back(a)
+            return True
+        except StopIteration:
+            return False
