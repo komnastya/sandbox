@@ -18,31 +18,21 @@ from pushback import PushBackIterator
 
 
 def merge_ugly(a, b):
-    def next_or_none(it):
-        try:
-            return next(it)
-        except StopIteration:
-            return None
-
     a = iter(a)
     b = iter(b)
-
-    x = next_or_none(a)
-    y = next_or_none(b)
-
+    x = next(a, None)
+    y = next(b, None)
     while x is not None and y is not None:
         if x <= y:
             yield x
-            x = next_or_none(a)
+            x = next(a, None)
         else:
             yield y
-            y = next_or_none(b)
-
+            y = next(b, None)
     if x is not None:
         yield x
     if y is not None:
         yield y
-
     yield from a
     yield from b
 
