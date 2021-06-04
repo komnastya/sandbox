@@ -31,14 +31,12 @@ def non_repeating_two(it):
 
 def non_repeating_better(it):
     it = iter(it)
-    last = None
-    has_last = False
+    last = object()
     while True:
         try:
             current = next(it)
         except StopIteration:
             break
-        if not has_last or current != last:
+        if current != last:
             yield current
         last = current
-        has_last = True

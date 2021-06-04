@@ -33,8 +33,11 @@ class TestNonRepeating(unittest.TestCase):
                          [1, 2, 1, 2, 1])
         self.assertEqual(list(non_repeating_better([1, 1, 1, 1, 1])), [1])
         self.assertEqual(list(non_repeating_better([1, 1, 2, 2, 2])), [1, 2])
-        self.assertEqual(list(non_repeating_better([1, 2, 2, 3, 4, 4, 5, 6, 6])),
-                         [1, 2, 3, 4, 5, 6])
+        self.assertEqual(list(non_repeating_better([1, 2, 2, 3, 4, 4, 5, 6, 6])), [1, 2, 3, 4, 5, 6])
+        self.assertEqual(list(non_repeating_better([None, None, None])), [None])
+        self.assertEqual(list(non_repeating_better([True, True, True])), [True])
+        self.assertEqual(list(non_repeating_better([True, True, False, False, True, False])), [True, False, True, False])
+
 
 
 
