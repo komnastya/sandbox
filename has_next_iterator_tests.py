@@ -34,20 +34,6 @@ class TestHasNextIterator(unittest.TestCase):
         with self.assertRaises(StopIteration):
             next(nums)
 
-    def test_inside_get_next_method_exception(self):
-        nums = HasNextIterator(iter([1, 2, 3]))
-
-        self.assertEqual(nums._next, 1)
-
-        nums._get_next()
-        self.assertEqual(nums._next, 2)
-
-        nums._get_next()
-        self.assertEqual(nums._next, 3)
-
-        nums._get_next()
-        self.assertEqual(nums._next, NOTHING)
-
 
 if __name__ == "__main__":
     unittest.main()
