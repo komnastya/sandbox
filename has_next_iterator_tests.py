@@ -1,5 +1,5 @@
 import unittest
-from has_next_iterator import HasNextIterator
+from has_next_iterator import HasNextIterator, NOTHING
 
 
 class TestHasNextIterator(unittest.TestCase):
@@ -23,6 +23,30 @@ class TestHasNextIterator(unittest.TestCase):
 
         self.assertFalse(nums.has_next())
         self.assertFalse(nums.has_next())
+
+    def test_next_method_exception(self):
+        nums = HasNextIterator(iter([1, 2, 3]))
+
+        next(nums)
+        next(nums)
+        next(nums)
+
+        with self.assertRaises(StopIteration):
+            next(nums)
+
+    def test_inside_get_next_method_exception(self):
+        nums = HasNextIterator(iter([1, 2, 3]))
+
+        self.assertEqual(nums._next, 1)
+
+        nums._get_next()
+        self.assertEqual(nums._next, 2)
+
+        nums._get_next()
+        self.assertEqual(nums._next, 3)
+
+        nums._get_next()
+        self.assertEqual(nums._next, NOTHING)
 
 
 if __name__ == "__main__":
