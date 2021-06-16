@@ -1,5 +1,5 @@
 import unittest
-from has_next_iterator import HasNextIterator, NOTHING
+from has_next_iterator import HasNextIterator
 
 
 class TestHasNextIterator(unittest.TestCase):
