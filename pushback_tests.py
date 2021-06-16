@@ -53,6 +53,32 @@ class TestMerge(unittest.TestCase):
         nums.push_back(1)
         self.assertEqual(list(nums), [1])
 
+    def test_exceptions(self):
+        nums = PushBackIterator(iter([1, 2, 3]))
+
+        next(nums)
+        next(nums)
+        next(nums)
+
+        with self.assertRaises(StopIteration):
+            next(nums)
+
+    def test_exception_with_push(self):
+        nums = PushBackIterator(iter([1, 2]))
+        next(nums)
+        next(nums)
+
+        nums.push_back(1)
+        nums.push_back(2)
+
+        next(nums)
+        next(nums)
+
+        with self.assertRaises(StopIteration):
+            next(nums)
+
+
+
 
 if __name__ == "__main__":
     unittest.main()
