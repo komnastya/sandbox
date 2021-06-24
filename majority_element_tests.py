@@ -1,5 +1,5 @@
 import unittest
-from majority_element import majority_element_for, majority_element_while
+from majority_element import majority_element_for, majority_element_while, majority_element
 
 
 class TestMajorElement(unittest.TestCase):
@@ -16,6 +16,12 @@ class TestMajorElement(unittest.TestCase):
         self.assertEqual(majority_element_while([1, 1, 1]), 1)
         self.assertEqual(majority_element_while([3, 2, 3]), 3)
         self.assertEqual(majority_element_while([2, 2, 1, 1, 1, 2, 2]), 2)
+
+    def test_majority_element(self):
+        self.assertEqual(majority_element([1]), 1)
+        self.assertEqual(majority_element([1, 1, 1]), 1)
+        self.assertEqual(majority_element([3, 2, 3]), 3)
+        self.assertEqual(majority_element([2, 2, 1, 1, 1, 2, 2]), 2)
 
 
 if __name__ == "__main__":

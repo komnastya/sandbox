@@ -40,3 +40,31 @@ def majority_element_while(nums):
             major = nums[i]
         i += 1
     return major
+
+
+def majority_element_count(nums):
+    for element in nums:
+        counter = nums.count(element)
+        if counter > len(nums) / 2:
+            return element
+
+
+def majority_element_dict(nums):
+    counters = {nums.count(element): element for element in nums}
+    major = max(counters.keys())
+    return counters.get(major)
+
+
+#Boyer–Moore majority vote algorithm
+
+def majority_element(nums):
+    counter = 0
+    for x in nums:
+        if counter == 0:
+            majority_element = x
+            counter = 1
+        elif majority_element == x:
+            counter += 1
+        else:
+            counter -= 1
+    return majority_element
