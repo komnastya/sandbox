@@ -3,7 +3,7 @@ class MySet:
         self.buckets = [None] * capacity
         self.len = 0
 
-    def insert(self, elem):
+    def add(self, elem):
         index = self._bucket_index(elem)
         bucket = self.buckets[index]
         if bucket is None:
@@ -36,16 +36,16 @@ class MySet:
     def union(self, other):
         result = MySet()
         for elem in self:
-            result.insert(elem)
+            result.add(elem)
         for elem in other:
-            result.insert(elem)
+            result.add(elem)
         return result
 
     def intersection(self, other):
         result = MySet()
         for elem in self:
             if elem in other:
-                result.insert(elem)
+                result.add(elem)
         return result
 
     def __iter__(self):
