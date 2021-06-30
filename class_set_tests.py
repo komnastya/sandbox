@@ -1,5 +1,5 @@
 import unittest
-from classnumberset import MySet
+from class_set import MySet
 
 
 class TestNumberSetCalss(unittest.TestCase):
