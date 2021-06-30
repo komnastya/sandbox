@@ -36,7 +36,7 @@ class MySet:
     def _bucket_index(self, elem):
         return abs(hash(elem)) % len(self.buckets)
 
-    def __add__(self, other):
+    def __or__(self, other):
         return self.union(other)
 
     def union(self, other):

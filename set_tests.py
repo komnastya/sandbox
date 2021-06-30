@@ -18,22 +18,6 @@ class TestMySet(unittest.TestCase):
         s.add(1)
         self.assertEqual(sorted(list(s)), [1])
 
-    def test_add_underscore(self):
-        set_one = MySet()
-        set_two = MySet()
-
-        self.assertEqual(list(set_one + set_two), [])
-
-        for x in range(1, 4):
-            set_one.add(x)
-
-        self.assertEqual(list(set_one + set_two), [1, 2, 3])
-
-        for x in range(2, 6):
-            set_two.add(x)
-
-        self.assertEqual(list(set_one + set_two), [1, 2, 3, 4, 5])
-
     def test_delete(self):
         s = MySet()
         self.assertFalse(s.has(1))
@@ -91,6 +75,23 @@ class TestMySet(unittest.TestCase):
             set_two.add(x)
 
         self.assertEqual(list(set_one.union(set_two)), [0, 1, 2, 3, 4, 5])
+
+    def test_or_underscore(self):
+        set_one = MySet()
+        set_two = MySet()
+
+        self.assertEqual(list(set_one | set_two), [])
+
+        for x in range(0, 4):
+            set_one.add(x)
+
+        self.assertEqual(list(set_one | set_two), [0, 1, 2, 3])
+
+        for x in range(2, 6):
+            set_two.add(x)
+
+        self.assertEqual(list(set_one | set_two), [0, 1, 2, 3, 4, 5])
+
 
     def test_intersection(self):
         set_one = MySet()
