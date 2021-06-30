@@ -174,6 +174,22 @@ class TestMySet(unittest.TestCase):
 
         self.assertEqual(list(set_one.symmetric_diff(set_two)), [0, 1, 4, 5])
 
+    def test_xor_underscore(self):
+        set_one = MySet()
+        set_two = MySet()
+
+        self.assertEqual(list(set_one ^ set_two), [])
+
+        for x in range(0, 4):
+            set_one.add(x)
+
+        self.assertEqual(list(set_one ^ set_two), [0, 1, 2, 3])
+
+        for x in range(2, 6):
+            set_two.add(x)
+
+        self.assertEqual(list(set_one ^ set_two), [0, 1, 4, 5])
+
     def test_isdisjoint(self):
         set_one = MySet()
         set_two = MySet()

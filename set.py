@@ -77,6 +77,9 @@ class MySet:
                 result.add(elem)
         return result
 
+    def __xor__(self, other):
+        return self.symmetric_diff(other)
+
     def isdisjoint(self, other):
         for elem in self:
             if elem in other:
