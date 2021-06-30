@@ -109,6 +109,23 @@ class TestMySet(unittest.TestCase):
 
         self.assertEqual(list(set_one.intersection(set_two)), [2, 3])
 
+    def test_and_underscore(self):
+        set_one = MySet()
+        set_two = MySet()
+
+        self.assertEqual(list(set_one & set_two), [])
+
+        for x in range(0, 4):
+            set_one.add(x)
+
+        self.assertEqual(list(set_one & set_two), [])
+
+        for x in range(2, 6):
+            set_two.add(x)
+
+        self.assertEqual(list(set_one & set_two), [2, 3])
+
+
     def test_difference(self):
         set_one = MySet()
         set_two = MySet()

@@ -54,6 +54,9 @@ class MySet:
                 result.add(elem)
         return result
 
+    def __and__(self, other):
+        return self.intersection(other)
+
     def difference(self, other):
         result = MySet()
         for elem in self:
