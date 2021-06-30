@@ -76,7 +76,7 @@ class TestMySet(unittest.TestCase):
 
         self.assertEqual(list(set_one.union(set_two)), [0, 1, 2, 3, 4, 5])
 
-    def test_or_underscore(self):
+    def test_or_operator(self):
         set_one = MySet()
         set_two = MySet()
 
@@ -108,7 +108,7 @@ class TestMySet(unittest.TestCase):
 
         self.assertEqual(list(set_one.intersection(set_two)), [2, 3])
 
-    def test_and_underscore(self):
+    def test_and_operator(self):
         set_one = MySet()
         set_two = MySet()
 
@@ -141,7 +141,7 @@ class TestMySet(unittest.TestCase):
         self.assertEqual(list(set_one.difference(set_two)), [0, 1])
         self.assertEqual(list(set_two.difference(set_one)), [4, 5])
 
-    def test_sub_underscore(self):
+    def test_sub_operator(self):
         set_one = MySet()
         set_two = MySet()
 
@@ -174,7 +174,7 @@ class TestMySet(unittest.TestCase):
 
         self.assertEqual(list(set_one.symmetric_diff(set_two)), [0, 1, 4, 5])
 
-    def test_xor_underscore(self):
+    def test_xor_operator(self):
         set_one = MySet()
         set_two = MySet()
 
