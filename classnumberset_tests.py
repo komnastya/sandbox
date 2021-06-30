@@ -66,12 +66,12 @@ class TestNumberSetCalss(unittest.TestCase):
 
         self.assertEqual(list(set_one.union(set_two)), [])
 
-        for x in range (0,4):
+        for x in range(0, 4):
             set_one.add(x)
 
         self.assertEqual(list(set_one.union(set_two)), [0, 1, 2, 3])
 
-        for x in range (2,6):
+        for x in range(2, 6):
             set_two.add(x)
 
         self.assertEqual(list(set_one.union(set_two)), [0, 1, 2, 3, 4, 5])
@@ -82,15 +82,32 @@ class TestNumberSetCalss(unittest.TestCase):
 
         self.assertEqual(list(set_one.intersection(set_two)), [])
 
-        for x in range (0,4):
+        for x in range(0, 4):
             set_one.add(x)
 
         self.assertEqual(list(set_one.intersection(set_two)), [])
 
-        for x in range (2,6):
+        for x in range(2, 6):
             set_two.add(x)
 
-        self.assertEqual(list(set_one.intersection(set_two)), [2,3])
+        self.assertEqual(list(set_one.intersection(set_two)), [2, 3])
+
+    def test_difference(self):
+        set_one = MySet()
+        set_two = MySet()
+
+        self.assertEqual(list(set_one.difference(set_two)), [])
+
+        for x in range(0, 4):
+            set_one.add(x)
+
+        self.assertEqual(list(set_one.difference(set_two)), [0, 1, 2, 3])
+
+        for x in range(2, 6):
+            set_two.add(x)
+
+        self.assertEqual(list(set_one.difference(set_two)), [0, 1])
+        self.assertEqual(list(set_two.difference(set_one)), [4, 5])
 
 
 if __name__ == "__main__":

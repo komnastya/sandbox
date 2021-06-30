@@ -48,6 +48,13 @@ class MySet:
                 result.add(elem)
         return result
 
+    def difference(self, other):
+        result = MySet()
+        for elem in self:
+            if elem not in other:
+                result.add(elem)
+        return result
+
     def __iter__(self):
         for bucket in self.buckets:
             if bucket is not None:
