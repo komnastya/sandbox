@@ -69,7 +69,10 @@ class MySet:
         return result
 
     def isdisjoint(self, other):
-        return list(self.intersection(other)) == []
+        for elem in self:
+            if elem in other:
+                return False
+        return True
 
     def __iter__(self):
         for bucket in self.buckets:
