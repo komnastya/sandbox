@@ -92,7 +92,6 @@ class TestMySet(unittest.TestCase):
 
         self.assertEqual(list(set_one | set_two), [0, 1, 2, 3, 4, 5])
 
-
     def test_intersection(self):
         set_one = MySet()
         set_two = MySet()
@@ -125,7 +124,6 @@ class TestMySet(unittest.TestCase):
 
         self.assertEqual(list(set_one & set_two), [2, 3])
 
-
     def test_difference(self):
         set_one = MySet()
         set_two = MySet()
@@ -142,6 +140,23 @@ class TestMySet(unittest.TestCase):
 
         self.assertEqual(list(set_one.difference(set_two)), [0, 1])
         self.assertEqual(list(set_two.difference(set_one)), [4, 5])
+
+    def test_sub_underscore(self):
+        set_one = MySet()
+        set_two = MySet()
+
+        self.assertEqual(list(set_one - set_two), [])
+
+        for x in range(0, 4):
+            set_one.add(x)
+
+        self.assertEqual(list(set_one - set_two), [0, 1, 2, 3])
+
+        for x in range(2, 6):
+            set_two.add(x)
+
+        self.assertEqual(list(set_one - set_two), [0, 1])
+        self.assertEqual(list(set_two - set_one), [4, 5])
 
     def test_symmetric_diff(self):
         set_one = MySet()

@@ -64,6 +64,9 @@ class MySet:
                 result.add(elem)
         return result
 
+    def __sub__(self, other):
+        return self.difference(other)
+
     def symmetric_diff(self, other):
         result = MySet()
         for elem in self:
