@@ -80,6 +80,12 @@ class MySet:
                 return False
         return True
 
+    def issuperset(self, other):
+        for elem in other:
+            if elem not in self:
+                return False
+        return True
+
     def __iter__(self):
         for bucket in self.buckets:
             if bucket is not None:

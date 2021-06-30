@@ -157,5 +157,21 @@ class TestNumberSetCalss(unittest.TestCase):
         self.assertTrue(set_one.issubset(set_two))
         self.assertFalse(set_two.issubset(set_one))
 
+    def test_issuperset(self):
+        set_one = MySet()
+        set_two = MySet()
+
+        for x in range (7):
+            set_one.add(x)
+
+        self.assertTrue(set_one.issuperset(set_two))
+
+        for x in range(3):
+            set_two.add(x)
+
+        self.assertTrue(set_one.issuperset(set_two))
+        self.assertFalse(set_two.issuperset(set_one))
+        self.assertTrue(set_two.issubset(set_one))
+
 if __name__ == "__main__":
     unittest.main(exit=False)
