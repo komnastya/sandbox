@@ -125,6 +125,22 @@ class TestNumberSetCalss(unittest.TestCase):
 
         self.assertEqual(list(set_one.symmetric_diff(set_two)), [0, 1, 4, 5])
 
+    def test_isdisjoint(self):
+        set_one = MySet()
+        set_two = MySet()
+
+        for x in range (11):
+            set_one.add(x)
+
+        for x in range(20, 29):
+            set_two.add(x)
+
+        self.assertTrue(set_one.isdisjoint(set_two))
+
+        for x in range (1,10):
+            set_two.add(x)
+
+        self.assertFalse(set_one.isdisjoint(set_two))
 
 if __name__ == "__main__":
     unittest.main(exit=False)

@@ -1,3 +1,6 @@
+from ranges import MyRange
+
+
 class MySet:
     def __init__(self, capacity=100):
         self.buckets = [None] * capacity
@@ -64,6 +67,9 @@ class MySet:
             if elem not in self:
                 result.add(elem)
         return result
+
+    def isdisjoint(self, other):
+        return list(self.intersection(other)) == []
 
     def __iter__(self):
         for bucket in self.buckets:
