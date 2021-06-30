@@ -1,4 +1,4 @@
-class NumberSet:
+class MySet:
     def __init__(self, capacity=100):
         self.buckets = [None] * capacity
         self.len = 0
@@ -31,7 +31,7 @@ class NumberSet:
         return bucket is not None and elem in bucket
 
     def _bucket_index(self, elem):
-        return elem % len(self.buckets)
+        return abs(hash(elem)) % len(self.buckets)
 
     def __iter__(self):
         for bucket in self.buckets:
