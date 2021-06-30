@@ -2,7 +2,7 @@ import unittest
 from set import MySet
 
 
-class TestNumberSetCalss(unittest.TestCase):
+class TestMySet(unittest.TestCase):
     def test_insert(self):
         s = MySet()
         self.assertEqual(list(s), [])
@@ -10,7 +10,7 @@ class TestNumberSetCalss(unittest.TestCase):
         s.add(11)
         self.assertEqual(sorted(list(s)), [1, 11])
 
-    def test_insert_duplicates(self):
+    def test_add_duplicates(self):
         s = MySet()
         self.assertEqual(list(s), [])
         s.add(1)
@@ -129,7 +129,7 @@ class TestNumberSetCalss(unittest.TestCase):
         set_one = MySet()
         set_two = MySet()
 
-        for x in range (11):
+        for x in range(11):
             set_one.add(x)
 
         for x in range(20, 29):
@@ -137,7 +137,7 @@ class TestNumberSetCalss(unittest.TestCase):
 
         self.assertTrue(set_one.isdisjoint(set_two))
 
-        for x in range (1,10):
+        for x in range(1, 10):
             set_two.add(x)
 
         self.assertFalse(set_one.isdisjoint(set_two))
@@ -146,7 +146,7 @@ class TestNumberSetCalss(unittest.TestCase):
         set_one = MySet()
         set_two = MySet()
 
-        for x in range (3):
+        for x in range(3):
             set_one.add(x)
 
         self.assertFalse(set_one.issubset(set_two))
@@ -161,7 +161,7 @@ class TestNumberSetCalss(unittest.TestCase):
         set_one = MySet()
         set_two = MySet()
 
-        for x in range (7):
+        for x in range(7):
             set_one.add(x)
 
         self.assertTrue(set_one.issuperset(set_two))
@@ -172,6 +172,7 @@ class TestNumberSetCalss(unittest.TestCase):
         self.assertTrue(set_one.issuperset(set_two))
         self.assertFalse(set_two.issuperset(set_one))
         self.assertTrue(set_two.issubset(set_one))
+
 
 if __name__ == "__main__":
     unittest.main(exit=False)
