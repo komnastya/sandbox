@@ -142,5 +142,20 @@ class TestNumberSetCalss(unittest.TestCase):
 
         self.assertFalse(set_one.isdisjoint(set_two))
 
+    def test_issubset(self):
+        set_one = MySet()
+        set_two = MySet()
+
+        for x in range (3):
+            set_one.add(x)
+
+        self.assertFalse(set_one.issubset(set_two))
+
+        for x in range(5):
+            set_two.add(x)
+
+        self.assertTrue(set_one.issubset(set_two))
+        self.assertFalse(set_two.issubset(set_one))
+
 if __name__ == "__main__":
     unittest.main(exit=False)

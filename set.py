@@ -74,6 +74,12 @@ class MySet:
                 return False
         return True
 
+    def issubset(self, other):
+        for elem in self:
+            if elem not in other:
+                return False
+        return True
+
     def __iter__(self):
         for bucket in self.buckets:
             if bucket is not None:
