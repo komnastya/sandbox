@@ -33,6 +33,21 @@ class MySet:
     def _bucket_index(self, elem):
         return abs(hash(elem)) % len(self.buckets)
 
+    def union(self, other):
+        result = MySet()
+        for elem in self:
+            result.insert(elem)
+        for elem in other:
+            result.insert(elem)
+        return result
+
+    def intersection(self, other):
+        result = MySet()
+        for elem in self:
+            if elem in other:
+                result.insert(elem)
+        return result
+
     def __iter__(self):
         for bucket in self.buckets:
             if bucket is not None:
