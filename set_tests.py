@@ -105,6 +105,9 @@ class TestMySet(unittest.TestCase):
         set_one |= set_two
         self.assertEqual(list(set_one), [1, 2, 3, 4, 5, 6, 7])
 
+        set_two |= set_one
+        self.assertEqual(list(set_two), [1, 2, 3, 4, 5, 6, 7])
+
     def test_intersection(self):
         set_one = MySet()
         set_two = MySet()
