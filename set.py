@@ -90,7 +90,7 @@ class MySet:
     def __isub__(self, other):
         return self.difference_update(other)
 
-    def symmetric_diff(self, other):
+    def symmetric_difference(self, other):
         result = MySet()
         for elem in self:
             if elem not in other:
@@ -101,7 +101,7 @@ class MySet:
         return result
 
     def __xor__(self, other):
-        return self.symmetric_diff(other)
+        return self.symmetric_difference(other)
 
     def __ixor__(self, other):
         for elem in self:

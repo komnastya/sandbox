@@ -290,21 +290,21 @@ class TestMySet(unittest.TestCase):
         set_two -= set_one
         self.assertEqual(list(set_two), [2, 3, 4, 5])
 
-    def test_symmetric_diff(self):
+    def test_symmetric_difference(self):
         set_one = MySet()
         set_two = MySet()
 
-        self.assertEqual(list(set_one.symmetric_diff(set_two)), [])
+        self.assertEqual(list(set_one.symmetric_difference(set_two)), [])
 
         for x in range(0, 4):
             set_one.add(x)
 
-        self.assertEqual(list(set_one.symmetric_diff(set_two)), [0, 1, 2, 3])
+        self.assertEqual(list(set_one.symmetric_difference(set_two)), [0, 1, 2, 3])
 
         for x in range(2, 6):
             set_two.add(x)
 
-        self.assertEqual(list(set_one.symmetric_diff(set_two)), [0, 1, 4, 5])
+        self.assertEqual(list(set_one.symmetric_difference(set_two)), [0, 1, 4, 5])
 
     def test_xor_operator(self):
         set_one = MySet()
