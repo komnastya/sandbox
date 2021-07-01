@@ -98,7 +98,7 @@ class MySet:
         for elem in self:
             if elem in other:
                 self.discard(elem)
-                other.delete(elem)
+                other.discard(elem)
         for elem in other:
             if elem not in self:
                 self.add(elem)
