@@ -28,6 +28,19 @@ class TestMySet(unittest.TestCase):
         s.discard(1)
         self.assertFalse(s.has(1))
 
+    def test_remove(self):
+        s = MySet()
+        self.assertEqual(list(s), [])
+
+        s.add(1)
+        self.assertEqual(list(s), [1])
+
+        s.remove(1)
+        self.assertEqual(list(s), [])
+
+        with self.assertRaises(KeyError):
+            s.remove(2)
+
     def test_has(self):
         s = MySet()
         self.assertFalse(s.has(1))

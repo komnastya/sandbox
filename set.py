@@ -25,6 +25,17 @@ class MySet:
             if not bucket:
                 self.buckets[index] = None
 
+    def remove(self, elem):
+        index = self._bucket_index(elem)
+        bucket = self.buckets[index]
+        if bucket is None or elem not in bucket:
+            raise KeyError
+        if bucket is not None:
+            bucket.remove(elem)
+            self.len -= 1
+        if not bucket:
+            self.buckets[index] = None
+
     def has(self, elem):
         index = self._bucket_index(elem)
         bucket = self.buckets[index]
