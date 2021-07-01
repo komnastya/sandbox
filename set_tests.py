@@ -3,12 +3,30 @@ from set import MySet
 
 
 class TestMySet(unittest.TestCase):
-    def test_insert(self):
+    def test_add(self):
         s = MySet()
         self.assertEqual(list(s), [])
         s.add(1)
         s.add(11)
         self.assertEqual(sorted(list(s)), [1, 11])
+
+    def test_copy_method(self):
+        set_one = MySet()
+
+        set_one.add(1)
+        set_one.add(2)
+        set_one.add(3)
+
+        self.assertEqual(list(set_one), [1,2,3])
+
+        set_two = set_one.copy()
+
+        set_one.add(4)
+        set_two.remove(3)
+
+        self.assertEqual(list(set_one), [1,2,3,4])
+        self.assertEqual(list(set_two), [1,2])
+
 
     def test_add_duplicates(self):
         s = MySet()
