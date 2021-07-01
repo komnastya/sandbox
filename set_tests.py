@@ -92,6 +92,19 @@ class TestMySet(unittest.TestCase):
 
         self.assertEqual(list(set_one | set_two), [0, 1, 2, 3, 4, 5])
 
+    def test_ior_operator(self):
+        set_one = MySet()
+        set_two = MySet()
+
+        for x in range(1, 5):
+            set_one.add(x)
+
+        for y in range(3, 8):
+            set_two.add(y)
+
+        set_one |= set_two
+        self.assertEqual(list(set_one), [1, 2, 3, 4, 5, 6, 7])
+
     def test_intersection(self):
         set_one = MySet()
         set_two = MySet()

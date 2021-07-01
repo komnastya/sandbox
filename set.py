@@ -36,6 +36,11 @@ class MySet:
     def __or__(self, other):
         return self.union(other)
 
+    def __ior__(self, other):
+        for elem in other:
+            self.add(elem)
+        return self
+
     def union(self, other):
         result = MySet()
         for elem in self:
