@@ -92,6 +92,29 @@ class TestMySet(unittest.TestCase):
 
         self.assertEqual(list(set_one | set_two), [0, 1, 2, 3, 4, 5])
 
+    def test_union_update(self):
+        set_one = MySet()
+        set_two = MySet()
+
+        set_one.union_update(set_two)
+        self.assertEqual(list(set_one), [])
+
+        for x in range(0, 4):
+            set_one.add(x)
+
+        set_one.union_update(set_two)
+        self.assertEqual(list(set_one), [0, 1, 2, 3])
+
+        for x in range(2, 6):
+            set_two.add(x)
+
+        set_one.union_update(set_two)
+        self.assertEqual(list(set_one), [0, 1, 2, 3, 4, 5])
+
+        set_two.union_update(set_one)
+        self.assertEqual(list(set_two), [0, 1, 2, 3, 4, 5])
+
+
     def test_ior_operator(self):
         set_one = MySet()
         set_two = MySet()

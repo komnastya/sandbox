@@ -33,14 +33,6 @@ class MySet:
     def _bucket_index(self, elem):
         return abs(hash(elem)) % len(self.buckets)
 
-    def __or__(self, other):
-        return self.union(other)
-
-    def __ior__(self, other):
-        for elem in other:
-            self.add(elem)
-        return self
-
     def union(self, other):
         result = MySet()
         for elem in self:
@@ -48,6 +40,17 @@ class MySet:
         for elem in other:
             result.add(elem)
         return result
+
+    def __or__(self, other):
+        return self.union(other)
+
+    def union_update(self, other):
+        for elem in other:
+            self.add(elem)
+        return self
+
+    def __ior__(self, other):
+        return self.union_update(other)
 
     def intersection(self, other):
         result = MySet()
