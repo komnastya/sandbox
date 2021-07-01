@@ -44,13 +44,13 @@ class MySet:
     def __or__(self, other):
         return self.union(other)
 
-    def union_update(self, other):
+    def update(self, other):
         for elem in other:
             self.add(elem)
         return self
 
     def __ior__(self, other):
-        return self.union_update(other)
+        return self.update(other)
 
     def intersection(self, other):
         result = MySet()
