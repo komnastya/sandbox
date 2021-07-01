@@ -94,6 +94,16 @@ class MySet:
     def __xor__(self, other):
         return self.symmetric_diff(other)
 
+    def __ixor__(self, other):
+        for elem in self:
+            if elem in other:
+                self.delete(elem)
+                other.delete(elem)
+        for elem in other:
+            if elem not in self:
+                self.add(elem)
+        return self
+
     def isdisjoint(self, other):
         for elem in self:
             if elem in other:
