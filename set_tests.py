@@ -199,6 +199,28 @@ class TestMySet(unittest.TestCase):
         self.assertEqual(list(set_one - set_two), [0, 1])
         self.assertEqual(list(set_two - set_one), [4, 5])
 
+    def test_isub_operator(self):
+        set_one = MySet()
+        set_two = MySet()
+
+        set_one -= set_two
+        self.assertEqual(list(set_one), [])
+
+        for x in range(0, 4):
+            set_one.add(x)
+
+        set_one -= set_two
+        self.assertEqual(list(set_one), [0, 1, 2, 3])
+
+        for x in range(2, 6):
+            set_two.add(x)
+
+        set_one -= set_two
+        self.assertEqual(list(set_one), [0, 1])
+
+        set_two -= set_one
+        self.assertEqual(list(set_two), [2, 3, 4, 5])
+
     def test_symmetric_diff(self):
         set_one = MySet()
         set_two = MySet()

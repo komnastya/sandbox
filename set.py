@@ -75,6 +75,12 @@ class MySet:
     def __sub__(self, other):
         return self.difference(other)
 
+    def __isub__(self, other):
+        for elem in self:
+            if elem in other:
+                self.delete(elem)
+        return self
+
     def symmetric_diff(self, other):
         result = MySet()
         for elem in self:
