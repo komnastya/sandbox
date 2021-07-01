@@ -163,6 +163,32 @@ class TestMySet(unittest.TestCase):
 
         self.assertEqual(list(set_one & set_two), [2, 3])
 
+    def test_intersection_update(self):
+        set_one = MySet()
+        set_two = MySet()
+
+        set_one.intersection_update(set_two)
+        self.assertEqual(list(set_one), [])
+
+        for x in range(0, 4):
+            set_one.add(x)
+
+        set_one.intersection_update(set_two)
+        self.assertEqual(list(set_one), [])
+
+        for x in range(0, 4):
+            set_one.add(x)
+
+        for x in range(2, 6):
+            set_two.add(x)
+
+        set_one.intersection_update(set_two)
+        self.assertEqual(list(set_one), [2, 3])
+
+        set_two.intersection_update(set_one)
+        self.assertEqual(list(set_two), [2, 3])
+
+
     def test_iand_operator(self):
         set_one = MySet()
         set_two = MySet()

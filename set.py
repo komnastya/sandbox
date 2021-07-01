@@ -62,11 +62,14 @@ class MySet:
     def __and__(self, other):
         return self.intersection(other)
 
-    def __iand__(self, other):
+    def intersection_update(self, other):
         for elem in self:
             if elem not in other:
                 self.discard(elem)
         return self
+
+    def __iand__(self, other):
+        return self.intersection_update(other)
 
     def difference(self, other):
         result = MySet()
