@@ -13,7 +13,7 @@ class MySet:
             bucket.append(elem)
             self.len += 1
 
-    def delete(self, elem):
+    def discard(self, elem):
         index = self._bucket_index(elem)
         bucket = self.buckets[index]
         if bucket is not None:
@@ -62,7 +62,7 @@ class MySet:
     def __iand__(self, other):
         for elem in self:
             if elem not in other:
-                self.delete(elem)
+                self.discard(elem)
         return self
 
     def difference(self, other):
@@ -78,7 +78,7 @@ class MySet:
     def __isub__(self, other):
         for elem in self:
             if elem in other:
-                self.delete(elem)
+                self.discard(elem)
         return self
 
     def symmetric_diff(self, other):
@@ -97,7 +97,7 @@ class MySet:
     def __ixor__(self, other):
         for elem in self:
             if elem in other:
-                self.delete(elem)
+                self.discard(elem)
                 other.delete(elem)
         for elem in other:
             if elem not in self:

@@ -18,14 +18,14 @@ class TestMySet(unittest.TestCase):
         s.add(1)
         self.assertEqual(sorted(list(s)), [1])
 
-    def test_delete(self):
+    def test_discard(self):
         s = MySet()
         self.assertFalse(s.has(1))
-        s.delete(1)
+        s.discard(1)
         self.assertFalse(s.has(1))
         s.add(1)
         self.assertTrue(s.has(1))
-        s.delete(1)
+        s.discard(1)
         self.assertFalse(s.has(1))
 
     def test_has(self):
@@ -48,7 +48,7 @@ class TestMySet(unittest.TestCase):
         s.add(2)
         s.add(3)
         self.assertEqual(len(s), 3)
-        s.delete(3)
+        s.discard(3)
         self.assertEqual(len(s), 2)
 
     def test_str(self):
