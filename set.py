@@ -3,6 +3,13 @@ class MySet:
         self.buckets = [None] * capacity
         self.len = 0
 
+    def clear(self):
+        for bucket in self.buckets:
+            if bucket is not None:
+                index = self._bucket_index(bucket[0])
+                self.buckets[index] = None
+        return self
+
     def copy(self):
         result = MySet()
         for elem in self:
