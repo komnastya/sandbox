@@ -10,7 +10,7 @@ class TestMySet(unittest.TestCase):
         s.add(11)
         self.assertEqual(sorted(list(s)), [1, 11])
 
-    def test_clear_method(self):
+    def test_clear(self):
         s = MySet()
         s.add(1)
         s.add(2)
@@ -21,7 +21,7 @@ class TestMySet(unittest.TestCase):
         self.assertEqual(list(s), [])
         self.assertEqual(s.len, 0)
 
-    def test_copy_method(self):
+    def test_copy(self):
         a = MySet()
 
         a.add(1)
