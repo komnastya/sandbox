@@ -83,6 +83,11 @@ class TestMySet(unittest.TestCase):
         a = MySet()
         b = MySet()
 
+        self.assertFalse(a == list())
+        self.assertFalse(a == set())
+        self.assertFalse(a == tuple())
+        self.assertFalse(a == frozenset())
+
         self.assertTrue(a == a)
         self.assertTrue(b == b)
         self.assertTrue(a == b)
