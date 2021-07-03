@@ -3,6 +3,10 @@ from set import MySet
 
 
 class TestMySet(unittest.TestCase):
+    def test_init(self):
+        self.assertEqual(set(MySet()), set())
+        self.assertEqual(set(MySet([1, 2, 3])), {1, 2, 3})
+
     def test_add(self):
         s = MySet()
         self.assertEqual(list(s), [])

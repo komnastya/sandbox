@@ -1,7 +1,10 @@
 class MySet:
-    def __init__(self, capacity=100):
+    def __init__(self, other=None, capacity=100):
         self.buckets = [None] * capacity
         self.len = 0
+        if other is not None:
+            for elem in other:
+                self.add(elem)
 
     def clear(self):
         for i in range(len(self.buckets)):
