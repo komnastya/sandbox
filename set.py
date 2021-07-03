@@ -153,6 +153,21 @@ class MySet:
                 return False
         return True
 
+    def __eq__(self, other):
+        if self is other:
+            return True
+        if type(self) is not type(other):
+            return False
+        if len(self) != len(other):
+            return False
+        for elem in self:
+            if elem not in other:
+                return False
+        for elem in other:
+            if elem not in self:
+                return False
+        return True
+
     def __iter__(self):
         for bucket in self.buckets:
             if bucket is not None:

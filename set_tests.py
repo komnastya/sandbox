@@ -75,6 +75,20 @@ class TestMySet(unittest.TestCase):
         s.add(1)
         self.assertTrue(s.has(1))
 
+    def test_equality(self):
+        a = MySet()
+        b = MySet()
+
+        self.assertTrue(a == a)
+        self.assertTrue(b == b)
+        self.assertTrue(a == b)
+
+        a.add(1)
+        self.assertTrue(a != b)
+
+        b.add(1)
+        self.assertTrue(a == b)
+
     def test_iterator(self):
         s = MySet()
         s.add(1)
