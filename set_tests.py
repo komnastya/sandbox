@@ -52,13 +52,13 @@ class TestMySet(unittest.TestCase):
 
     def test_discard(self):
         s = MySet()
-        self.assertFalse(s.has(1))
+        self.assertFalse(1 in s)
         s.discard(1)
-        self.assertFalse(s.has(1))
+        self.assertFalse(1 in s)
         s.add(1)
-        self.assertTrue(s.has(1))
+        self.assertTrue(1 in s)
         s.discard(1)
-        self.assertFalse(s.has(1))
+        self.assertFalse(1 in s)
 
     def test_remove(self):
         s = MySet()
@@ -95,9 +95,9 @@ class TestMySet(unittest.TestCase):
 
     def test_has(self):
         s = MySet()
-        self.assertFalse(s.has(1))
+        self.assertFalse(1 in s)
         s.add(1)
-        self.assertTrue(s.has(1))
+        self.assertTrue(1 in s)
 
     def test_equality(self):
         a = MySet()

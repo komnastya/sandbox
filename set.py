@@ -61,7 +61,7 @@ class MySet:
                 return elem
         raise KeyError
 
-    def has(self, elem):
+    def __contains__(self, elem):
         index = self._bucket_index(elem)
         bucket = self.buckets[index]
         return bucket is not None and elem in bucket
