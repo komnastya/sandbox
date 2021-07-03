@@ -73,6 +73,26 @@ class TestMySet(unittest.TestCase):
         with self.assertRaises(KeyError):
             s.remove(2)
 
+    def test_pop(self):
+        s = MySet()
+        s.add(1)
+        s.add(2)
+        s.add(3)
+
+        self.assertEqual(len(s), 3)
+
+        a = s.pop()
+
+        self.assertEqual(a, 1)
+        self.assertFalse(a in s)
+        self.assertEqual(len(s), 2)
+
+        s.pop()
+        s.pop()
+
+        with self.assertRaises(KeyError):
+            s.pop()
+
     def test_has(self):
         s = MySet()
         self.assertFalse(s.has(1))

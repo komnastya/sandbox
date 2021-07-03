@@ -50,6 +50,17 @@ class MySet:
         if not bucket:
             self.buckets[index] = None
 
+    def pop(self):
+        for i in range(len(self.buckets)):
+            bucket = self.buckets[i]
+            if bucket is not None:
+                elem = bucket.pop()
+                self.len -= 1
+                if not bucket:
+                    self.buckets[i] = None
+                return elem
+        raise KeyError
+
     def has(self, elem):
         index = self._bucket_index(elem)
         bucket = self.buckets[index]
