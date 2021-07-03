@@ -1,7 +1,10 @@
 class MySet:
-    def __init__(self, capacity=100):
+    def __init__(self, other=None, capacity=100):
         self.buckets = [None] * capacity
         self.len = 0
+        if other is not None:
+            for elem in other:
+                self.add(elem)
 
     def clear(self):
         for i in range(len(self.buckets)):
@@ -148,6 +151,21 @@ class MySet:
         return True
 
     def issuperset(self, other):
+        for elem in other:
+            if elem not in self:
+                return False
+        return True
+
+    def __eq__(self, other):
+        if self is other:
+            return True
+        if type(self) is not type(other):
+            return False
+        if len(self) != len(other):
+            return False
+        for elem in self:
+            if elem not in other:
+                return False
         for elem in other:
             if elem not in self:
                 return False

@@ -3,48 +3,52 @@ from set import MySet
 
 
 class TestMySet(unittest.TestCase):
+    def test_init(self):
+        self.assertEqual(set(MySet()), set())
+        self.assertEqual(set(MySet({1, 2, 3})), {1, 2, 3})
+
     def test_add(self):
         s = MySet()
-        self.assertEqual(list(s), [])
+        self.assertEqual(set(s), set())
         s.add(1)
         s.add(11)
-        self.assertEqual(sorted(list(s)), [1, 11])
+        self.assertEqual(set(s), {1, 11})
 
-    def test_clear_method(self):
+    def test_clear(self):
         s = MySet()
         s.add(1)
         s.add(2)
         s.add(3)
-        self.assertEqual(list(s), [1, 2, 3])
+        self.assertEqual(set(s), {1, 2, 3})
 
         s.clear()
-        self.assertEqual(list(s), [])
+        self.assertEqual(set(s), set())
         self.assertEqual(s.len, 0)
 
-    def test_copy_method(self):
-        set_one = MySet()
+    def test_copy(self):
+        a = MySet()
 
-        set_one.add(1)
-        set_one.add(2)
-        set_one.add(3)
+        a.add(1)
+        a.add(2)
+        a.add(3)
 
-        self.assertEqual(list(set_one), [1, 2, 3])
+        self.assertEqual(set(a), {1, 2, 3})
 
-        set_two = set_one.copy()
+        b = a.copy()
 
-        set_one.add(4)
-        set_two.remove(3)
+        a.add(4)
+        b.remove(3)
 
-        self.assertEqual(list(set_one), [1, 2, 3, 4])
-        self.assertEqual(list(set_two), [1, 2])
+        self.assertEqual(set(a), {1, 2, 3, 4})
+        self.assertEqual(set(b), {1, 2})
 
     def test_add_duplicates(self):
         s = MySet()
-        self.assertEqual(list(s), [])
+        self.assertEqual(set(s), set())
         s.add(1)
         s.add(1)
         s.add(1)
-        self.assertEqual(sorted(list(s)), [1])
+        self.assertEqual(set(s), {1})
 
     def test_discard(self):
         s = MySet()
@@ -58,13 +62,13 @@ class TestMySet(unittest.TestCase):
 
     def test_remove(self):
         s = MySet()
-        self.assertEqual(list(s), [])
+        self.assertEqual(set(s), set())
 
         s.add(1)
-        self.assertEqual(list(s), [1])
+        self.assertEqual(set(s), {1})
 
         s.remove(1)
-        self.assertEqual(list(s), [])
+        self.assertEqual(set(s), set())
 
         with self.assertRaises(KeyError):
             s.remove(2)
@@ -75,12 +79,26 @@ class TestMySet(unittest.TestCase):
         s.add(1)
         self.assertTrue(s.has(1))
 
+    def test_equality(self):
+        a = MySet()
+        b = MySet()
+
+        self.assertTrue(a == a)
+        self.assertTrue(b == b)
+        self.assertTrue(a == b)
+
+        a.add(1)
+        self.assertTrue(a != b)
+
+        b.add(1)
+        self.assertTrue(a == b)
+
     def test_iterator(self):
         s = MySet()
         s.add(1)
         s.add(2)
         s.add(3)
-        self.assertEqual(sorted(list(s)), [1, 2, 3])
+        self.assertEqual(set(s), {1, 2, 3})
 
     def test_len(self):
         s = MySet()
@@ -102,336 +120,336 @@ class TestMySet(unittest.TestCase):
         self.assertEqual(str(s), "{1, 2, 3}")
 
     def test_union(self):
-        set_one = MySet()
-        set_two = MySet()
+        a = MySet()
+        b = MySet()
 
-        self.assertEqual(list(set_one.union(set_two)), [])
+        self.assertEqual(set(a.union(b)), set())
 
         for x in range(0, 4):
-            set_one.add(x)
+            a.add(x)
 
-        self.assertEqual(list(set_one.union(set_two)), [0, 1, 2, 3])
+        self.assertEqual(set(a.union(b)), {0, 1, 2, 3})
 
         for x in range(2, 6):
-            set_two.add(x)
+            b.add(x)
 
-        self.assertEqual(list(set_one.union(set_two)), [0, 1, 2, 3, 4, 5])
+        self.assertEqual(set(a.union(b)), {0, 1, 2, 3, 4, 5})
 
     def test_or_operator(self):
-        set_one = MySet()
-        set_two = MySet()
+        a = MySet()
+        b = MySet()
 
-        self.assertEqual(list(set_one | set_two), [])
+        self.assertEqual(set(a | b), set())
 
         for x in range(0, 4):
-            set_one.add(x)
+            a.add(x)
 
-        self.assertEqual(list(set_one | set_two), [0, 1, 2, 3])
+        self.assertEqual(set(a | b), {0, 1, 2, 3})
 
         for x in range(2, 6):
-            set_two.add(x)
+            b.add(x)
 
-        self.assertEqual(list(set_one | set_two), [0, 1, 2, 3, 4, 5])
+        self.assertEqual(set(a | b), {0, 1, 2, 3, 4, 5})
 
     def test_union_update(self):
-        set_one = MySet()
-        set_two = MySet()
+        a = MySet()
+        b = MySet()
 
-        set_one.update(set_two)
-        self.assertEqual(list(set_one), [])
+        a.update(b)
+        self.assertEqual(set(a), set())
 
         for x in range(0, 4):
-            set_one.add(x)
+            a.add(x)
 
-        set_one.update(set_two)
-        self.assertEqual(list(set_one), [0, 1, 2, 3])
+        a.update(b)
+        self.assertEqual(set(a), {0, 1, 2, 3})
 
         for x in range(2, 6):
-            set_two.add(x)
+            b.add(x)
 
-        set_one.update(set_two)
-        self.assertEqual(list(set_one), [0, 1, 2, 3, 4, 5])
+        a.update(b)
+        self.assertEqual(set(a), {0, 1, 2, 3, 4, 5})
 
-        set_two.update(set_one)
-        self.assertEqual(list(set_two), [0, 1, 2, 3, 4, 5])
+        b.update(a)
+        self.assertEqual(set(b), {0, 1, 2, 3, 4, 5})
 
     def test_ior_operator(self):
-        set_one = MySet()
-        set_two = MySet()
+        a = MySet()
+        b = MySet()
 
         for x in range(1, 5):
-            set_one.add(x)
+            a.add(x)
 
         for y in range(3, 8):
-            set_two.add(y)
+            b.add(y)
 
-        set_one |= set_two
-        self.assertEqual(list(set_one), [1, 2, 3, 4, 5, 6, 7])
+        a |= b
+        self.assertEqual(set(a), {1, 2, 3, 4, 5, 6, 7})
 
-        set_two |= set_one
-        self.assertEqual(list(set_two), [1, 2, 3, 4, 5, 6, 7])
+        b |= a
+        self.assertEqual(set(b), {1, 2, 3, 4, 5, 6, 7})
 
     def test_intersection(self):
-        set_one = MySet()
-        set_two = MySet()
+        a = MySet()
+        b = MySet()
 
-        self.assertEqual(list(set_one.intersection(set_two)), [])
+        self.assertEqual(set(a.intersection(b)), set())
 
         for x in range(0, 4):
-            set_one.add(x)
+            a.add(x)
 
-        self.assertEqual(list(set_one.intersection(set_two)), [])
+        self.assertEqual(set(a.intersection(b)), set())
 
         for x in range(2, 6):
-            set_two.add(x)
+            b.add(x)
 
-        self.assertEqual(list(set_one.intersection(set_two)), [2, 3])
+        self.assertEqual(set(a.intersection(b)), {2, 3})
 
     def test_and_operator(self):
-        set_one = MySet()
-        set_two = MySet()
+        a = MySet()
+        b = MySet()
 
-        self.assertEqual(list(set_one & set_two), [])
+        self.assertEqual(set(a & b), set())
 
         for x in range(0, 4):
-            set_one.add(x)
+            a.add(x)
 
-        self.assertEqual(list(set_one & set_two), [])
+        self.assertEqual(set(a & b), set())
 
         for x in range(2, 6):
-            set_two.add(x)
+            b.add(x)
 
-        self.assertEqual(list(set_one & set_two), [2, 3])
+        self.assertEqual(set(a & b), {2, 3})
 
     def test_intersection_update(self):
-        set_one = MySet()
-        set_two = MySet()
+        a = MySet()
+        b = MySet()
 
-        set_one.intersection_update(set_two)
-        self.assertEqual(list(set_one), [])
-
-        for x in range(0, 4):
-            set_one.add(x)
-
-        set_one.intersection_update(set_two)
-        self.assertEqual(list(set_one), [])
+        a.intersection_update(b)
+        self.assertEqual(set(a), set())
 
         for x in range(0, 4):
-            set_one.add(x)
+            a.add(x)
+
+        a.intersection_update(b)
+        self.assertEqual(set(a), set())
+
+        for x in range(0, 4):
+            a.add(x)
 
         for x in range(2, 6):
-            set_two.add(x)
+            b.add(x)
 
-        set_one.intersection_update(set_two)
-        self.assertEqual(list(set_one), [2, 3])
+        a.intersection_update(b)
+        self.assertEqual(set(a), {2, 3})
 
-        set_two.intersection_update(set_one)
-        self.assertEqual(list(set_two), [2, 3])
+        b.intersection_update(a)
+        self.assertEqual(set(b), {2, 3})
 
     def test_iand_operator(self):
-        set_one = MySet()
-        set_two = MySet()
+        a = MySet()
+        b = MySet()
 
-        set_one &= set_two
-        self.assertEqual(list(set_one), [])
-
-        for x in range(0, 4):
-            set_one.add(x)
-
-        set_one &= set_two
-        self.assertEqual(list(set_one), [])
+        a &= b
+        self.assertEqual(set(a), set())
 
         for x in range(0, 4):
-            set_one.add(x)
+            a.add(x)
+
+        a &= b
+        self.assertEqual(set(a), set())
+
+        for x in range(0, 4):
+            a.add(x)
 
         for x in range(2, 6):
-            set_two.add(x)
+            b.add(x)
 
-        set_one &= set_two
-        self.assertEqual(list(set_one), [2, 3])
+        a &= b
+        self.assertEqual(set(a), {2, 3})
 
-        set_two &= set_one
-        self.assertEqual(list(set_two), [2, 3])
+        b &= a
+        self.assertEqual(set(b), {2, 3})
 
     def test_difference(self):
-        set_one = MySet()
-        set_two = MySet()
+        a = MySet()
+        b = MySet()
 
-        self.assertEqual(list(set_one.difference(set_two)), [])
+        self.assertEqual(set(a.difference(b)), set())
 
         for x in range(0, 4):
-            set_one.add(x)
+            a.add(x)
 
-        self.assertEqual(list(set_one.difference(set_two)), [0, 1, 2, 3])
+        self.assertEqual(set(a.difference(b)), {0, 1, 2, 3})
 
         for x in range(2, 6):
-            set_two.add(x)
+            b.add(x)
 
-        self.assertEqual(list(set_one.difference(set_two)), [0, 1])
-        self.assertEqual(list(set_two.difference(set_one)), [4, 5])
+        self.assertEqual(set(a.difference(b)), {0, 1})
+        self.assertEqual(set(b.difference(a)), {4, 5})
 
     def test_sub_operator(self):
-        set_one = MySet()
-        set_two = MySet()
+        a = MySet()
+        b = MySet()
 
-        self.assertEqual(list(set_one - set_two), [])
+        self.assertEqual(set(a - b), set())
 
         for x in range(0, 4):
-            set_one.add(x)
+            a.add(x)
 
-        self.assertEqual(list(set_one - set_two), [0, 1, 2, 3])
+        self.assertEqual(set(a - b), {0, 1, 2, 3})
 
         for x in range(2, 6):
-            set_two.add(x)
+            b.add(x)
 
-        self.assertEqual(list(set_one - set_two), [0, 1])
-        self.assertEqual(list(set_two - set_one), [4, 5])
+        self.assertEqual(set(a - b), {0, 1})
+        self.assertEqual(set(b - a), {4, 5})
 
     def test_difference_update(self):
-        set_one = MySet()
-        set_two = MySet()
+        a = MySet()
+        b = MySet()
 
-        set_one.difference_update(set_two)
-        self.assertEqual(list(set_one), [])
+        a.difference_update(b)
+        self.assertEqual(set(a), set())
 
         for x in range(0, 4):
-            set_one.add(x)
+            a.add(x)
 
-        set_one.difference_update(set_two)
-        self.assertEqual(list(set_one), [0, 1, 2, 3])
+        a.difference_update(b)
+        self.assertEqual(set(a), {0, 1, 2, 3})
 
         for x in range(2, 6):
-            set_two.add(x)
+            b.add(x)
 
-        set_one.difference_update(set_two)
-        self.assertEqual(list(set_one), [0, 1])
+        a.difference_update(b)
+        self.assertEqual(set(a), {0, 1})
 
-        set_one.difference_update(set_two)
-        self.assertEqual(list(set_two), [2, 3, 4, 5])
+        a.difference_update(b)
+        self.assertEqual(set(b), {2, 3, 4, 5})
 
     def test_isub_operator(self):
-        set_one = MySet()
-        set_two = MySet()
+        a = MySet()
+        b = MySet()
 
-        set_one -= set_two
-        self.assertEqual(list(set_one), [])
+        a -= b
+        self.assertEqual(set(a), set())
 
         for x in range(0, 4):
-            set_one.add(x)
+            a.add(x)
 
-        set_one -= set_two
-        self.assertEqual(list(set_one), [0, 1, 2, 3])
+        a -= b
+        self.assertEqual(set(a), {0, 1, 2, 3})
 
         for x in range(2, 6):
-            set_two.add(x)
+            b.add(x)
 
-        set_one -= set_two
-        self.assertEqual(list(set_one), [0, 1])
+        a -= b
+        self.assertEqual(set(a), {0, 1})
 
-        set_two -= set_one
-        self.assertEqual(list(set_two), [2, 3, 4, 5])
+        b -= a
+        self.assertEqual(set(b), {2, 3, 4, 5})
 
     def test_symmetric_difference(self):
-        set_one = MySet()
-        set_two = MySet()
+        a = MySet()
+        b = MySet()
 
-        self.assertEqual(list(set_one.symmetric_difference(set_two)), [])
+        self.assertEqual(set(a.symmetric_difference(b)), set())
 
         for x in range(0, 4):
-            set_one.add(x)
+            a.add(x)
 
-        self.assertEqual(list(set_one.symmetric_difference(set_two)), [0, 1, 2, 3])
+        self.assertEqual(set(a.symmetric_difference(b)), {0, 1, 2, 3})
 
         for x in range(2, 6):
-            set_two.add(x)
+            b.add(x)
 
-        self.assertEqual(list(set_one.symmetric_difference(set_two)), [0, 1, 4, 5])
+        self.assertEqual(set(a.symmetric_difference(b)), {0, 1, 4, 5})
 
     def test_xor_operator(self):
-        set_one = MySet()
-        set_two = MySet()
+        a = MySet()
+        b = MySet()
 
-        self.assertEqual(list(set_one ^ set_two), [])
+        self.assertEqual(set(a ^ b), set())
 
         for x in range(0, 4):
-            set_one.add(x)
+            a.add(x)
 
-        self.assertEqual(list(set_one ^ set_two), [0, 1, 2, 3])
+        self.assertEqual(set(a ^ b), {0, 1, 2, 3})
 
         for x in range(2, 6):
-            set_two.add(x)
+            b.add(x)
 
-        self.assertEqual(list(set_one ^ set_two), [0, 1, 4, 5])
+        self.assertEqual(set(a ^ b), {0, 1, 4, 5})
 
     def test_ixor_operator(self):
-        set_one = MySet()
-        set_two = MySet()
+        a = MySet()
+        b = MySet()
 
-        set_one ^= set_two
-        self.assertEqual(list(set_one), [])
+        a ^= b
+        self.assertEqual(set(a), set())
 
         for x in range(0, 4):
-            set_one.add(x)
+            a.add(x)
 
-        set_one ^= set_two
-        self.assertEqual(list(set_one), [0, 1, 2, 3])
+        a ^= b
+        self.assertEqual(set(a), {0, 1, 2, 3})
 
         for x in range(2, 6):
-            set_two.add(x)
+            b.add(x)
 
-        set_one ^= set_two
-        self.assertEqual(list(set_one), [0, 1, 4, 5])
+        a ^= b
+        self.assertEqual(set(a), {0, 1, 4, 5})
 
-        set_two ^= set_one
-        self.assertEqual(list(set_two), [0, 1])
+        b ^= a
+        self.assertEqual(set(b), {0, 1})
 
     def test_isdisjoint(self):
-        set_one = MySet()
-        set_two = MySet()
+        a = MySet()
+        b = MySet()
 
         for x in range(11):
-            set_one.add(x)
+            a.add(x)
 
         for x in range(20, 29):
-            set_two.add(x)
+            b.add(x)
 
-        self.assertTrue(set_one.isdisjoint(set_two))
+        self.assertTrue(a.isdisjoint(b))
 
         for x in range(1, 10):
-            set_two.add(x)
+            b.add(x)
 
-        self.assertFalse(set_one.isdisjoint(set_two))
+        self.assertFalse(a.isdisjoint(b))
 
     def test_issubset(self):
-        set_one = MySet()
-        set_two = MySet()
+        a = MySet()
+        b = MySet()
 
         for x in range(3):
-            set_one.add(x)
+            a.add(x)
 
-        self.assertFalse(set_one.issubset(set_two))
+        self.assertFalse(a.issubset(b))
 
         for x in range(5):
-            set_two.add(x)
+            b.add(x)
 
-        self.assertTrue(set_one.issubset(set_two))
-        self.assertFalse(set_two.issubset(set_one))
+        self.assertTrue(a.issubset(b))
+        self.assertFalse(b.issubset(a))
 
     def test_issuperset(self):
-        set_one = MySet()
-        set_two = MySet()
+        a = MySet()
+        b = MySet()
 
         for x in range(7):
-            set_one.add(x)
+            a.add(x)
 
-        self.assertTrue(set_one.issuperset(set_two))
+        self.assertTrue(a.issuperset(b))
 
         for x in range(3):
-            set_two.add(x)
+            b.add(x)
 
-        self.assertTrue(set_one.issuperset(set_two))
-        self.assertFalse(set_two.issuperset(set_one))
-        self.assertTrue(set_two.issubset(set_one))
+        self.assertTrue(a.issuperset(b))
+        self.assertFalse(b.issuperset(a))
+        self.assertTrue(b.issubset(a))
 
 
 if __name__ == "__main__":
