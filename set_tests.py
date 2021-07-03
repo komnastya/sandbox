@@ -19,6 +19,7 @@ class TestMySet(unittest.TestCase):
 
         s.clear()
         self.assertEqual(list(s), [])
+        self.assertEqual(s.len, 0)
 
     def test_copy_method(self):
         set_one = MySet()
