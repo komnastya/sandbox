@@ -19,3 +19,31 @@ def count_negative_numbers(nums):
 #  1  1  1  1 | -1 -1
 #  1  1  1 -1 | -1 -1 <-- we are on this row
 #  1 -1 -1 -1 | -1 -1
+
+def count_negative_numbers_2(nums):
+    negatives = 0
+
+    def counter(nums):
+        length = len(nums)
+
+        if length == 0:
+            return 0
+        if nums[0] < 0:
+            return length
+        if nums[length - 1] > 0:
+            return 0
+        lo = 0
+        hi = length - 1
+        while lo <= hi:
+            mid = (lo + hi) // 2
+            if nums[mid + 1] < 0 and nums[mid] >= 0:
+                return length - 1 - mid
+            elif nums[mid] > 0:
+                lo = mid + 1
+            elif nums[mid] < 0:
+                hi = mid - 1
+
+    for num in nums:
+        negatives += counter(num)
+
+    return negatives
