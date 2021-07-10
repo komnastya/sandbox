@@ -33,6 +33,17 @@ class MyDict:
                         defaults = pair[1]
         return defaults
 
+    def popitem(self):
+        for i in range(len(self.buckets)):
+            bucket = self.buckets[i]
+            if bucket is not None:
+                pair = self.buckets[i].pop()
+                self.len -= 1
+                if not bucket:
+                    self.buckets[i] = None
+                return f"({pair[0]}, {pair[1]})"
+        raise KeyError
+
     def __len__(self):
         return self.len
 
