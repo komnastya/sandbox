@@ -11,7 +11,6 @@ class MyDict:
     def set(self, key, value):
         index = self._bucket_index(key)
         bucket = self.buckets[index]
-        print(bucket)
         if bucket is None:
             bucket = [(key, value)]
             self.buckets[index] = bucket
