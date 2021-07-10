@@ -17,10 +17,20 @@ class TestMyDict(unittest.TestCase):
         d.set(2, "two")
         d.set(3, "three")
 
-        self.assertEqual(d.get(1), 'one')
-        self.assertEqual(d.get(2), 'two')
-        self.assertEqual(d.get(3), 'three')
+        self.assertEqual(d.get(1), "one")
+        self.assertEqual(d.get(2), "two")
+        self.assertEqual(d.get(3), "three")
         self.assertIsNone(d.get(4))
+
+    def test_len(self):
+        d = MyDict()
+        self.assertEqual(len(d), 0)
+
+        d.set(1, "one")
+        d.set(2, "two")
+        d.set(3, "three")
+
+        self.assertEqual(len(d), 3)
 
     def test_contains(self):
         d = MyDict()
@@ -30,25 +40,25 @@ class TestMyDict(unittest.TestCase):
         self.assertTrue(1 in d)
 
     def test_str(self):
-      d = MyDict()
+        d = MyDict()
 
-      self.assertEqual(str(d), '{}')
+        self.assertEqual(str(d), "{}")
 
-      d.set(1, "one")
-      d.set(2, "two")
+        d.set(1, "one")
+        d.set(2, "two")
 
-      self.assertEqual(str(d), "{1 : one, 2 : two}")
+        self.assertEqual(str(d), "{1 : one, 2 : two}")
 
     def test_clear(self):
-      d = MyDict()
+        d = MyDict()
 
-      d.set(1, "one")
-      d.set(2, "two")
+        d.set(1, "one")
+        d.set(2, "two")
 
-      self.assertEqual(str(d), "{1 : one, 2 : two}")
+        self.assertEqual(str(d), "{1 : one, 2 : two}")
 
-      d.clear()
-      self.assertEqual(str(d), "{}")
+        d.clear()
+        self.assertEqual(str(d), "{}")
 
 
 if __name__ == "__main__":

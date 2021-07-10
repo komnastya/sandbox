@@ -33,6 +33,9 @@ class MyDict:
                         defaults = pair[1]
         return defaults
 
+    def __len__(self):
+        return self.len
+
     def __contains__(self, key):
         index = self._bucket_index(key)
         bucket = self.buckets[index]
@@ -57,10 +60,3 @@ class MyDict:
             )
             + "}"
         )
-
-
-a = MyDict()
-a.set("Name", "Nastya")
-a.set("Age", 25)
-print(a)
-print(a.get("Age"))
