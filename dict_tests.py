@@ -163,5 +163,19 @@ class TestMyDict(unittest.TestCase):
         self.assertEqual(str(d), "{}")
 
 
+    def test_copy(self):
+        d = MyDict()
+
+        d.set(1, "one")
+        d.set(2, "two")
+        self.assertEqual(str(d), "{1 : one, 2 : two}")
+
+        dd = d.copy()
+        del d[2]
+        dd[3] = 'three'
+        self.assertEqual(str(d), "{1 : one}")
+        self.assertEqual(str(dd), "{1 : one, 2 : two, 3 : three}")
+
+
 if __name__ == "__main__":
     unittest.main()

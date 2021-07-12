@@ -8,6 +8,14 @@ class MyDict:
             self.buckets[i] = None
         self.len = 0
 
+    def copy(self):
+        result = MyDict()
+        for bucket in self.buckets:
+            if bucket is not None:
+                for key, value in bucket:
+                    result[key] = value
+        return result
+
     def set(self, key, value):
         self[key] = value
 
