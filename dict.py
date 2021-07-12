@@ -9,6 +9,9 @@ class MyDict:
         self.len = 0
 
     def set(self, key, value):
+        self[key] = value
+
+    def __setitem__(self, key, value):
         index = self._bucket_index(key)
         bucket = self.buckets[index]
         if bucket is None:

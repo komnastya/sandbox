@@ -58,10 +58,27 @@ class TestMyDict(unittest.TestCase):
         d.set(2, "two")
         d.set(3, "three")
 
-        self.assertEqual(d[1], 'one')
-        self.assertEqual(d[2], 'two')
-        self.assertEqual(d[3], 'three')
+        self.assertEqual(d[1], "one")
+        self.assertEqual(d[2], "two")
+        self.assertEqual(d[3], "three")
 
+    def test_setitem(self):
+        d = MyDict()
+
+        self.assertEqual(len(d), 0)
+        self.assertEqual(str(d), "{}")
+        self.assertFalse(1 in d)
+        self.assertIsNone(d.get(1))
+
+        d[1] = "one"
+        d[2] = "two"
+
+        self.assertEqual(len(d), 2)
+        self.assertEqual(str(d), "{1 : one, 2 : two}")
+        self.assertTrue(1 in d)
+        self.assertTrue(2 in d)
+        self.assertEqual(d.get(1), "one")
+        self.assertEqual(d.get(2), "two")
 
     def test_popitem(self):
         d = MyDict()
