@@ -38,6 +38,13 @@ class MyDict:
             return bucket[key_index][1]
         raise KeyError
 
+    def __delitem__(self, key):
+        index = self._bucket_index(key)
+        bucket = self.buckets[index]
+        key_index = find_key_index(bucket, key)
+        del bucket[key_index]
+        self.len -= 1
+
     def popitem(self):
         for i in range(len(self.buckets)):
             bucket = self.buckets[i]

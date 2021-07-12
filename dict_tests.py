@@ -80,6 +80,26 @@ class TestMyDict(unittest.TestCase):
         self.assertEqual(d.get(1), "one")
         self.assertEqual(d.get(2), "two")
 
+    def test_delitem(self):
+        d = MyDict()
+
+        self.assertEqual(len(d), 0)
+        self.assertEqual(str(d), "{}")
+        self.assertFalse(1 in d)
+        self.assertIsNone(d.get(1))
+
+        d[1] = "one"
+        d[2] = "two"
+
+        self.assertEqual(len(d), 2)
+        self.assertEqual(str(d), "{1 : one, 2 : two}")
+
+        del d[1]
+        del d[2]
+
+        self.assertEqual(len(d), 0)
+        self.assertEqual(str(d), "{}")
+
     def test_popitem(self):
         d = MyDict()
 
