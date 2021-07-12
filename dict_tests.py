@@ -33,9 +33,18 @@ class TestMyDict(unittest.TestCase):
         a = d.popitem()
         a_key = a[0]
 
-        self.assertEqual(a, "(1, one)")
+        self.assertEqual(a, (1, "one"))
         self.assertFalse(a_key in d)
         self.assertEqual(len(d), 1)
+
+        b = d.popitem()
+        b_key = b[0]
+        self.assertEqual(b, (2, "two"))
+        self.assertFalse(b_key in d)
+        self.assertEqual(len(d), 0)
+
+        with self.assertRaises(KeyError):
+            d.popitem()
 
     def test_len(self):
         d = MyDict()

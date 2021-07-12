@@ -12,25 +12,30 @@ class MyDict:
         index = self._bucket_index(key)
         bucket = self.buckets[index]
         if bucket is None:
-            bucket = [(key, value)]
+            bucket = []
             self.buckets[index] = bucket
-        for pair in bucket:
-            keys = [pair[0] for pair in bucket]
-        if key not in keys:
+        key_index = self.key_index(bucket, key)
+        if key_index != -1:
+            bucket[key_index] = (key, value)
+        else:
             bucket.append((key, value))
-        self.len += 1
+            self.len += 1
 
     def get(self, key, defaults=None):
+        value = defaults
         index = self._bucket_index(key)
         bucket = self.buckets[index]
+        key_index = self.key_index(bucket, key)
+        if key_index != -1:
+            value = bucket[key_index][1]
+        return value
+
+    def key_index(self, bucket, key):
         if bucket is not None:
-            for pair in bucket:
-                keys = [pair[0] for pair in bucket]
-            if key in keys:
-                for pair in bucket:
-                    if pair[0] == key:
-                        defaults = pair[1]
-        return defaults
+            for i in range(len(bucket)):
+                if bucket[i][0] == key:
+                    return i
+        return -1
 
     def popitem(self):
         for i in range(len(self.buckets)):
@@ -40,7 +45,7 @@ class MyDict:
                 self.len -= 1
                 if not bucket:
                     self.buckets[i] = None
-                return f"({pair[0]}, {pair[1]})"
+                return pair
         raise KeyError
 
     def __len__(self):
@@ -50,19 +55,24 @@ class MyDict:
         index = self._bucket_index(key)
         bucket = self.buckets[index]
         if bucket is not None:
-            keys = [pair[0] for pair in bucket]
-            return key in keys
+            for i in range(len(bucket)):
+                if bucket[i][0] == key:
+                    return True
         return False
 
     def _bucket_index(self, key):
         return abs(hash(key)) % len(self.buckets)
 
     def __str__(self):
-        buckets = [bucket for bucket in self.buckets if bucket is not None]
+        # This is a list comprehension expression, it creates a new list.
+        # Try using a generator comprehension instead.
+        # Why generator comprehension is better here?
+        buckets = (bucket for bucket in self.buckets if bucket is not None)
         return (
             "{"
             + ", ".join(
                 (
+                    # Don't write pair[X], use tuple unpacking.
                     str(pair[0]) + " : " + str(pair[1])
                     for bucket in buckets
                     for pair in bucket
