@@ -22,14 +22,12 @@ class MyDict:
             self.len += 1
 
     def get(self, key, defaults=None):
-        value = defaults
         index = self._bucket_index(key)
         bucket = self.buckets[index]
         key_index = find_key_index(bucket, key)
         if key_index != -1:
-            value = bucket[key_index][1]
-        return value
-
+            return bucket[key_index][1]
+        return defaults
 
     def popitem(self):
         for i in range(len(self.buckets)):
@@ -74,6 +72,7 @@ class MyDict:
             )
             + "}"
         )
+
 
 def find_key_index(bucket, key):
     if bucket is not None:
