@@ -22,12 +22,18 @@ class MyDict:
             self.len += 1
 
     def get(self, key, defaults=None):
+        try:
+            return self[key]
+        except KeyError:
+            return defaults
+
+    def __getitem__(self, key):
         index = self._bucket_index(key)
         bucket = self.buckets[index]
         key_index = find_key_index(bucket, key)
         if key_index != -1:
             return bucket[key_index][1]
-        return defaults
+        raise KeyError
 
     def popitem(self):
         for i in range(len(self.buckets)):

@@ -48,6 +48,21 @@ class TestMyDict(unittest.TestCase):
         self.assertEqual(d.get(3), "three")
         self.assertIsNone(d.get(4))
 
+    def test_getitem(self):
+        d = MyDict()
+
+        with self.assertRaises(KeyError):
+            d[1]
+
+        d.set(1, "one")
+        d.set(2, "two")
+        d.set(3, "three")
+
+        self.assertEqual(d[1], 'one')
+        self.assertEqual(d[2], 'two')
+        self.assertEqual(d[3], 'three')
+
+
     def test_popitem(self):
         d = MyDict()
 
