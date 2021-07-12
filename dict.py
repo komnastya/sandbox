@@ -46,10 +46,7 @@ class MyDict:
     def __contains__(self, key):
         index = self._bucket_index(key)
         bucket = self.buckets[index]
-        if bucket is not None:
-            key_index = find_key_index(bucket, key)
-            return key_index != -1
-
+        return bucket is not None and find_key_index(bucket, key) != -1
 
     def _bucket_index(self, key):
         return abs(hash(key)) % len(self.buckets)
