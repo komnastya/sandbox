@@ -56,6 +56,16 @@ class MyDict:
         else:
             raise KeyError
 
+    def pop(self, key, default=None):
+        try:
+            default = self[key]
+            del self[key]
+            return default
+        except KeyError:
+            if default is not None:
+                return default
+            else:
+                raise KeyError
 
     def popitem(self):
         for i in range(len(self.buckets)):

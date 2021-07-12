@@ -103,6 +103,18 @@ class TestMyDict(unittest.TestCase):
         with self.assertRaises(KeyError):
             del d[1]
 
+    def test_pop(self):
+        d = MyDict()
+
+        d[1] = "one"
+
+        self.assertEqual(d.pop(1), "one")
+
+        with self.assertRaises(KeyError):
+             d.pop(2)
+
+        self.assertEqual(d.pop(3, "Not found"), "Not found")
+
     def test_popitem(self):
         d = MyDict()
 
