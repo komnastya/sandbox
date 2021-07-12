@@ -56,18 +56,14 @@ class MyDict:
         return abs(hash(key)) % len(self.buckets)
 
     def __str__(self):
-        # This is a list comprehension expression, it creates a new list.
-        # Try using a generator comprehension instead.
-        # Why generator comprehension is better here?
         buckets = (bucket for bucket in self.buckets if bucket is not None)
         return (
             "{"
             + ", ".join(
                 (
-                    # Don't write pair[X], use tuple unpacking.
-                    str(pair[0]) + " : " + str(pair[1])
+                    (str(key) + " : " + str(value))
                     for bucket in buckets
-                    for pair in bucket
+                    for key, value in bucket
                 )
             )
             + "}"
