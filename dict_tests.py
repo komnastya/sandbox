@@ -3,13 +3,39 @@ from dict import MyDict
 
 
 class TestMyDict(unittest.TestCase):
-    def test_dictionary(self):
+    def test_dict(self):
         d = MyDict()
-        d.set(1, "one")
-        d.set(2, "two")
-        d.set(3, "three")
 
-        self.assertEqual(str(d), "{1 : one, 2 : two, 3 : three}")
+        self.assertEqual(len(d), 0)
+        self.assertEqual(str(d), "{}")
+        self.assertFalse(1 in d)
+        self.assertIsNone(d.get(1))
+
+        d.set(1, "one")
+
+        self.assertEqual(len(d), 1)
+        self.assertEqual(str(d), "{1 : one}")
+        self.assertTrue(1 in d)
+        self.assertEqual(d.get(1), "one")
+
+        d.set(1, "uno")
+
+        self.assertEqual(len(d), 1)
+        self.assertEqual(str(d), "{1 : uno}")
+        self.assertTrue(1 in d)
+        self.assertEqual(d.get(1), "uno")
+
+        d.set(3, "tre")
+        d.set(2, "due")
+
+        self.assertEqual(len(d), 3)
+        self.assertEqual(str(d), "{1 : uno, 2 : due, 3 : tre}")
+        self.assertTrue(1 in d)
+        self.assertEqual(d.get(1), "uno")
+        self.assertTrue(2 in d)
+        self.assertEqual(d.get(2), "due")
+        self.assertTrue(3 in d)
+        self.assertEqual(d.get(3), "tre")
 
     def test_get(self):
         d = MyDict()
