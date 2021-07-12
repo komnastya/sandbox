@@ -77,13 +77,12 @@ class MyDict:
         return abs(hash(key)) % len(self.buckets)
 
     def __str__(self):
-        buckets = (bucket for bucket in self.buckets if bucket is not None)
         return (
             "{"
             + ", ".join(
                 (
                     (str(key) + " : " + str(value))
-                    for bucket in buckets
+                    for bucket in self.buckets if bucket is not None
                     for key, value in bucket
                 )
             )
