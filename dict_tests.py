@@ -111,9 +111,19 @@ class TestMyDict(unittest.TestCase):
         self.assertEqual(d.pop(1), "one")
 
         with self.assertRaises(KeyError):
-             d.pop(2)
+            d.pop(2)
 
         self.assertEqual(d.pop(3, "Not found"), "Not found")
+
+    def test_setdefault(self):
+        d = MyDict()
+
+        d[1] = "one"
+
+        self.assertEqual(d.setdefault(1), "one")
+        self.assertEqual(d.setdefault(1, "uno"), "one")
+        self.assertIsNone(d.setdefault(2))
+        self.assertEqual(d.setdefault(2, "two"), "two")
 
     def test_popitem(self):
         d = MyDict()
@@ -177,7 +187,6 @@ class TestMyDict(unittest.TestCase):
         d.clear()
         self.assertEqual(str(d), "{}")
 
-
     def test_copy(self):
         d = MyDict()
 
@@ -187,7 +196,7 @@ class TestMyDict(unittest.TestCase):
 
         dd = d.copy()
         del d[2]
-        dd[3] = 'three'
+        dd[3] = "three"
         self.assertEqual(str(d), "{1 : one}")
         self.assertEqual(str(dd), "{1 : one, 2 : two, 3 : three}")
 

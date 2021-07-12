@@ -67,6 +67,17 @@ class MyDict:
             else:
                 raise KeyError
 
+    def setdefault(self, key, default=None):
+        index = self._bucket_index(key)
+        bucket = self.buckets[index]
+        key_index = find_key_index(bucket, key)
+        if key_index != -1:
+            return bucket[key_index][1]
+        elif default is not None:
+            d[key] = default
+            return d[key]
+        return default
+
     def popitem(self):
         for i in range(len(self.buckets)):
             bucket = self.buckets[i]
@@ -110,3 +121,11 @@ def find_key_index(bucket, key):
             if bucket[i][0] == key:
                 return i
     return -1
+
+d = MyDict()
+d[1] = 213
+print(d)
+print (d.setdefault(1))
+print (d.setdefault(2))
+print (d.setdefault(2, 'No'))
+print (d.setdefault(3, 543))
