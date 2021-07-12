@@ -100,6 +100,9 @@ class TestMyDict(unittest.TestCase):
         self.assertEqual(len(d), 0)
         self.assertEqual(str(d), "{}")
 
+        with self.assertRaises(KeyError):
+            del d[1]
+
     def test_popitem(self):
         d = MyDict()
 

@@ -51,8 +51,12 @@ class MyDict:
         index = self._bucket_index(key)
         bucket = self.buckets[index]
         key_index = find_key_index(bucket, key)
-        del bucket[key_index]
-        self.len -= 1
+        if key_index != -1:
+            del bucket[key_index]
+            self.len -= 1
+        else:
+            raise KeyError
+
 
     def popitem(self):
         for i in range(len(self.buckets)):
