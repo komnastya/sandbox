@@ -224,7 +224,7 @@ class TestMyDict(unittest.TestCase):
         d[2] = 'two'
 
         self.assertEqual(str(d.keys()), "dict_keys[1, 2]")
-        self.assertEqual(str(d.keys()), "dict_keys[1, 2]")
+        self.assertEqual(len(d.keys()), 2)
 
     def test_dictvalues(self):
         d = MyDict()
