@@ -1,4 +1,6 @@
 class MyDictKeys:
+    """My class for dictionary keys"""
+
     def __init__(self, owner):
         self.owner = owner
 
@@ -8,7 +10,8 @@ class MyDictKeys:
             + ", ".join(
                 (
                     str(key)
-                    for bucket in self.owner.buckets if bucket is not None
+                    for bucket in self.owner.buckets
+                    if bucket is not None
                     for key, value in bucket
                 )
             )
@@ -16,7 +19,7 @@ class MyDictKeys:
         )
 
     def __len__(self):
-      return len(self.owner)
+        return len(self.owner)
 
     def __contains__(self, key):
         return key in self.owner

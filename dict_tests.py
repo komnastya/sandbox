@@ -248,6 +248,20 @@ class TestMyDict(unittest.TestCase):
         self.assertEqual(str(d.values()), "dict_values[one, two]")
         self.assertEqual(len(d.values()), 2)
 
+    def test_documentation(self):
+        d = MyDict()
+
+        self.assertEqual(d.__doc__, "My own dictionary class")
+
+        items = d.items()
+        self.assertEqual(items.__doc__, "My class for dictionary items")
+
+        keys = d.keys()
+        self.assertEqual(keys.__doc__, "My class for dictionary keys")
+
+        values = d.values()
+        self.assertEqual(values.__doc__, "My class for dictionary values")
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -4,6 +4,8 @@ from dict_values import MyDictValues
 
 
 class MyDict:
+    """My own dictionary class"""
+
     def __init__(self, other=None, capacity=100):
         self.buckets = [None] * capacity
         self.len = 0
