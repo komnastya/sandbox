@@ -170,6 +170,10 @@ class TestMyDict(unittest.TestCase):
         self.assertTrue(1 in d_items)
         self.assertFalse("one" in d_items)
 
+        d_keys = d.keys()
+        self.assertTrue(1 in d_keys)
+        self.assertFalse("one" in d_keys)
+
     def test_str(self):
         d = MyDict()
 

@@ -17,3 +17,6 @@ class MyDictKeys:
 
     def __len__(self):
       return len(self.owner)
+
+    def __contains__(self, key):
+        return key in self.owner
