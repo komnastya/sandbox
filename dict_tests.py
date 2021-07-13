@@ -202,39 +202,44 @@ class TestMyDict(unittest.TestCase):
 
     def test_fromkeys(self):
 
-        self.assertEqual(str(MyDict().fromkeys([1,2,3])), '{1: None, 2: None, 3: None}')
-        self.assertEqual(str(MyDict().fromkeys([1,2,3], 'number')), '{1: number, 2: number, 3: number}')
-
+        self.assertEqual(
+            str(MyDict().fromkeys([1, 2, 3])), "{1: None, 2: None, 3: None}"
+        )
+        self.assertEqual(
+            str(MyDict().fromkeys([1, 2, 3], "number")),
+            "{1: number, 2: number, 3: number}",
+        )
 
     def test_dictitems(self):
         d = MyDict()
-        self.assertEqual(str(d.items()), 'dict_items[]')
+        self.assertEqual(str(d.items()), "dict_items[]")
 
-        d[1] = 'one'
-        d[2] = 'two'
+        d[1] = "one"
+        d[2] = "two"
 
         self.assertEqual(str(d.items()), "dict_items[(1, one), (2, two)]")
         self.assertEqual(len(d.items()), 2)
 
     def test_dictkeys(self):
         d = MyDict()
-        self.assertEqual(str(d.keys()), 'dict_keys[]')
+        self.assertEqual(str(d.keys()), "dict_keys[]")
 
-        d[1] = 'one'
-        d[2] = 'two'
+        d[1] = "one"
+        d[2] = "two"
 
         self.assertEqual(str(d.keys()), "dict_keys[1, 2]")
         self.assertEqual(len(d.keys()), 2)
 
     def test_dictvalues(self):
         d = MyDict()
-        self.assertEqual(str(d.values()), 'dict_values[]')
+        self.assertEqual(str(d.values()), "dict_values[]")
 
-        d[1] = 'one'
-        d[2] = 'two'
+        d[1] = "one"
+        d[2] = "two"
 
         self.assertEqual(str(d.values()), "dict_values[one, two]")
         self.assertEqual(len(d.values()), 2)
+
 
 if __name__ == "__main__":
     unittest.main()
