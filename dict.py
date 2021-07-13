@@ -1,3 +1,6 @@
+from dict_items import DictItems
+
+
 class MyDict:
     def __init__(self, other=None, capacity=100):
         self.buckets = [None] * capacity
@@ -115,6 +118,10 @@ class MyDict:
             )
             + "}"
         )
+
+    # Return a new object of the dictionary's items in (key, value) format.
+    def items(self):
+        return DictItems(self)
 
 
 def find_key_index(bucket, key):

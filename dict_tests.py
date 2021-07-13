@@ -200,6 +200,13 @@ class TestMyDict(unittest.TestCase):
         self.assertEqual(str(d), "{1: one}")
         self.assertEqual(str(dd), "{1: one, 2: two, 3: three}")
 
+    def test_dictitems(self):
+        d = MyDict()
+
+        d[1] = 'one'
+        d[2] = 'two'
+
+        self.assertEqual(str(d.items()), 'dict_items[(1, one), (2, two)]')
 
 if __name__ == "__main__":
     unittest.main()
