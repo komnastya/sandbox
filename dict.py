@@ -2,6 +2,7 @@ from dict_items import MyDictItems
 from dict_keys import MyDictKeys
 from dict_values import MyDictValues
 
+
 class MyDict:
     def __init__(self, other=None, capacity=100):
         self.buckets = [None] * capacity
@@ -120,14 +121,12 @@ class MyDict:
             + "}"
         )
 
-    # Returns a new dictionary with keys from seq and value equal to v (defaults to None).
     def fromkeys(self, seq, v=None):
         result = MyDict()
         for key in seq:
             result[key] = v
         return result
 
-    # Return a new object of the dictionary's items in (key, value) format.
     def items(self):
         return MyDictItems(self)
 
