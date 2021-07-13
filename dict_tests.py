@@ -14,14 +14,14 @@ class TestMyDict(unittest.TestCase):
         d.set(1, "one")
 
         self.assertEqual(len(d), 1)
-        self.assertEqual(str(d), "{1 : one}")
+        self.assertEqual(str(d), "{1: one}")
         self.assertTrue(1 in d)
         self.assertEqual(d.get(1), "one")
 
         d.set(1, "uno")
 
         self.assertEqual(len(d), 1)
-        self.assertEqual(str(d), "{1 : uno}")
+        self.assertEqual(str(d), "{1: uno}")
         self.assertTrue(1 in d)
         self.assertEqual(d.get(1), "uno")
 
@@ -29,7 +29,7 @@ class TestMyDict(unittest.TestCase):
         d.set(2, "due")
 
         self.assertEqual(len(d), 3)
-        self.assertEqual(str(d), "{1 : uno, 2 : due, 3 : tre}")
+        self.assertEqual(str(d), "{1: uno, 2: due, 3: tre}")
         self.assertTrue(1 in d)
         self.assertEqual(d.get(1), "uno")
         self.assertTrue(2 in d)
@@ -74,7 +74,7 @@ class TestMyDict(unittest.TestCase):
         d[2] = "two"
 
         self.assertEqual(len(d), 2)
-        self.assertEqual(str(d), "{1 : one, 2 : two}")
+        self.assertEqual(str(d), "{1: one, 2: two}")
         self.assertTrue(1 in d)
         self.assertTrue(2 in d)
         self.assertEqual(d.get(1), "one")
@@ -92,7 +92,7 @@ class TestMyDict(unittest.TestCase):
         d[2] = "two"
 
         self.assertEqual(len(d), 2)
-        self.assertEqual(str(d), "{1 : one, 2 : two}")
+        self.assertEqual(str(d), "{1: one, 2: two}")
 
         del d[1]
         del d[2]
@@ -174,7 +174,7 @@ class TestMyDict(unittest.TestCase):
         d.set(1, "one")
         d.set(2, "two")
 
-        self.assertEqual(str(d), "{1 : one, 2 : two}")
+        self.assertEqual(str(d), "{1: one, 2: two}")
 
     def test_clear(self):
         d = MyDict()
@@ -182,7 +182,7 @@ class TestMyDict(unittest.TestCase):
         d.set(1, "one")
         d.set(2, "two")
 
-        self.assertEqual(str(d), "{1 : one, 2 : two}")
+        self.assertEqual(str(d), "{1: one, 2: two}")
 
         d.clear()
         self.assertEqual(str(d), "{}")
@@ -192,13 +192,13 @@ class TestMyDict(unittest.TestCase):
 
         d.set(1, "one")
         d.set(2, "two")
-        self.assertEqual(str(d), "{1 : one, 2 : two}")
+        self.assertEqual(str(d), "{1: one, 2: two}")
 
         dd = d.copy()
         del d[2]
         dd[3] = "three"
-        self.assertEqual(str(d), "{1 : one}")
-        self.assertEqual(str(dd), "{1 : one, 2 : two, 3 : three}")
+        self.assertEqual(str(d), "{1: one}")
+        self.assertEqual(str(dd), "{1: one, 2: two, 3: three}")
 
 
 if __name__ == "__main__":
