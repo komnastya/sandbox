@@ -1,4 +1,5 @@
 from dict_items import MyDictItems
+from dict_keys import MyDictKeys
 
 
 class MyDict:
@@ -129,6 +130,9 @@ class MyDict:
     # Return a new object of the dictionary's items in (key, value) format.
     def items(self):
         return MyDictItems(self)
+
+    def keys(self):
+        return MyDictKeys(self)
 
 
 def find_key_index(bucket, key):
