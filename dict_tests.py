@@ -213,7 +213,7 @@ class TestMyDict(unittest.TestCase):
         d[1] = 'one'
         d[2] = 'two'
 
-        self.assertEqual(str(d.items()), "dict_items[(1, 'one'), (2, 'two')]")
+        self.assertEqual(str(d.items()), "dict_items[(1, one), (2, two)]")
 
 if __name__ == "__main__":
     unittest.main()
