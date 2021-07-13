@@ -107,7 +107,7 @@ class MyDict:
             "{"
             + ", ".join(
                 (
-                    (str(key) + " : " + str(value))
+                    (str(key) + ": " + str(value))
                     for bucket in self.buckets
                     if bucket is not None
                     for key, value in bucket
