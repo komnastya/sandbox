@@ -234,6 +234,7 @@ class TestMyDict(unittest.TestCase):
         d[2] = 'two'
 
         self.assertEqual(str(d.values()), "dict_values[one, two]")
+        self.assertEqual(len(d.values()), 2)
 
 if __name__ == "__main__":
     unittest.main()
