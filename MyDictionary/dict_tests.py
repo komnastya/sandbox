@@ -202,6 +202,7 @@ class TestMyDict(unittest.TestCase):
 
     def test_dictitems(self):
         d = MyDict()
+        self.assertEqual(str(d.items()), 'dict_items[]')
 
         d[1] = 'one'
         d[2] = 'two'
