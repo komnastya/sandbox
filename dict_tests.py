@@ -166,6 +166,10 @@ class TestMyDict(unittest.TestCase):
         d.set(1, "one")
         self.assertTrue(1 in d)
 
+        d_items = d.items()
+        self.assertTrue(1 in d_items)
+        self.assertFalse("one" in d_items)
+
     def test_str(self):
         d = MyDict()
 
