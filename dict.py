@@ -1,6 +1,6 @@
 from dict_items import MyDictItems
 from dict_keys import MyDictKeys
-
+from dict_values import MyDictValues
 
 class MyDict:
     def __init__(self, other=None, capacity=100):
@@ -133,6 +133,9 @@ class MyDict:
 
     def keys(self):
         return MyDictKeys(self)
+
+    def values(self):
+        return MyDictValues(self)
 
 
 def find_key_index(bucket, key):
