@@ -200,6 +200,12 @@ class TestMyDict(unittest.TestCase):
         self.assertEqual(str(d), "{1: one}")
         self.assertEqual(str(dd), "{1: one, 2: two, 3: three}")
 
+    def test_fromkeys(self):
+
+        self.assertEqual(str(MyDict().fromkeys([1,2,3])), '{1: None, 2: None, 3: None}')
+        self.assertEqual(str(MyDict().fromkeys([1,2,3], 'number')), '{1: number, 2: number, 3: number}')
+
+
     def test_dictitems(self):
         d = MyDict()
         self.assertEqual(str(d.items()), 'dict_items[]')
