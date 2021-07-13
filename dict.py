@@ -71,12 +71,13 @@ class MyDict:
     def setdefault(self, key, default=None):
         index = self._bucket_index(key)
         bucket = self.buckets[index]
-        key_index = find_key_index(bucket, key)
-        if key_index != -1:
-            return bucket[key_index][1]
-        elif default is not None:
-            d[key] = default
-            return d[key]
+        if bucket is not None:
+            key_index = find_key_index(bucket, key)
+            if key_index != -1:
+                return bucket[key_index][1]
+            if default is not None:
+                self[key] = default
+                return self[key]
         return default
 
     def popitem(self):
@@ -107,7 +108,8 @@ class MyDict:
             + ", ".join(
                 (
                     (str(key) + " : " + str(value))
-                    for bucket in self.buckets if bucket is not None
+                    for bucket in self.buckets
+                    if bucket is not None
                     for key, value in bucket
                 )
             )
@@ -120,11 +122,3 @@ def find_key_index(bucket, key):
         if bucket[i][0] == key:
             return i
     return -1
-
-d = MyDict()
-d[1] = 213
-print(d)
-print (d.setdefault(1))
-print (d.setdefault(2))
-print (d.setdefault(2, 'No'))
-print (d.setdefault(3, 543))
