@@ -41,9 +41,10 @@ class MyDict:
     def __getitem__(self, key):
         index = self._bucket_index(key)
         bucket = self.buckets[index]
-        key_index = find_key_index(bucket, key)
-        if key_index != -1:
-            return bucket[key_index][1]
+        if bucket is not None:
+            key_index = find_key_index(bucket, key)
+            if key_index != -1:
+                return bucket[key_index][1]
         raise KeyError
 
     def __delitem__(self, key):
@@ -101,13 +102,12 @@ class MyDict:
         return abs(hash(key)) % len(self.buckets)
 
     def __str__(self):
-        buckets = (bucket for bucket in self.buckets if bucket is not None)
         return (
             "{"
             + ", ".join(
                 (
                     (str(key) + " : " + str(value))
-                    for bucket in buckets
+                    for bucket in self.buckets if bucket is not None
                     for key, value in bucket
                 )
             )
@@ -116,10 +116,9 @@ class MyDict:
 
 
 def find_key_index(bucket, key):
-    if bucket is not None:
-        for i in range(len(bucket)):
-            if bucket[i][0] == key:
-                return i
+    for i in range(len(bucket)):
+        if bucket[i][0] == key:
+            return i
     return -1
 
 d = MyDict()
