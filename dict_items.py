@@ -3,16 +3,16 @@ class DictItems():
     self.items = []
     for bucket in dictionary.buckets:
       if bucket is not None:
-        for key, value in bucket:
-          self.items.append((key, value))
+        for item in bucket:
+          self.items.append(item)
 
   def __str__(self):
             return (
             "dict_items["
             + ", ".join(
                 (
-                    ('(' + str(key) + ", " + str(value) + ')')
-                    for key, value in self.items
+                    str(item)
+                    for item in self.items
                 )
             )
             + "]"
