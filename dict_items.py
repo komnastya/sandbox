@@ -14,3 +14,6 @@ class MyDictItems():
             )
             + "]"
         )
+
+    def __len__(self):
+      return len(self.owner)

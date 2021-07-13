@@ -214,6 +214,7 @@ class TestMyDict(unittest.TestCase):
         d[2] = 'two'
 
         self.assertEqual(str(d.items()), "dict_items[(1, one), (2, two)]")
+        self.assertEqual(len(d.items()), 2)
 
     def test_dictkeys(self):
         d = MyDict()
