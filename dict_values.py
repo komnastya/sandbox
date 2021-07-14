@@ -26,3 +26,11 @@ class MyDictValues:
             if bucket is not None:
                 for pair in bucket:
                     yield pair[1]
+
+    def __contain__(self, value):
+        for bucket in self.owner.buckets:
+            if bucket is not None:
+                for b_key, b_value in bucket:
+                    if b_value == value:
+                        return True
+        return False
