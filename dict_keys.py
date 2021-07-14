@@ -23,3 +23,9 @@ class MyDictKeys:
 
     def __contains__(self, key):
         return key in self.owner
+
+    def __iter__(self):
+        for bucket in self.buckets:
+            if bucket is not None:
+                for pair in bucket:
+                    yield pair[0]
