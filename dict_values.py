@@ -20,3 +20,9 @@ class MyDictValues:
 
     def __len__(self):
         return len(self.owner)
+
+    def __iter__(self):
+        for bucket in self.owner.buckets:
+            if bucket is not None:
+                for pair in bucket:
+                    yield pair[1]
