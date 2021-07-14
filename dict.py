@@ -163,6 +163,11 @@ class MyDict:
                 return False
         return True
 
+    def update(self, other):
+        for key, value in other:
+            self[key] = value
+        return self
+
 
 def find_key_index(bucket, key):
     for i in range(len(bucket)):

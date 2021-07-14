@@ -298,5 +298,21 @@ class TestMyDict(unittest.TestCase):
         self.assertIs(d, dd)
         self.assertEqual(d, dd)
 
+    def test_update(self):
+        d = MyDict()
+        d[1] = 'one'
+        d[2] = 'three'
+
+        d1 = MyDict()
+        d1[2] = 'two'
+        self.assertEqual(str(d), '{1: one, 2: three}')
+
+        d.update(d1)
+        self.assertEqual(str(d), '{1: one, 2: two}')
+
+        d1[3] = 'three'
+        d.update(d1)
+        self.assertEqual(str(d), '{1: one, 2: two, 3: three}')
+
 if __name__ == "__main__":
     unittest.main()
