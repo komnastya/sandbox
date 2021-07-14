@@ -138,6 +138,12 @@ class MyDict:
     def values(self):
         return MyDictValues(self)
 
+    def __iter__(self):
+        for bucket in self.buckets:
+            if bucket is not None:
+                for pair in bucket:
+                    yield pair
+
 
 def find_key_index(bucket, key):
     for i in range(len(bucket)):
