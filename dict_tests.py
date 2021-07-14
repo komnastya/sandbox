@@ -262,6 +262,37 @@ class TestMyDict(unittest.TestCase):
         values = d.values()
         self.assertEqual(values.__doc__, "My class for dictionary values")
 
+    def test_eq(self):
+        d = MyDict()
+        dd = d
+        c = MyDict()
+
+        self.assertEqual(d, dd)
+        self.assertEqual(c, d)
+        self.assertEqual(c, dd)
+
+        self.assertIs(d, dd)
+        self.assertIsNot(c, d)
+        self.assertIsNot(c, dd)
+
+        d[1] = 'one'
+        dd[2] = 'two'
+        c[3] = 'three'
+
+        self.assertEqual(d, dd)
+        self.assertIs(d, dd)
+        self.assertNotEqual(c, d)
+        self.assertNotEqual(c, dd)
+
+        c[3] = 'one'
+        c[4] = 'two'
+
+        self.assertIsNot(c, d)
+        self.assertNotEqual(c, d)
+        self.assertIsNot(c, dd)
+        self.assertNotEqual(c, dd)
+        self.assertIs(d, dd)
+        self.assertEqual(d, dd)
 
 if __name__ == "__main__":
     unittest.main()

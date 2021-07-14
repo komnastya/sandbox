@@ -144,6 +144,25 @@ class MyDict:
                 for pair in bucket:
                     yield pair
 
+    def __eq__(self, other):
+        if type(self) is not type(other):
+            return False
+        if len(self) != len(other):
+            return False
+        for key, value in self:
+            try:
+                if value != other[key]:
+                    return False
+            except KeyError:
+                return False
+        for key, value in other:
+            try:
+                if value != self[key]:
+                    return False
+            except KeyError:
+                return False
+        return True
+
 
 def find_key_index(bucket, key):
     for i in range(len(bucket)):
