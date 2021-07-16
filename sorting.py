@@ -16,3 +16,11 @@ def select_sort(list):
                 list[j] = list[i]
                 list[i] = current
     return list
+
+
+def insert_sort(list):
+    for i in range(1, len(list)):
+        for j in range(0, i):
+            if list[i] < list[j]:
+                list[j:j] = [list.pop(i)]
+    return list

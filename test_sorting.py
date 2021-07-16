@@ -1,5 +1,5 @@
 import pytest
-from sorting import bubble_sort, select_sort
+from sorting import bubble_sort, select_sort, insert_sort
 
 
 def test_bubble_sort():
@@ -16,3 +16,11 @@ def test_select_sort():
     assert select_sort([1, 2]) == [1, 2]
     assert select_sort([2, 1]) == [1, 2]
     assert select_sort([5, 3, 1, 4, 2]) == [1, 2, 3, 4, 5]
+
+
+def test_insert_sort():
+    assert insert_sort([]) == []
+    assert insert_sort([1]) == [1]
+    assert insert_sort([1, 2]) == [1, 2]
+    assert insert_sort([2, 1]) == [1, 2]
+    assert insert_sort([5, 3, 1, 4, 2]) == [1, 2, 3, 4, 5]
