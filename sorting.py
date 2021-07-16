@@ -7,11 +7,12 @@ def sorting(list):
                 list[i + 1] = current
     return list
 
+
 def sorting2(list):
-  for j in range(len(list)):
-    for i in range(len(list)):
-      if list[i] > list[j]:
-        current = list[j]
-        list[j] = list[i]
-        list[i] = current
-  return list
+    for j in range(len(list)):
+        for i in range(j, len(list)):
+            if list[i] < list[j]:
+                current = list[j]
+                list[j] = list[i]
+                list[i] = current
+    return list
