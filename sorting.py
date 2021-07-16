@@ -10,7 +10,7 @@ def sorting(list):
 
 def sorting2(list):
     for j in range(len(list)):
-        for i in range(j, len(list)):
+        for i in range(j + 1, len(list)):
             if list[i] < list[j]:
                 current = list[j]
                 list[j] = list[i]
