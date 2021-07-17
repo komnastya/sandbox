@@ -23,7 +23,7 @@ def insert_sort(list):
 
 
 def quick_sort(arr):
-    def portition(arr, l, r):
+    def portition(l, r):
         pivot = arr[r]
         i = l - 1
         for j in range(l, r):
@@ -33,14 +33,14 @@ def quick_sort(arr):
         arr[i + 1], arr[r] = arr[r], arr[i + 1]
         return i + 1
 
-    def qs(arr, l, r):
+    def qs(l, r):
         if l >= r:
             return
-        p = portition(arr, l, r)
+        p = portition(l, r)
 
-        qs(arr, l, p - 1)
-        qs(arr, p + 1, r)
+        qs(l, p - 1)
+        qs(p + 1, r)
 
-    qs(arr, 0, len(arr) - 1)
+    qs(0, len(arr) - 1)
 
     return arr
