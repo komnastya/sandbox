@@ -10,9 +10,7 @@ def select_sort(list):
     for j in range(len(list)):
         for i in range(j + 1, len(list)):
             if list[i] < list[j]:
-                current = list[j]
-                list[j] = list[i]
-                list[i] = current
+                list[i], list[j] = list[j], list[i]
     return list
 
 
