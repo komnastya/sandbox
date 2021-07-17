@@ -35,7 +35,7 @@ def quick_sort(arr):
 
     def qs(arr, l, r):
         if l >= r:
-            return list
+            return
         p = portition(arr, l, r)
 
         qs(arr, l, p - 1)
