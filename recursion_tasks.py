@@ -102,10 +102,6 @@ def fill_numbers_dec(x, accum):
         fill_numbers_dec(x - 1, accum)
 
 
-accum = []
-
-fill_numbers_dec(3, accum)
-
 # 7. Write a function using recursion to update a given list with numbers from 0 to n. This function does not print or return anything, it updates a list given in an argument.
 
 #   def fill_numbers_inc(x, accum): pass # accum is the list to be updated with numbers
@@ -120,9 +116,6 @@ def fill_numbers_inc(x, accum):  # accum is the list to be updated with numbers
     accum.append(x)
 
 
-accum = []
-fill_numbers_inc(3, accum)
-
 # 8. Write a function that takes in two numbers and recursively multiplies them together. Using the `*` operator is forbidden!
 
 #   def mul(a, b): pass
@@ -134,8 +127,7 @@ fill_numbers_inc(3, accum)
 def mul(a, b):
     if a == 0 or b == 0:
         return 0
-    else:
-        return a + mul(a, b - 1)
+    return a + mul(a, b - 1)
 
 
 # 9. Write a function that takes in two numbers `base` and an `exp` and recursively computes `base` ** `exp`. Using the `**` operator is forbidden!
@@ -149,10 +141,9 @@ def mul(a, b):
 def pow(base, exp):
     if exp == 0:
         return 1
-    elif exp == 1:
+    if exp == 1:
         return base
-    elif exp >= 2:
-        return base * pow(base, exp - 1)
+    return base * pow(base, exp - 1)
 
 
 # 10. Write a recursive function that takes in one argument n and computes F(n), the n_th value of the Fibonacci sequence. Recall that the Fibonacci sequence is defined by the relation
@@ -170,13 +161,12 @@ def pow(base, exp):
 #   # fib(3) -> 2
 
 
-def F(n):
+def fib(n):
     if n == 0:
         return n
-    elif n == 1:
+    if n == 1:
         return 1
-    else:
-        return F(n - 1) + F(n - 2)
+    return fib(n - 1) + fib(n - 2)
 
 
 # 11. Write a recursive implementation of the factorial function. Recall that n! = 1 × 2 × ... × n, with the special case that 0! = 1.
@@ -250,5 +240,5 @@ def item_count(l):
 
 # 15. Write a function, which returns all subsets of a given list of unique elements (generates power set).
 
-#   def poset(s): pass
+#   def power_set(s): pass
 #   # power_set([1, 2, 3]) -> [[], [1], [2], [3], [1,2], [1,3], [2,3], [1,2,3]]
