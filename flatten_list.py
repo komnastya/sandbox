@@ -14,16 +14,13 @@ def flatten_list(items, depth=1000):
 
 def flatten_list2(items, depth=None):
     output = []
-    if depth is None:
-        depth = 1000
 
     def step(items, depth):
         for item in items:
-            if isinstance(item, list) and depth > 0:
-                step(item, depth - 1)
+            if isinstance(item, list) and (depth is None or depth > 0):
+                step(item, None if depth is None else depth - 1)
             else:
                 output.append(item)
 
     step(items, depth)
-
     return output
