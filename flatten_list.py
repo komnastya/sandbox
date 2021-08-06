@@ -6,7 +6,7 @@ def flatten_list(items, depth=1000):
     output = []
     for item in items:
         if isinstance(item, list) and depth > 0:
-            output.extend(flatten_list2(item, depth - 1))
+            output.extend(flatten_list(item, depth - 1))
         else:
             output.append(item)
     return output
