@@ -24,7 +24,3 @@ def board():
                 full_board.pop()
 
     step(full_board)
-    return full_board
-
-
-print(board())
