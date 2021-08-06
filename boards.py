@@ -27,4 +27,4 @@ def board():
     return full_board
 
 
-board()
+print(board())
