@@ -12,7 +12,7 @@
 def permutations(array):
     shifted_array = []
 
-    def step(shifted_array):
+    def step():
         if len(shifted_array) == len(array):
             print(shifted_array)
         else:
@@ -22,7 +22,7 @@ def permutations(array):
                     step(shifted_array)
                     shifted_array.pop()
 
-    step(shifted_array)
+    step()
 
 
 def permutations2(l, pos=0):
