@@ -10,17 +10,17 @@
 
 
 def permutations(array):
-    shifted_array = []
+    result = []
 
     def step():
-        if len(shifted_array) == len(array):
-            print(shifted_array)
+        if len(result) == len(array):
+            print(result)
         else:
             for item in array:
-                if item not in shifted_array:
-                    shifted_array.append(item)
+                if item not in result:
+                    result.append(item)
                     step()
-                    shifted_array.pop()
+                    result.pop()
 
     step()
 
