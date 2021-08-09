@@ -8,6 +8,7 @@
 # [3, 2, 1]
 # [3, 1, 2]
 
+
 def permutations(array):
     shifted_array = []
 
@@ -22,3 +23,13 @@ def permutations(array):
                     shifted_array.pop()
 
     step(shifted_array)
+
+
+def permutations2(l, pos=0):
+    if pos == len(l):
+        print(l)
+    else:
+        for i in range(pos, len(l)):
+            l[pos], l[i] = l[i], l[pos]
+            permutations2(l, pos + 1)
+            l[pos], l[i] = l[i], l[pos]
