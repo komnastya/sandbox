@@ -19,7 +19,7 @@ def permutations(array):
             for item in array:
                 if item not in shifted_array:
                     shifted_array.append(item)
-                    step(shifted_array)
+                    step()
                     shifted_array.pop()
 
     step()
