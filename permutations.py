@@ -9,14 +9,14 @@
 # [3, 1, 2]
 
 
-def permutations(l):
+def permutations(items):
     result = []
 
     def step():
-        if len(result) == len(l):
+        if len(result) == len(items):
             print(result)
         else:
-            for item in l:
+            for item in items:
                 if item not in result:
                     result.append(item)
                     step()
@@ -25,21 +25,21 @@ def permutations(l):
     step()
 
 
-def permutations2(l, pos=0):
-    if pos == len(l):
-        print(l)
+def permutations2(items, pos=0):
+    if pos == len(items):
+        print(items)
     else:
-        for i in range(pos, len(l)):
-            l[pos], l[i] = l[i], l[pos]
-            permutations2(l, pos + 1)
-            l[pos], l[i] = l[i], l[pos]
+        for i in range(pos, len(items)):
+            items[pos], items[i] = items[i], items[pos]
+            permutations2(items, pos + 1)
+            items[pos], items[i] = items[i], items[pos]
 
 
-def permutations_gen(l, pos=0):
-    if pos == len(l):
-        yield l
+def permutations_gen(items, pos=0):
+    if pos == len(items):
+        yield items
     else:
-        for i in range(pos, len(l)):
-            l[pos], l[i] = l[i], l[pos]
-            yield from permutations_gen(l, pos + 1)
-            l[pos], l[i] = l[i], l[pos]
+        for i in range(pos, len(items)):
+            items[pos], items[i] = items[i], items[pos]
+            yield from permutations_gen(items, pos + 1)
+            items[pos], items[i] = items[i], items[pos]
