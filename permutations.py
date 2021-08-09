@@ -9,14 +9,14 @@
 # [3, 1, 2]
 
 
-def permutations(array):
+def permutations(l):
     result = []
 
     def step():
-        if len(result) == len(array):
+        if len(result) == len(l):
             print(result)
         else:
-            for item in array:
+            for item in l:
                 if item not in result:
                     result.append(item)
                     step()
