@@ -33,3 +33,13 @@ def permutations2(l, pos=0):
             l[pos], l[i] = l[i], l[pos]
             permutations2(l, pos + 1)
             l[pos], l[i] = l[i], l[pos]
+
+
+def permutations_gen(l, pos=0):
+    if pos == len(l):
+        yield l
+    else:
+        for i in range(pos, len(l)):
+            l[pos], l[i] = l[i], l[pos]
+            yield from permutations_gen(l, pos + 1)
+            l[pos], l[i] = l[i], l[pos]
