@@ -1,3 +1,6 @@
+from merge_lists import merge_lists
+
+
 def bubble_sort(list):
     for j in range(len(list)):
         for i in range(len(list) - 1):
@@ -79,3 +82,20 @@ def merge_sort(arr):
             k += 1
 
     return arr
+
+
+# Merge sorting using merge_lists function
+
+def merge_sort_2(arr):
+    if len(arr) <= 1:
+        return arr
+    else:
+        mid = len(arr) // 2
+
+        left = arr[:mid]
+        right = arr[mid:]
+
+        return merge_lists(merge_sort_2(left), merge_sort_2(right))
+
+
+print(merge_sort_2([2, 4, 6, 7, 5, 3, 1]))
