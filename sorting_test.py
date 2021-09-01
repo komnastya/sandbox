@@ -1,5 +1,5 @@
 import pytest
-from sorting import bubble_sort, select_sort, insert_sort, quick_sort
+from sorting import bubble_sort, select_sort, insert_sort, quick_sort, merge_sort
 
 
 def _check_sorting_function(sf):
@@ -24,3 +24,6 @@ def test_insert_sort():
 
 def test_quick_sort():
     _check_sorting_function(quick_sort)
+
+def test_merge_sort():
+    _check_sorting_function(merge_sort)
