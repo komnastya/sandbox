@@ -96,6 +96,3 @@ def merge_sort_2(arr):
         right = arr[mid:]
 
         return merge_lists(merge_sort_2(left), merge_sort_2(right))
-
-
-print(merge_sort_2([2, 4, 6, 7, 5, 3, 1]))
