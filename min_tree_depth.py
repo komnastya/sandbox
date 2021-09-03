@@ -25,9 +25,8 @@ def min_tree_depth(node):
     right = min_tree_depth(node.right)
     if left == 0 and right == 0:
         return 1
-    elif left == 0 and right != 0:
+    if left == 0 and right != 0:
         return 1 + right
-    elif left != 0 and right == 0:
+    if left != 0 and right == 0:
         return 1 + left
-    else:
-        return 1 + min(left, right)
+    return 1 + min(left, right)
