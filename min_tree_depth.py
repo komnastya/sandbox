@@ -21,4 +21,13 @@ class Node:
 def min_tree_depth(node):
     if node is None:
         return 0
-    return 1 + min(min_tree_depth(node.left), min_tree_depth(node.right))
+    left = min_tree_depth(node.left)
+    right = min_tree_depth(node.right)
+    if left == 0 and right == 0:
+        return 1
+    elif left == 0 and right != 0:
+        return 1 + right
+    elif left != 0 and right == 0:
+        return 1 + left
+    else:
+        return 1 + min(left, right)
