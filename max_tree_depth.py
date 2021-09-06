@@ -20,7 +20,7 @@ class Node:
 # Count quantity
 
 
-def node_count(node):
+def node_count(node: Node) -> int:
     if node is None:
         return 0
     else:
@@ -30,7 +30,7 @@ def node_count(node):
 # Count height
 
 
-def max_tree_depth(node):
+def max_tree_depth(node: Node) -> int:
     if node is None:
         return 0
     return 1 + max(max_tree_depth(node.left), max_tree_depth(node.right))

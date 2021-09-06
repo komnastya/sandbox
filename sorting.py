@@ -1,7 +1,9 @@
+from typing import List
+
 from merge_lists import merge_lists
 
 
-def bubble_sort(list):
+def bubble_sort(list: List) -> List:
     for j in range(len(list)):
         for i in range(len(list) - 1):
             if list[i] > list[i + 1]:
@@ -9,7 +11,7 @@ def bubble_sort(list):
     return list
 
 
-def select_sort(list):
+def select_sort(list: List) -> List:
     for j in range(len(list)):
         for i in range(j + 1, len(list)):
             if list[i] < list[j]:
@@ -17,7 +19,7 @@ def select_sort(list):
     return list
 
 
-def insert_sort(list):
+def insert_sort(list: List) -> List:
     for i in range(1, len(list)):
         for j in range(0, i):
             if list[i] < list[j]:
@@ -25,7 +27,7 @@ def insert_sort(list):
     return list
 
 
-def quick_sort(arr):
+def quick_sort(arr: List) -> List:
     def portition(l, r):
         pivot = arr[r]
         i = l - 1
@@ -49,7 +51,7 @@ def quick_sort(arr):
     return arr
 
 
-def merge_sort(arr):
+def merge_sort(arr: List) -> List:
     if len(arr) > 1:
 
         mid = len(arr) // 2
@@ -86,7 +88,7 @@ def merge_sort(arr):
 
 # Merge sorting using merge_lists function
 
-def merge_sort_2(arr):
+def merge_sort_2(arr: List) -> List:
     if len(arr) <= 1:
         return arr
     else:

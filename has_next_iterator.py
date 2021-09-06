@@ -1,7 +1,10 @@
+from typing import List
+
 NOTHING = object()
 
+
 class HasNextIterator:
-    def __init__(self, iterator):
+    def __init__(self, iterator: List):
         self._iterator = iterator
         self._get_next()
 

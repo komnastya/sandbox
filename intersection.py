@@ -1,4 +1,7 @@
-def intersect(a, b):
+from typing import List
+
+
+def intersect(a: List, b: List) -> List:
     output = []
     a = sorted(a)
     b = sorted(b)

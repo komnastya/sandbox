@@ -1,3 +1,5 @@
+from typing import List
+
 from dict_items import MyDictItems
 from dict_keys import MyDictKeys
 from dict_values import MyDictValues
@@ -6,9 +8,9 @@ from dict_values import MyDictValues
 class MyDict:
     """My own dictionary class"""
 
-    def __init__(self, other=None, capacity=100):
-        self.buckets = [None] * capacity
-        self.len = 0
+    def __init__(self, other=None, capacity: int = 100):
+        self.buckets: List = [None] * capacity
+        self.len: int = 0
 
     def clear(self):
         for i in range(len(self.buckets)):
@@ -111,16 +113,16 @@ class MyDict:
 
     def __str__(self):
         return (
-            "{"
-            + ", ".join(
-                (
-                    (str(key) + ": " + str(value))
-                    for bucket in self.buckets
-                    if bucket is not None
-                    for key, value in bucket
-                )
+                "{"
+                + ", ".join(
+            (
+                (str(key) + ": " + str(value))
+                for bucket in self.buckets
+                if bucket is not None
+                for key, value in bucket
             )
-            + "}"
+        )
+                + "}"
         )
 
     def fromkeys(self, seq, v=None):

@@ -5,12 +5,13 @@
 # - a board in which all cells are set to O,
 # - a board in which all cells are set to X,
 # - and all variants in between.
+from typing import List
 
 
-def board():
-    full_board = []
+def board() -> None:
+    full_board: List[str] = []
 
-    def step(full_board):
+    def step(full_board: List[str]) -> None:
         if len(full_board) == 9:
             print("---")
             x = "".join(full_board)

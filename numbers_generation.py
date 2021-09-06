@@ -1,5 +1,8 @@
 # This function keeps the temporary list of digits in an argument.
-def numbers0(size, digits):
+from typing import List
+
+
+def numbers0(size: int, digits: List):
     if len(digits) == size:
         print(digits)
     else:
@@ -8,7 +11,7 @@ def numbers0(size, digits):
 
 
 # This function keeps the temporary list of digits in an argument.
-def numbers1(size, digits):
+def numbers1(size: int, digits: List):
     if len(digits) == size:
         print(digits)
     else:
@@ -19,8 +22,8 @@ def numbers1(size, digits):
 
 
 # This function keeps the temporary list of digits in a local variable.
-def numbers2(size):
-    digits = []
+def numbers2(size: List):
+    digits: List = []
 
     def step():
         if len(digits) == size:

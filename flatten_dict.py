@@ -13,18 +13,18 @@
 #                      Here we joined keys of the containing
 #                      and the nested dictionary items.
 
-def flatten_dict(d):
-  output = {}
+def flatten_dict(d: dict) -> dict:
+    output = {}
 
-  def step(d, upper_key = None):
-    for key, value in d.items():
-      if upper_key is not None:
-        key = upper_key + '.' + key
-      if isinstance(value, dict):
-        step(value, key)
-      else:
-        output[key] = value
+    def step(d, upper_key=None):
+        for key, value in d.items():
+            if upper_key is not None:
+                key = upper_key + '.' + key
+            if isinstance(value, dict):
+                step(value, key)
+            else:
+                output[key] = value
 
-  step(d)
+    step(d)
 
-  return output
+    return output

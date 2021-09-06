@@ -1,7 +1,8 @@
 # Returns index of elem in nums, or -1 if not found.
+from typing import Union, List
 
 
-def binary_search(nums, elem):
+def binary_search(nums: List[int], elem: Union[int]) -> int:
     lo = 0
     hi = len(nums) - 1
     while lo <= hi:

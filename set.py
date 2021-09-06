@@ -1,6 +1,9 @@
+from typing import List
+
+
 class MySet:
     def __init__(self, other=None, capacity=100):
-        self.buckets = [None] * capacity
+        self.buckets: List = [None] * capacity
         self.len = 0
         if other is not None:
             for elem in other:

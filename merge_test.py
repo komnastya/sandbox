@@ -1,4 +1,5 @@
 import unittest
+
 from merge import merge, merge_better, merge_ugly
 
 

@@ -14,9 +14,10 @@
 #   # 2
 #   # 1
 #   # 0
+from typing import List
 
 
-def print_numbers_dec(x):
+def print_numbers_dec(x: int) -> None:
     print(x)
     if x > 0:
         print_numbers_dec(x - 1)
@@ -32,7 +33,7 @@ def print_numbers_dec(x):
 #   # 3
 
 
-def print_numbers_inc(x):
+def print_numbers_inc(x: int) -> None:
     if x > 0:
         print_numbers_inc(x - 1)
     print(x)
@@ -51,7 +52,7 @@ def print_numbers_inc(x):
 #   # 3
 
 
-def print_numbers(x):
+def print_numbers(x: int) -> None:
     print(x)
     if x > 0:
         print_numbers(x - 1)
@@ -65,7 +66,7 @@ def print_numbers(x):
 #   # numbers_dec(3) -> [3,2,1,0]
 
 
-def numbers_dec(x):
+def numbers_dec(x: int) -> List:
     output = []
     output.append(x)
     if x > 0:
@@ -80,7 +81,7 @@ def numbers_dec(x):
 #   # numbers_inc(3) -> [0,1,2,3]
 
 
-def numbers_inc(x):
+def numbers_inc(x: int) -> List:
     output = []
     if x > 0:
         output.extend(numbers_inc(x - 1))
@@ -96,7 +97,7 @@ def numbers_inc(x):
 #   # print(accum) -> [3, 2, 1, 0]
 
 
-def fill_numbers_dec(x, accum):
+def fill_numbers_dec(x: int, accum: List) -> None:
     accum.append(x)
     if x > 0:
         fill_numbers_dec(x - 1, accum)
@@ -110,7 +111,7 @@ def fill_numbers_dec(x, accum):
 #   # print(accum) -> [0, 1, 2, 3]
 
 
-def fill_numbers_inc(x, accum):  # accum is the list to be updated with numbers
+def fill_numbers_inc(x: int, accum: List) -> None:  # accum is the list to be updated with numbers
     if x > 0:
         fill_numbers_inc(x - 1, accum)
     accum.append(x)
@@ -124,7 +125,7 @@ def fill_numbers_inc(x, accum):  # accum is the list to be updated with numbers
 #   # mul(2, 3) -> 6
 
 
-def mul(a, b):
+def mul(a: int, b: int) -> int:
     if a == 0 or b == 0:
         return 0
     return a + mul(a, b - 1)
@@ -138,7 +139,7 @@ def mul(a, b):
 #   # pow(2, 3) -> 8
 
 
-def pow(base, exp):
+def pow(base: int, exp: int) -> int:
     if exp == 0:
         return 1
     if exp == 1:
@@ -161,7 +162,7 @@ def pow(base, exp):
 #   # fib(3) -> 2
 
 
-def fib(n):
+def fib(n: int) -> int:
     if n == 0:
         return n
     if n == 1:
@@ -176,7 +177,7 @@ def fib(n):
 #   # factorial(3) -> 6
 
 
-def factorial(n):
+def factorial(n: int) -> int:
     if n == 0 or n == 1:
         return 1
     else:
@@ -190,7 +191,7 @@ def factorial(n):
 #   # reverse("abc") -> "cba"
 
 
-def reverse(s):
+def reverse(s: str) -> str:
     if len(s) <= 1:
         return s
     return reverse(s[1:]) + s[0]
@@ -204,7 +205,7 @@ def reverse(s):
 #   # is_palindrome("") -> ? Tell me, what is the right answer? True
 
 
-def is_palindrome(s):
+def is_palindrome(s: str) -> bool:
     if len(s) <= 1:
         return True
     else:
@@ -225,7 +226,7 @@ def is_palindrome(s):
 #   # item_count([1, [1, [1]]]) -> 3 # many nested non-empty sub-lists
 
 
-def item_count(l):
+def item_count(l: List) -> int:
     count = 0
     for item in l:
         if isinstance(item, list):
@@ -233,7 +234,6 @@ def item_count(l):
         else:
             count += 1
     return count
-
 
 # Hard problems
 # -------------

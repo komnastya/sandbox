@@ -18,7 +18,7 @@ class Node:
         self.right = right
 
 
-def min_tree_depth(node):
+def min_tree_depth(node: Node) -> int:
     if node is None:
         return 0
     left = min_tree_depth(node.left)

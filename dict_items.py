@@ -1,21 +1,24 @@
+from dict import MyDict
+
+
 class MyDictItems:
     """My class for dictionary items"""
 
-    def __init__(self, owner):
+    def __init__(self, owner: MyDict):
         self.owner = owner
 
     def __str__(self):
         return (
-            "dict_items["
-            + ", ".join(
-                (
-                    "(" + str(key) + ", " + str(value) + ")"
-                    for bucket in self.owner.buckets
-                    if bucket is not None
-                    for key, value in bucket
-                )
+                "dict_items["
+                + ", ".join(
+            (
+                "(" + str(key) + ", " + str(value) + ")"
+                for bucket in self.owner.buckets
+                if bucket is not None
+                for key, value in bucket
             )
-            + "]"
+        )
+                + "]"
         )
 
     def __len__(self):

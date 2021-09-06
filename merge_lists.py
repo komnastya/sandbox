@@ -1,4 +1,7 @@
-def merge_lists(a, b):
+from typing import List
+
+
+def merge_lists(a: List, b: List) -> List:
     output = []
     i = 0
     j = 0

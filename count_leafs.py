@@ -1,4 +1,7 @@
-def count_leaf_items_recursive(item_list):
+from typing import List
+
+
+def count_leaf_items_recursive(item_list: List) -> int:
     """Recursively counts and returns the
        number of leaf items in a (potentially
        nested) list.
@@ -13,13 +16,13 @@ def count_leaf_items_recursive(item_list):
     return count
 
 
-def count_leaf_items(item_list):
+def count_leaf_items(item_list: List) -> int:
     """Non-recursively counts and returns the
        number of leaf items in a (potentially
        nested) list.
     """
     count = 0
-    stack = []
+    stack: List = []
     current_list = item_list
     i = 0
 

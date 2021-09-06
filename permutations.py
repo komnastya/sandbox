@@ -7,10 +7,11 @@
 # [2, 3, 1]
 # [3, 2, 1]
 # [3, 1, 2]
+from typing import List
 
 
-def permutations(items):
-    result = []
+def permutations(items: List) -> None:
+    result: List = []
 
     def step():
         if len(result) == len(items):
@@ -25,7 +26,7 @@ def permutations(items):
     step()
 
 
-def permutations2(items, pos=0):
+def permutations2(items: List, pos: int = 0):
     if pos == len(items):
         print(items)
     else:

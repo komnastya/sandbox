@@ -10,10 +10,11 @@
 #  [1,1,1,1,1]],
 # k = 3
 # Output: [2,0,3]
+from typing import List
 
 
-def kWeakestRows(mat, k):
-    def counter(row):
+def kWeakestRows(mat: List[List], k: int) -> List[int]:
+    def counter(row: List) -> int:
         lo = 0
         hi = len(row) - 1
         if row[hi] == 1:
@@ -31,6 +32,7 @@ def kWeakestRows(mat, k):
                 lo = mid + 1
                 continue
             return mid
+        return -1
 
     result = sorted([[counter(mat[row]), row] for row in range(len(mat))])
 
