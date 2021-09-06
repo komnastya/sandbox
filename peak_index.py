@@ -9,16 +9,18 @@
 # Example 1: arr = [0,1,0] -> 1
 # Example 1: arr = [0,1,2,0] -> 2
 # Example 1: arr = [0,1,2,3,5,7,11,6,4] -> 6
+from typing import List
 
 
-def peak_index(nums):
+def peak_index(nums: List) -> int:
     lo = 0
     hi = len(nums) - 1
     while lo <= hi:
         mid = (lo + hi) // 2
         if nums[mid - 1] < nums[mid] < nums[mid + 1]:
-           lo = mid + 1
+            lo = mid + 1
         elif nums[mid - 1] > nums[mid] > nums[mid + 1]:
-          hi = mid - 1
+            hi = mid - 1
         elif nums[mid - 1] < nums[mid] > nums[mid + 1]:
-          return mid
+            return mid
+    raise ValueError
