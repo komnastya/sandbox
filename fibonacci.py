@@ -1,3 +1,6 @@
+from typing import Generator
+
+
 class Fibonacci:
     def __init__(self):
         self.a = 0
@@ -13,7 +16,7 @@ class Fibonacci:
         return self.a
 
 
-def fibonacci():
+def fibonacci() -> Generator[int, None, None]:
     yield 1
     a = 0
     b = 1
