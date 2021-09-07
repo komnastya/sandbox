@@ -1,3 +1,5 @@
+from typing import Any, Dict
+
 # Recursively flatten a dictionary of dictionaries.
 # The result is a single flat dictionary.
 # To avoid collisions in the case of nested dictionaries their keys
@@ -12,10 +14,7 @@
 #                      ^^^^^^^^^^^
 #                      Here we joined keys of the containing
 #                      and the nested dictionary items.
-from typing import Dict
-
-
-def flatten_dict(d: Dict[int, str]) -> Dict:
+def flatten_dict(d: Dict[str, Any]) -> Dict[str, Any]:
     output = {}
 
     def step(d, upper_key=None):
