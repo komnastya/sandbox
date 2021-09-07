@@ -12,8 +12,10 @@
 #                      ^^^^^^^^^^^
 #                      Here we joined keys of the containing
 #                      and the nested dictionary items.
+from typing import Dict
 
-def flatten_dict(d: dict) -> dict:
+
+def flatten_dict(d: Dict[int, str]) -> Dict:
     output = {}
 
     def step(d, upper_key=None):
