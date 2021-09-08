@@ -10,20 +10,20 @@ def test_has_next_iterator():
 
 def test_has_next_method():
     nums_1 = HasNextIterator(iter([]))
-    assert nums_1.has_next() == False
+    assert not nums_1.has_next()
 
     nums = HasNextIterator(iter([1, 2, 3]))
-    assert nums.has_next() == True
+    assert nums.has_next()
     assert next(nums) == 1
 
-    assert nums.has_next() == True
+    assert nums.has_next()
     assert next(nums) == 2
 
-    assert nums.has_next() == True
+    assert nums.has_next()
     assert next(nums) == 3
 
-    assert nums.has_next() == False
-    assert nums.has_next() == False
+    assert not nums.has_next()
+    assert not nums.has_next()
 
 
 def test_next_method_exception():

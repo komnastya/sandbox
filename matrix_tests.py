@@ -4,9 +4,9 @@ from matrix import is_square, matrix_sum
 
 
 def test_matrix():
-    assert is_square([[1, 2], [3, 4]]) == True
-    assert is_square([]) == True
-    assert is_square([[1]]) == True
+    assert is_square([[1, 2], [3, 4]])
+    assert is_square([])
+    assert is_square([[1]])
     with pytest.raises(ValueError):
         matrix_sum([[1, 2], [3, 4]], [[1, 2]])
 

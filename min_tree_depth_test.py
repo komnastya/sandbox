@@ -8,4 +8,11 @@ def test_min_tree_depth():
     assert min_tree_depth(Node(left=None, right=Node())) == 2
     assert min_tree_depth(Node(left=Node(), right=Node())) == 2
     assert min_tree_depth(Node(left=None, right=Node(left=None, right=Node()))) == 3
-    assert min_tree_depth(Node(left=Node(left=None, right=Node()), right=Node(left=None, right=Node()))) == 3
+    assert (
+        min_tree_depth(
+            Node(
+                left=Node(left=None, right=Node()), right=Node(left=None, right=Node())
+            )
+        )
+        == 3
+    )

@@ -1,4 +1,11 @@
-from sorting import bubble_sort, insert_sort, merge_sort, merge_sort_2, quick_sort, select_sort
+from sorting import (
+    bubble_sort,
+    insert_sort,
+    merge_sort,
+    merge_sort_2,
+    quick_sort,
+    select_sort,
+)
 
 
 def _check_sorting_function(sf):

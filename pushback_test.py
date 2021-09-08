@@ -23,18 +23,18 @@ def test_push_back_method():
 
 def test_has_next_method():
     nums = PushBackIterator(iter([]))
-    assert nums.has_next() == False
+    assert not nums.has_next()
 
     nums = PushBackIterator(iter([1, 2, 3]))
     assert next(nums) == 1
 
-    assert nums.has_next() == True
+    assert nums.has_next()
     assert next(nums) == 2
 
-    assert nums.has_next() == True
+    assert nums.has_next()
     assert next(nums) == 3
 
-    assert nums.has_next() == False
+    assert not nums.has_next()
 
 
 def test_has_next_and_push_back_methods_together():
@@ -43,16 +43,16 @@ def test_has_next_and_push_back_methods_together():
     assert next(nums) == 3
     assert next(nums) == 4
 
-    assert nums.has_next() == False
+    assert not nums.has_next()
 
     nums.push_back(5)
-    assert nums.has_next() == True
+    assert nums.has_next()
 
     assert next(nums) == 5
-    assert nums.has_next() == False
+    assert not nums.has_next()
 
     nums = PushBackIterator(iter([]))
-    assert nums.has_next() == False
+    assert not nums.has_next()
     nums.push_back(1)
     assert list(nums) == [1]
 
