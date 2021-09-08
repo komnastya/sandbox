@@ -1,3 +1,5 @@
+# type: ignore
+
 # Theory
 
 # Private method

@@ -1,3 +1,5 @@
+# type: ignore
+
 # Theory with examples
 
 # Accessing tuple elements using slicing

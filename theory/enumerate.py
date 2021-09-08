@@ -1,3 +1,5 @@
+# type: ignore
+
 # THEORY with examples
 
 
