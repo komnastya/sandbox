@@ -3,6 +3,8 @@ import unittest
 from dict import MyDict
 
 
+# TODO fix bugs
+
 class TestMyDict(unittest.TestCase):
     def test_dict(self):
         d = MyDict()
@@ -214,7 +216,6 @@ class TestMyDict(unittest.TestCase):
         self.assertEqual(str(dd), "{1: one, 2: two, 3: three}")
 
     def test_fromkeys(self):
-
         self.assertEqual(
             str(MyDict().fromkeys([1, 2, 3])), "{1: None, 2: None, 3: None}"
         )
@@ -314,6 +315,7 @@ class TestMyDict(unittest.TestCase):
         d1[3] = 'three'
         d.update(d1)
         self.assertEqual(str(d), '{1: one, 2: two, 3: three}')
+
 
 if __name__ == "__main__":
     unittest.main()
