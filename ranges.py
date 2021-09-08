@@ -1,7 +1,7 @@
 # making iterators the hard way
 
-class MyRange:
 
+class MyRange:
     def __init__(self, start, end):
         self.value = start
         self.end = end
@@ -18,6 +18,7 @@ class MyRange:
 
 
 # making iterators the easy way
+
 
 def my_range(start, end):
     while start < end:

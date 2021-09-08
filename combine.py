@@ -7,9 +7,7 @@ from typing import List, Tuple
 # Both lists a and b are assumed to be of equal size.
 # Example: combine([1], [4]) -> [1,4]
 # Example: combine([1,2,3], [4,5,6]) -> [1,4,2,5,3,6]
-
-# combine function is the equivalent to built-in zip function
-
+# The combine function is the equivalent to the built-in zip function
 def combine(a: List[int], b: List[int]) -> List[Tuple[int, int]]:
     if len(a) != len(b):
         raise ValueError

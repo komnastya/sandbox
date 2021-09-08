@@ -1,5 +1,7 @@
-# Given a binary tree, find its minimum depth.
+from typing import Optional
 
+
+# Given a binary tree, find its minimum depth.
 # The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
 
 #                        Node
@@ -12,13 +14,14 @@
 #                                   |
 #                               x---+---x
 
+
 class Node:
     def __init__(self, left=None, right=None):
-        self.left = left
-        self.right = right
+        self.left = left  # type: Optional[Node]
+        self.right = right  # type: Optional[Node]
 
 
-def min_tree_depth(node: Node) -> int:
+def min_tree_depth(node: Optional[Node]) -> int:
     if node is None:
         return 0
     left = min_tree_depth(node.left)

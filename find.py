@@ -10,8 +10,6 @@ from typing import Any, List
 # Given list=[0,2,2,4], element=2, result=1
 # Given list=[0,2,2,4], element=4, result=3
 # Given list=[0,2,2,4], element=1, result=-1
-
-
 def find(list: List[Any], element: Any) -> int:
     for i in range(len(list)):
         if list[i] == element:

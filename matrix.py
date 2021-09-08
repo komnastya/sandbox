@@ -1,7 +1,6 @@
 from typing import List
 
-# Type Alias
-Matrix = List[List[int]]
+Matrix = List[List[int]]  # Type Alias
 
 
 # Tests whether the given matrix is square.
@@ -9,8 +8,6 @@ Matrix = List[List[int]]
 # Example: [[1]] -> True
 # Example: [[1,2],[3,4]] -> True
 # Example: [[1],[2]] -> False
-
-
 def is_square(matrix: Matrix) -> bool:
     for row in matrix:
         if len(row) != len(matrix):
@@ -18,9 +15,7 @@ def is_square(matrix: Matrix) -> bool:
     return True
 
 
-# Matrix addition
-
-
+# Returns sum of the given matrices.
 def matrix_sum(a: Matrix, b: Matrix) -> Matrix:
     if len(a) != len(b):
         raise ValueError

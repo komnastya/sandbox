@@ -3,8 +3,8 @@ from typing import List
 
 def count_leaf_items_recursive(item_list: List) -> int:
     """Recursively counts and returns the
-       number of leaf items in a (potentially
-       nested) list.
+    number of leaf items in a (potentially
+    nested) list.
     """
     count = 0
     for item in item_list:
@@ -18,8 +18,8 @@ def count_leaf_items_recursive(item_list: List) -> int:
 
 def count_leaf_items(item_list: List) -> int:
     """Non-recursively counts and returns the
-       number of leaf items in a (potentially
-       nested) list.
+    number of leaf items in a (potentially
+    nested) list.
     """
     count = 0
     stack: List = []

@@ -1,3 +1,5 @@
+from typing import List, Any
+
 # Theory with examples
 
 fruits = ["apple", "pear", "orange", "banana", "grapes", "apricon"]
@@ -21,7 +23,7 @@ print("Vegetables are ", vegetables)
 vegetables[3:6] = ["Foo!"]
 print("Vegetables are ", vegetables)
 
-nums = [1, 2, 3, 4]
+nums: List[Any] = [1, 2, 3, 4]
 print("Numbers are", nums)
 
 nums[1:2] = [2.1, 2.2, 2.3]
@@ -34,7 +36,7 @@ print("Numbers are", nums)
 
 # You can also insert elements into a list without removing anything. Simply specify a slice of the form [n:n] (a zero-length slice) at the desired index:
 
-a = [1, 2, 7, 8]
+a: List[Any] = [1, 2, 7, 8]
 a[2:2] = [3, 4, 5, 6]
 
 print("a is", a)

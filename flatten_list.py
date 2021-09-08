@@ -1,11 +1,9 @@
-from typing import List, Optional
+from typing import List, Optional, Any
 
 
 # Given a list of lists of lists of items (of arbitrary depth)
 # this function returns a single flat list of items.
-
-
-def flatten_list(items: List, depth: int = 1000):
+def flatten_list(items: List[Any], depth: int = 1000) -> List[Any]:
     output = []
     for item in items:
         if isinstance(item, list) and depth > 0:
@@ -15,7 +13,7 @@ def flatten_list(items: List, depth: int = 1000):
     return output
 
 
-def flatten_list2(items: List, depth: Optional[int] = None):
+def flatten_list2(items: List, depth: Optional[int] = None) -> List[Any]:
     output = []
 
     def step(items, depth):

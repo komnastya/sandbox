@@ -1,8 +1,9 @@
-# This function keeps the temporary list of digits in an argument.
 from typing import List
 
 
-def numbers0(size: int, digits: List):
+# Recursively generates a list of all numbers with the given number of digits.
+def numbers0(size: int, digits: List[int]):
+    # This function keeps the temporary list of digits in an argument.
     if len(digits) == size:
         print(digits)
     else:
@@ -10,8 +11,9 @@ def numbers0(size: int, digits: List):
             numbers0(size, [d] + digits)
 
 
-# This function keeps the temporary list of digits in an argument.
-def numbers1(size: int, digits: List):
+# Recursively generates a list of all numbers with the given number of digits.
+def numbers1(size: int, digits: List[int]):
+    # This function keeps the temporary list of digits in an argument.
     if len(digits) == size:
         print(digits)
     else:
@@ -21,8 +23,10 @@ def numbers1(size: int, digits: List):
             digits.pop()  # Remove the digit.
 
 
-# This function keeps the temporary list of digits in a local variable.
-def numbers2(size: List):
+# Recursively generates a list of all numbers with the given number of digits.
+def numbers2(size: List[int]):
+    # This function keeps the temporary list of digits in a local variable.
+
     digits: List = []
 
     def step():

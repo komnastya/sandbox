@@ -2,11 +2,11 @@ from splitflat import equal, flat, split
 
 
 def test_equal():
-    assert equal([], []) == True
-    assert equal([1], [1]) == True
-    assert equal([1, 2], [1, 2]) == True
-    assert equal([1, 2, 3], [1, 2]) == False
-    assert equal([1, 2], [2, 1]) == False
+    assert equal([], [])
+    assert equal([1], [1])
+    assert equal([1, 2], [1, 2])
+    assert not equal([1, 2, 3], [1, 2])
+    assert not equal([1, 2], [2, 1])
 
 
 def test_flat():

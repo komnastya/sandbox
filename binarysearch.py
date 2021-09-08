@@ -1,7 +1,8 @@
-# Returns index of elem in nums, or -1 if not found.
 from typing import List
 
 
+# Performs binary search to find index of the given element
+# in the given list, or -1 if not found.
 def binary_search(nums: List[int], elem: int) -> int:
     lo = 0
     hi = len(nums) - 1

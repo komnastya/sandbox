@@ -1,3 +1,6 @@
+from typing import List
+
+
 # A function which prints all permutations of a given list of unique elements.
 # Example:
 # permutations([1, 2, 3]):
@@ -7,7 +10,6 @@
 # [2, 3, 1]
 # [3, 2, 1]
 # [3, 1, 2]
-from typing import List
 
 
 def permutations(items: List) -> None:

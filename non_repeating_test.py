@@ -29,4 +29,9 @@ def test_non_repeating_better():
     assert list(non_repeating_better([1, 2, 2, 3, 4, 4, 5, 6, 6])) == [1, 2, 3, 4, 5, 6]
     assert list(non_repeating_better([None, None, None])) == [None]
     assert list(non_repeating_better([True, True, True])) == [True]
-    assert list(non_repeating_better([True, True, False, False, True, False])) == [True, False, True, False]
+    assert list(non_repeating_better([True, True, False, False, True, False])) == [
+        True,
+        False,
+        True,
+        False,
+    ]

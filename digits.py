@@ -7,8 +7,6 @@ from typing import List
 # [1]           -> 1
 # [1,0]         -> 10
 # [1,2,3,4,5]   -> 12345
-
-
 def digits_to_number(digits: List[int], base: int = 10) -> int:
     number = 0
     for digit in digits:
@@ -21,8 +19,6 @@ def digits_to_number(digits: List[int], base: int = 10) -> int:
 # 1     -> [1]
 # 10    -> [1,0]
 # 12345 -> [1,2,3,4,5]
-
-
 def number_to_digits(number: int, base: int = 10) -> List[int]:
     digits: List[int] = []
     if number == 0:

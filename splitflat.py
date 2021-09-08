@@ -31,7 +31,7 @@ def equal(a: List[int], b: List[int]) -> bool:
 def split(list: List[int], max_size: int) -> List[List[int]]:
     output = []
     for i in range(0, len(list), max_size):
-        output.append(list[i: i + max_size])
+        output.append(list[i : i + max_size])
     return output
 
 

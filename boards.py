@@ -1,3 +1,6 @@
+from typing import List
+
+
 # A function which prints all possible Tic-tac-toe boards.
 # Any cell may be empty, X or O.
 # Possible results include
@@ -5,7 +8,6 @@
 # - a board in which all cells are set to O,
 # - a board in which all cells are set to X,
 # - and all variants in between.
-from typing import List
 
 
 def board() -> None:

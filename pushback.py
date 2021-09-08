@@ -1,3 +1,6 @@
+# An iterator which allows to "unget" the items returned from it.
+# If some value was pushed back, the next call to `__next__` will return
+# this value.
 class PushBackIterator:
     def __init__(self, iterator):
         self.iterator = iterator

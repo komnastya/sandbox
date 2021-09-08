@@ -53,6 +53,7 @@ def delete_large_fast(list: List[int], max: int) -> None:
             w = w + 1
     del list[w:]
 
+
 # Delete_large_fast function explanation -> -> ->
 
 # 1

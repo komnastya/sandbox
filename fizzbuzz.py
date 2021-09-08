@@ -7,12 +7,12 @@ from typing import List, Literal, Tuple, Union
 # d) Otherwise print the number.
 
 
-FizzBuzzString = Union[
+FizzBuzzValue = Union[
     Literal["fizz"],
     Literal["buzz"],
     Literal["fizz_buzz"],
 ]
-FizzBuzzList = List[Union[int, Tuple[int, FizzBuzzString]]]
+FizzBuzzList = List[Union[int, Tuple[int, FizzBuzzValue]]]
 
 
 def fizz_buzz(max: int) -> FizzBuzzList:

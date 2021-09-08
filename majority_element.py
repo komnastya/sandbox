@@ -55,7 +55,8 @@ def majority_element_dict(nums):
     return counters.get(major)
 
 
-#Boyer–Moore majority vote algorithm
+# Boyer–Moore majority vote algorithm
+
 
 def majority_element(nums):
     counter = 0

@@ -1,7 +1,14 @@
 # python -m unittest discover -p "*_test.py"
 import pytest
 
-from shift import shift_for, shift_inplace_smart, shift_inplace_stupid, shift_reverse, shift_slices, shift_while
+from shift import (
+    shift_for,
+    shift_inplace_smart,
+    shift_inplace_stupid,
+    shift_reverse,
+    shift_slices,
+    shift_while,
+)
 
 
 def test_shift_reverse():
