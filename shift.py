@@ -66,7 +66,8 @@ def shift_slices(list: List[int]) -> List[int]:
 
 
 def shift_inplace_smart(list: List[int]) -> None:
-    list.append(list.pop(0))
+    if len(list) >= 1:
+        list.append(list.pop(0))
 
 
 def shift_inplace_stupid(list: List[int]) -> None:
