@@ -1,39 +1,37 @@
-import unittest
+import pytest
+
 from has_next_iterator import HasNextIterator
 
 
-class TestHasNextIterator(unittest.TestCase):
-    def test_has_next_iterator(self):
-        nums = HasNextIterator(iter([1, 2, 3, 4, 5]))
-        self.assertEqual(list(nums), [1, 2, 3, 4, 5])
+def test_has_next_iterator():
+    nums = HasNextIterator(iter([1, 2, 3, 4, 5]))
+    assert list(nums) == [1, 2, 3, 4, 5]
 
-    def test_has_next_method(self):
-        nums_1 = HasNextIterator(iter([]))
-        self.assertFalse(nums_1.has_next())
 
-        nums = HasNextIterator(iter([1, 2, 3]))
-        self.assertTrue(nums.has_next())
-        self.assertEqual(next(nums), 1)
+def test_has_next_method():
+    nums_1 = HasNextIterator(iter([]))
+    assert nums_1.has_next() == False
 
-        self.assertTrue(nums.has_next())
-        self.assertEqual(next(nums), 2)
+    nums = HasNextIterator(iter([1, 2, 3]))
+    assert nums.has_next() == True
+    assert next(nums) == 1
 
-        self.assertTrue(nums.has_next())
-        self.assertEqual(next(nums), 3)
+    assert nums.has_next() == True
+    assert next(nums) == 2
 
-        self.assertFalse(nums.has_next())
-        self.assertFalse(nums.has_next())
+    assert nums.has_next() == True
+    assert next(nums) == 3
 
-    def test_next_method_exception(self):
-        nums = HasNextIterator(iter([1, 2, 3]))
+    assert nums.has_next() == False
+    assert nums.has_next() == False
 
+
+def test_next_method_exception():
+    nums = HasNextIterator(iter([1, 2, 3]))
+
+    next(nums)
+    next(nums)
+    next(nums)
+
+    with pytest.raises(StopIteration):
         next(nums)
-        next(nums)
-        next(nums)
-
-        with self.assertRaises(StopIteration):
-            next(nums)
-
-
-if __name__ == "__main__":
-    unittest.main()

@@ -1,4 +1,3 @@
-import pytest
 from intersection import intersect
 
 

@@ -1,5 +1,4 @@
-import pytest
-from max_tree_depth import max_tree_depth, Node
+from max_tree_depth import Node, max_tree_depth
 
 
 def test_max_tree_depth():

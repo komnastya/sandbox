@@ -1,4 +1,3 @@
-import pytest
 from negative_numbers_search import count_negative_numbers, count_negative_numbers_2
 
 
@@ -14,6 +13,7 @@ def test_negative_numbers_search():
     assert count_negative_numbers([[4, 3], [2, -1], [-1, -2]]) == 3
     assert count_negative_numbers([[1, -1], [-2, -3], [-4, -5]]) == 5
     assert count_negative_numbers([[4, 3, 2], [1, -1, -1]]) == 2
+
 
 def test_negative_numbers_search_2():
     assert count_negative_numbers_2([[]]) == 0

@@ -1,25 +1,19 @@
-import unittest
-
 from startendwith import ends_with, starts_with
 
 
-class TestStartEndWith(unittest.TestCase):
-    def test_starts_with(self):
-        self.assertTrue(starts_with([1, 2, 3], []))
-        self.assertTrue(starts_with([1, 2, 3], [1]))
-        self.assertTrue(starts_with([1, 2, 3], [1, 2]))
-        self.assertTrue(starts_with([1, 2, 3], [1, 2, 3]))
-        self.assertFalse(starts_with([1, 2, 3], [2]))
-        self.assertFalse(starts_with([1, 2, 3], [1, 2, 3, 4]))
-
-    def tests_ends_with(self):
-        self.assertTrue(ends_with([1, 2, 3], []))
-        self.assertTrue(ends_with([1, 2, 3], [3]))
-        self.assertTrue(ends_with([1, 2, 3], [2, 3]))
-        self.assertTrue(ends_with([1, 2, 3], [1, 2, 3]))
-        self.assertFalse(ends_with([1, 2, 3], [2]))
-        self.assertFalse(ends_with([1, 2, 3], [1, 2, 3, 4]))
+def test_starts_with():
+    assert starts_with([1, 2, 3], []) == True
+    assert starts_with([1, 2, 3], [1]) == True
+    assert starts_with([1, 2, 3], [1, 2]) == True
+    assert starts_with([1, 2, 3], [1, 2, 3]) == True
+    assert starts_with([1, 2, 3], [2]) == False
+    assert starts_with([1, 2, 3], [1, 2, 3, 4]) == False
 
 
-if __name__ == "__main__":
-    unittest.main()
+def tests_ends_with():
+    assert ends_with([1, 2, 3], []) == True
+    assert ends_with([1, 2, 3], [3]) == True
+    assert ends_with([1, 2, 3], [2, 3]) == True
+    assert ends_with([1, 2, 3], [1, 2, 3]) == True
+    assert ends_with([1, 2, 3], [2]) == False
+    assert ends_with([1, 2, 3], [1, 2, 3, 4]) == False

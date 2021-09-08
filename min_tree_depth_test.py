@@ -1,4 +1,4 @@
-from min_tree_depth import min_tree_depth, Node
+from min_tree_depth import Node, min_tree_depth
 
 
 def test_min_tree_depth():

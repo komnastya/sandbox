@@ -1,84 +1,83 @@
-import unittest
+import pytest
+
 from pushback import PushBackIterator
 
 
-class TestMerge(unittest.TestCase):
-    def test_push_back_iterator(self):
-        nums = PushBackIterator(iter([1, 2, 3, 4, 5]))
-        self.assertEqual(list(nums), [1, 2, 3, 4, 5])
+def test_push_back_iterator():
+    nums = PushBackIterator(iter([1, 2, 3, 4, 5]))
+    assert list(nums) == [1, 2, 3, 4, 5]
 
-    def test_push_back_method(self):
-        nums = PushBackIterator(iter([3, 4, 5]))
-        self.assertEqual(next(nums), 3)
 
-        nums.push_back(3)
-        self.assertEqual(next(nums), 3)
+def test_push_back_method():
+    nums = PushBackIterator(iter([3, 4, 5]))
+    assert next(nums) == 3
 
-        nums.push_back(3)
-        nums.push_back(2)
-        nums.push_back(1)
-        self.assertEqual(list(nums), [1, 2, 3, 4, 5])
+    nums.push_back(3)
+    assert next(nums) == 3
 
-    def test_has_next_method(self):
-        nums = PushBackIterator(iter([]))
-        self.assertFalse(nums.has_next())
+    nums.push_back(3)
+    nums.push_back(2)
+    nums.push_back(1)
+    assert list(nums) == [1, 2, 3, 4, 5]
 
-        nums = PushBackIterator(iter([1, 2, 3]))
-        self.assertEqual(next(nums), 1)
 
-        self.assertTrue(nums.has_next())
-        self.assertEqual(next(nums), 2)
+def test_has_next_method():
+    nums = PushBackIterator(iter([]))
+    assert nums.has_next() == False
 
-        self.assertTrue(nums.has_next())
-        self.assertEqual(next(nums), 3)
+    nums = PushBackIterator(iter([1, 2, 3]))
+    assert next(nums) == 1
 
-        self.assertFalse(nums.has_next())
+    assert nums.has_next() == True
+    assert next(nums) == 2
 
-    def test_has_next_and_push_back_methods_together(self):
-        nums = PushBackIterator(iter([3, 4]))
+    assert nums.has_next() == True
+    assert next(nums) == 3
 
-        self.assertEqual(next(nums), 3)
-        self.assertEqual(next(nums), 4)
+    assert nums.has_next() == False
 
-        self.assertFalse(nums.has_next())
 
-        nums.push_back(5)
-        self.assertTrue(nums.has_next())
+def test_has_next_and_push_back_methods_together():
+    nums = PushBackIterator(iter([3, 4]))
 
-        self.assertEqual(next(nums), 5)
-        self.assertFalse(nums.has_next())
+    assert next(nums) == 3
+    assert next(nums) == 4
 
-        nums = PushBackIterator(iter([]))
-        self.assertFalse(nums.has_next())
-        nums.push_back(1)
-        self.assertEqual(list(nums), [1])
+    assert nums.has_next() == False
 
-    def test_exceptions(self):
-        nums = PushBackIterator(iter([1, 2, 3]))
+    nums.push_back(5)
+    assert nums.has_next() == True
 
-        next(nums)
-        next(nums)
-        next(nums)
+    assert next(nums) == 5
+    assert nums.has_next() == False
 
-        with self.assertRaises(StopIteration):
-            next(nums)
+    nums = PushBackIterator(iter([]))
+    assert nums.has_next() == False
+    nums.push_back(1)
+    assert list(nums) == [1]
 
-    def test_exception_with_push(self):
-        nums = PushBackIterator(iter([1, 2]))
-        next(nums)
+
+def test_exceptions():
+    nums = PushBackIterator(iter([1, 2, 3]))
+
+    next(nums)
+    next(nums)
+    next(nums)
+
+    with pytest.raises(StopIteration):
         next(nums)
 
-        nums.push_back(1)
-        nums.push_back(2)
 
+def test_exception_with_push():
+    nums = PushBackIterator(iter([1, 2]))
+    next(nums)
+    next(nums)
+
+    nums.push_back(1)
+    nums.push_back(2)
+
+    next(nums)
+    next(nums)
+
+    with pytest.raises(StopIteration):
         next(nums)
-        next(nums)
-
-        with self.assertRaises(StopIteration):
-            next(nums)
-
-
-
-
-if __name__ == "__main__":
-    unittest.main()

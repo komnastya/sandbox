@@ -1,4 +1,3 @@
-import pytest
 from flatten_list import flatten_list, flatten_list2
 
 
