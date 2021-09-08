@@ -1,5 +1,3 @@
-from typing import List
-
 from dict_items import MyDictItems
 from dict_keys import MyDictKeys
 from dict_values import MyDictValues
@@ -8,8 +6,8 @@ from dict_values import MyDictValues
 class MyDict:
     """My own dictionary class"""
 
-    def __init__(self, other=None, capacity: int = 100):
-        self.buckets: List = [None] * capacity
+    def __init__(self, other=None, capacity=100):
+        self.buckets = [None] * capacity
         self.len: int = 0
 
     def clear(self):

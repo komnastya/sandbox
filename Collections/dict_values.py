@@ -1,10 +1,7 @@
-from dict import MyDict
-
-
 class MyDictValues:
     """My class for dictionary values"""
 
-    def __init__(self, owner: MyDict):
+    def __init__(self, owner):
         self.owner = owner
 
     def __str__(self):

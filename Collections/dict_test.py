@@ -3,8 +3,6 @@ import unittest
 from dict import MyDict
 
 
-# TODO fix bugs
-
 class TestMyDict(unittest.TestCase):
     def test_dict(self):
         d = MyDict()
