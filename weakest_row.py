@@ -1,3 +1,6 @@
+from typing import List
+
+
 # My solution for https://leetcode.com/problems/the-k-weakest-rows-in-a-matrix/ using binary search (it isn't the best solution for this task)
 
 # Example 1:
@@ -10,7 +13,6 @@
 #  [1,1,1,1,1]],
 # k = 3
 # Output: [2,0,3]
-from typing import List
 
 
 def kWeakestRows(mat: List[List], k: int) -> List[int]:

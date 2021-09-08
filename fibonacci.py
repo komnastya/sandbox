@@ -1,7 +1,8 @@
 from typing import Generator, List
 
 
-# Fibonacci sequence
+# A function which generates Fibonacci sequence in which
+# the last member is not larger  than the given max.
 def fibonacci(max: int) -> List[int]:
     if max <= 0:
         raise ValueError
@@ -20,7 +21,7 @@ def fibonacci(max: int) -> List[int]:
     return output
 
 
-# Fibonacci class
+# An iterable class which generates infinite Fibonacci sequence.
 class Fibonacci:
     def __init__(self):
         self.a = 0
@@ -36,7 +37,7 @@ class Fibonacci:
         return self.a
 
 
-# Fibonacci generator
+# A generator which generates infinite Fibonacci sequence.
 def fibonacci_g() -> Generator[int, None, None]:
     yield 1
     a = 0

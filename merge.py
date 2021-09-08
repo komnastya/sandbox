@@ -1,3 +1,6 @@
+from pushback import PushBackIterator
+
+
 # Merges two sorted sequences of numbers into a single sorted sequence.
 #
 # merge([], []) -> []
@@ -12,7 +15,6 @@
 # Both `a` and `b` are iterables, and the result must be iterable too. Don't use lists! Use `yield`.
 # Both `a` and `b` are sorted, and the result must be sorted too.
 
-from pushback import PushBackIterator
 
 # Without PushBackIterator
 
@@ -63,7 +65,7 @@ def merge(a, b):
     yield from b
 
 
-# Using PushBackIteretor with implemented has_next method
+# Using PushBackIterator with implemented has_next method
 
 
 def merge_better(a, b):

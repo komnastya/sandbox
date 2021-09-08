@@ -467,12 +467,12 @@ def test_isdisjoint():
     for x in range(20, 29):
         b.add(x)
 
-    assert a.isdisjoint(b) == True
+    assert a.isdisjoint(b)
 
     for x in range(1, 10):
         b.add(x)
 
-    assert a.isdisjoint(b) == False
+    assert not a.isdisjoint(b)
 
 
 def test_issubset():
@@ -482,13 +482,13 @@ def test_issubset():
     for x in range(3):
         a.add(x)
 
-    assert a.issubset(b) == False
+    assert not a.issubset(b)
 
     for x in range(5):
         b.add(x)
 
-    assert a.issubset(b) == True
-    assert b.issubset(a) == False
+    assert a.issubset(b)
+    assert not b.issubset(a)
 
 
 def test_issuperset():
@@ -498,11 +498,11 @@ def test_issuperset():
     for x in range(7):
         a.add(x)
 
-    assert a.issuperset(b) == True
+    assert a.issuperset(b)
 
     for x in range(3):
         b.add(x)
 
-    assert a.issuperset(b) == True
-    assert b.issuperset(a) == False
-    assert b.issubset(a) == True
+    assert a.issuperset(b)
+    assert not b.issuperset(a)
+    assert b.issubset(a)

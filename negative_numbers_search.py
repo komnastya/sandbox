@@ -1,7 +1,7 @@
-# Counts the number of negative numbers in the given matrix.
 from typing import List
 
 
+# Counts the number of negative numbers in the given matrix.
 def count_negative_numbers(nums: List) -> int:
     count = 0
     width = len(nums[0])
@@ -22,7 +22,6 @@ def count_negative_numbers(nums: List) -> int:
 #  1  1  1  1 | -1 -1
 #  1  1  1 -1 | -1 -1 <-- we are on this row
 #  1 -1 -1 -1 | -1 -1
-
 def count_negative_numbers_2(nums: List) -> int:
     negatives = 0
 

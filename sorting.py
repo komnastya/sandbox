@@ -88,6 +88,7 @@ def merge_sort(arr: List) -> List:
 
 # Merge sorting using merge_lists function
 
+
 def merge_sort_2(arr: List) -> List:
     if len(arr) <= 1:
         return arr

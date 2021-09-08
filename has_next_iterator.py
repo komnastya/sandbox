@@ -1,8 +1,10 @@
 from typing import List
 
-NOTHING = object()
+NOTHING = object()  # A special value which denotes absence of item.
 
 
+# An iterator class which supports the `has_next` method
+# which indicates whether there are more items in the iterator.
 class HasNextIterator:
     def __init__(self, iterator: List):
         self._iterator = iterator

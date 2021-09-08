@@ -1,3 +1,6 @@
+from typing import List
+
+
 # Let's call an array arr a mountain if the following properties hold:
 
 # arr.length >= 3
@@ -9,7 +12,6 @@
 # Example 1: arr = [0,1,0] -> 1
 # Example 1: arr = [0,1,2,0] -> 2
 # Example 1: arr = [0,1,2,3,5,7,11,6,4] -> 6
-from typing import List
 
 
 def peak_index(nums: List) -> int:

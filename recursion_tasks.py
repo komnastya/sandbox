@@ -111,7 +111,9 @@ def fill_numbers_dec(x: int, accum: List) -> None:
 #   # print(accum) -> [0, 1, 2, 3]
 
 
-def fill_numbers_inc(x: int, accum: List) -> None:  # accum is the list to be updated with numbers
+def fill_numbers_inc(
+    x: int, accum: List
+) -> None:  # accum is the list to be updated with numbers
     if x > 0:
         fill_numbers_inc(x - 1, accum)
     accum.append(x)
@@ -234,6 +236,7 @@ def item_count(l: List) -> int:
         else:
             count += 1
     return count
+
 
 # Hard problems
 # -------------
