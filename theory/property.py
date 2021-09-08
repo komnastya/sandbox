@@ -1,3 +1,5 @@
+# type: ignore
+
 # Making Getters and Setter methods
 class Celsius:
     def __init__(self, temperature=0):

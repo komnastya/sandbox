@@ -2,7 +2,7 @@ from typing import List, Optional
 
 
 class Node:
-    def __init__(self, val: int = None, children: List = None):
+    def __init__(self, val: Optional[int] = None, children: Optional[List] = None):
         self.val = val  # type: Optional[int]
         self.children = children  # type: Optional[List[Node]]
 
