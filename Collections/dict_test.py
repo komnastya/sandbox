@@ -1,319 +1,328 @@
-import unittest
+import pytest
 
 from dict import MyDict
 
 
-class TestMyDict(unittest.TestCase):
-    def test_dict(self):
-        d = MyDict()
+def test_dict():
+    d = MyDict()
 
-        self.assertEqual(len(d), 0)
-        self.assertEqual(str(d), "{}")
-        self.assertFalse(1 in d)
-        self.assertIsNone(d.get(1))
+    assert len(d) == 0
+    assert str(d) == "{}"
+    assert 1 not in d
+    assert d.get(1) is None
 
-        d.set(1, "one")
+    d.set(1, "one")
 
-        self.assertEqual(len(d), 1)
-        self.assertEqual(str(d), "{1: one}")
-        self.assertTrue(1 in d)
-        self.assertEqual(d.get(1), "one")
+    assert len(d) == 1
+    assert str(d) == "{1: one}"
+    assert 1 in d
+    assert d.get(1) == "one"
 
-        d.set(1, "uno")
+    d.set(1, "uno")
 
-        self.assertEqual(len(d), 1)
-        self.assertEqual(str(d), "{1: uno}")
-        self.assertTrue(1 in d)
-        self.assertEqual(d.get(1), "uno")
+    assert len(d) == 1
+    assert str(d) == "{1: uno}"
+    assert 1 in d
+    assert d.get(1) == "uno"
 
-        d.set(3, "tre")
-        d.set(2, "due")
+    d.set(3, "tre")
+    d.set(2, "due")
 
-        self.assertEqual(len(d), 3)
-        self.assertEqual(str(d), "{1: uno, 2: due, 3: tre}")
-        self.assertTrue(1 in d)
-        self.assertEqual(d.get(1), "uno")
-        self.assertTrue(2 in d)
-        self.assertEqual(d.get(2), "due")
-        self.assertTrue(3 in d)
-        self.assertEqual(d.get(3), "tre")
+    assert len(d) == 3
+    assert str(d) == "{1: uno, 2: due, 3: tre}"
+    assert 1 in d
+    assert d.get(1) == "uno"
+    assert 2 in d
+    assert d.get(2) == "due"
+    assert 3 in d
+    assert d.get(3) == "tre"
 
-    def test_get(self):
-        d = MyDict()
-        d.set(1, "one")
-        d.set(2, "two")
-        d.set(3, "three")
 
-        self.assertEqual(d.get(1), "one")
-        self.assertEqual(d.get(2), "two")
-        self.assertEqual(d.get(3), "three")
-        self.assertIsNone(d.get(4))
+def test_get():
+    d = MyDict()
+    d.set(1, "one")
+    d.set(2, "two")
+    d.set(3, "three")
 
-    def test_getitem(self):
-        d = MyDict()
+    assert d.get(1) == "one"
+    assert d.get(2) == "two"
+    assert d.get(3) == "three"
+    assert d.get(4) is None
 
-        with self.assertRaises(KeyError):
-            d[1]
 
-        d.set(1, "one")
-        d.set(2, "two")
-        d.set(3, "three")
+def test_getitem():
+    d = MyDict()
 
-        self.assertEqual(d[1], "one")
-        self.assertEqual(d[2], "two")
-        self.assertEqual(d[3], "three")
+    with pytest.raises(KeyError):
+        d[1]
 
-    def test_setitem(self):
-        d = MyDict()
+    d.set(1, "one")
+    d.set(2, "two")
+    d.set(3, "three")
 
-        self.assertEqual(len(d), 0)
-        self.assertEqual(str(d), "{}")
-        self.assertFalse(1 in d)
-        self.assertIsNone(d.get(1))
+    assert d[1] == "one"
+    assert d[2] == "two"
+    assert d[3] == "three"
 
-        d[1] = "one"
-        d[2] = "two"
 
-        self.assertEqual(len(d), 2)
-        self.assertEqual(str(d), "{1: one, 2: two}")
-        self.assertTrue(1 in d)
-        self.assertTrue(2 in d)
-        self.assertEqual(d.get(1), "one")
-        self.assertEqual(d.get(2), "two")
+def test_setitem():
+    d = MyDict()
 
-    def test_delitem(self):
-        d = MyDict()
+    assert len(d) == 0
+    assert str(d) == "{}"
+    assert 1 not in d
+    assert d.get(1) is None
 
-        self.assertEqual(len(d), 0)
-        self.assertEqual(str(d), "{}")
-        self.assertFalse(1 in d)
-        self.assertIsNone(d.get(1))
+    d[1] = "one"
+    d[2] = "two"
 
-        d[1] = "one"
-        d[2] = "two"
+    assert len(d) == 2
+    assert str(d) == "{1: one, 2: two}"
+    assert 1 in d
+    assert 2 in d
+    assert d.get(1) == "one"
+    assert d.get(2) == "two"
 
-        self.assertEqual(len(d), 2)
-        self.assertEqual(str(d), "{1: one, 2: two}")
 
+def test_delitem():
+    d = MyDict()
+
+    assert len(d) == 0
+    assert str(d) == "{}"
+    assert 1 not in d
+    assert d.get(1) is None
+
+    d[1] = "one"
+    d[2] = "two"
+
+    assert len(d) == 2
+    assert str(d) == "{1: one, 2: two}"
+
+    del d[1]
+    del d[2]
+
+    assert len(d) == 0
+    assert str(d) == "{}"
+
+    with pytest.raises(KeyError):
         del d[1]
-        del d[2]
 
-        self.assertEqual(len(d), 0)
-        self.assertEqual(str(d), "{}")
 
-        with self.assertRaises(KeyError):
-            del d[1]
+def test_pop():
+    d = MyDict()
 
-    def test_pop(self):
-        d = MyDict()
+    d[1] = "one"
 
-        d[1] = "one"
+    assert d.pop(1) == "one"
 
-        self.assertEqual(d.pop(1), "one")
+    with pytest.raises(KeyError):
+        d.pop(2)
 
-        with self.assertRaises(KeyError):
-            d.pop(2)
+    assert d.pop(3, "Not found") == "Not found"
 
-        self.assertEqual(d.pop(3, "Not found"), "Not found")
 
-    def test_setdefault(self):
-        d = MyDict()
+def test_setdefault():
+    d = MyDict()
 
-        d[1] = "one"
+    d[1] = "one"
 
-        self.assertEqual(d.setdefault(1), "one")
-        self.assertEqual(d.setdefault(1, "uno"), "one")
-        self.assertIsNone(d.setdefault(2))
-        self.assertEqual(d.setdefault(2, "two"), "two")
+    assert d.setdefault(1) == "one"
+    assert d.setdefault(1, "uno") == "one"
+    assert d.setdefault(2) is None
+    assert d.setdefault(2, "two") == "two"
 
-    def test_popitem(self):
-        d = MyDict()
 
-        d.set(1, "one")
-        d.set(2, "two")
+def test_popitem():
+    d = MyDict()
 
-        self.assertEqual(len(d), 2)
+    d.set(1, "one")
+    d.set(2, "two")
 
-        a = d.popitem()
-        a_key = a[0]
+    assert len(d) == 2
 
-        self.assertEqual(a, (1, "one"))
-        self.assertFalse(a_key in d)
-        self.assertEqual(len(d), 1)
+    a = d.popitem()
+    a_key = a[0]
 
-        b = d.popitem()
-        b_key = b[0]
-        self.assertEqual(b, (2, "two"))
-        self.assertFalse(b_key in d)
-        self.assertEqual(len(d), 0)
+    assert a == (1, "one")
+    assert a_key not in d
+    assert len(d) == 1
 
-        with self.assertRaises(KeyError):
-            d.popitem()
+    b = d.popitem()
+    b_key = b[0]
+    assert b == (2, "two")
+    assert b_key not in d
+    assert len(d) == 0
 
-    def test_len(self):
-        d = MyDict()
-        self.assertEqual(len(d), 0)
+    with pytest.raises(KeyError):
+        d.popitem()
 
-        d.set(1, "one")
-        d.set(2, "two")
-        d.set(3, "three")
 
-        self.assertEqual(len(d), 3)
+def test_len():
+    d = MyDict()
+    assert len(d) == 0
 
-    def test_contains(self):
-        d = MyDict()
+    d.set(1, "one")
+    d.set(2, "two")
+    d.set(3, "three")
 
-        self.assertFalse(1 in d)
-        d[1] = "one"
-        self.assertTrue(1 in d)
+    assert len(d) == 3
 
-        d_items = d.items()
-        self.assertTrue(1 in d_items)
-        self.assertFalse("one" in d_items)
 
-        d_keys = d.keys()
-        self.assertTrue(1 in d_keys)
-        self.assertFalse("one" in d_keys)
+def test_contains():
+    d = MyDict()
 
-        d_values = d.values()
-        self.assertTrue("one" in d_values)
-        self.assertFalse(1 in d_values)
+    assert 1 not in d
+    d[1] = "one"
+    assert 1 in d
 
-    def test_str(self):
-        d = MyDict()
+    d_items = d.items()
+    assert 1 in d_items
+    assert "one" not in d_items
 
-        self.assertEqual(str(d), "{}")
+    d_keys = d.keys()
+    assert 1 in d_keys
+    assert "one" not in d_keys
 
-        d.set(1, "one")
-        d.set(2, "two")
+    d_values = d.values()
+    assert "one" in d_values
+    assert 1 not in d_values
 
-        self.assertEqual(str(d), "{1: one, 2: two}")
 
-    def test_clear(self):
-        d = MyDict()
+def test_str():
+    d = MyDict()
 
-        d.set(1, "one")
-        d.set(2, "two")
+    assert str(d) == "{}"
 
-        self.assertEqual(str(d), "{1: one, 2: two}")
+    d.set(1, "one")
+    d.set(2, "two")
 
-        d.clear()
-        self.assertEqual(str(d), "{}")
+    assert str(d) == "{1: one, 2: two}"
 
-    def test_copy(self):
-        d = MyDict()
 
-        d.set(1, "one")
-        d.set(2, "two")
-        self.assertEqual(str(d), "{1: one, 2: two}")
+def test_clear():
+    d = MyDict()
 
-        dd = d.copy()
-        del d[2]
-        dd[3] = "three"
-        self.assertEqual(str(d), "{1: one}")
-        self.assertEqual(str(dd), "{1: one, 2: two, 3: three}")
+    d.set(1, "one")
+    d.set(2, "two")
 
-    def test_fromkeys(self):
-        self.assertEqual(
-            str(MyDict().fromkeys([1, 2, 3])), "{1: None, 2: None, 3: None}"
-        )
-        self.assertEqual(
-            str(MyDict().fromkeys([1, 2, 3], "number")),
-            "{1: number, 2: number, 3: number}",
-        )
+    assert str(d) == "{1: one, 2: two}"
 
-    def test_dictitems(self):
-        d = MyDict()
-        self.assertEqual(str(d.items()), "dict_items[]")
+    d.clear()
+    assert str(d) == "{}"
 
-        d[1] = "one"
-        d[2] = "two"
 
-        self.assertEqual(str(d.items()), "dict_items[(1, one), (2, two)]")
-        self.assertEqual(len(d.items()), 2)
+def test_copy():
+    d = MyDict()
 
-    def test_dictkeys(self):
-        d = MyDict()
-        self.assertEqual(str(d.keys()), "dict_keys[]")
+    d.set(1, "one")
+    d.set(2, "two")
+    assert str(d) == "{1: one, 2: two}"
 
-        d[1] = "one"
-        d[2] = "two"
+    dd = d.copy()
+    del d[2]
+    dd[3] = "three"
+    assert str(d) == "{1: one}"
+    assert str(dd) == "{1: one, 2: two, 3: three}"
 
-        self.assertEqual(str(d.keys()), "dict_keys[1, 2]")
-        self.assertEqual(len(d.keys()), 2)
 
-    def test_dictvalues(self):
-        d = MyDict()
-        self.assertEqual(str(d.values()), "dict_values[]")
+def test_fromkeys():
+    assert str(MyDict().fromkeys([1, 2, 3])) == "{1: None, 2: None, 3: None}"
+    assert str(MyDict().fromkeys([1, 2, 3], "number")) == "{1: number, 2: number, 3: number}"
 
-        d[1] = "one"
-        d[2] = "two"
 
-        self.assertEqual(str(d.values()), "dict_values[one, two]")
-        self.assertEqual(len(d.values()), 2)
+def test_dictitems():
+    d = MyDict()
+    assert str(d.items()) == "dict_items[]"
 
-    def test_documentation(self):
-        d = MyDict()
+    d[1] = "one"
+    d[2] = "two"
 
-        self.assertEqual(d.__doc__, "My own dictionary class")
+    assert str(d.items()) == "dict_items[(1, one), (2, two)]"
+    assert len(d.items()) == 2
 
-        items = d.items()
-        self.assertEqual(items.__doc__, "My class for dictionary items")
 
-        keys = d.keys()
-        self.assertEqual(keys.__doc__, "My class for dictionary keys")
+def test_dictkeys():
+    d = MyDict()
+    assert str(d.keys()) == "dict_keys[]"
 
-        values = d.values()
-        self.assertEqual(values.__doc__, "My class for dictionary values")
+    d[1] = "one"
+    d[2] = "two"
 
-    def test_eq(self):
-        d = MyDict()
-        dd = d
-        c = MyDict()
+    assert str(d.keys()) == "dict_keys[1, 2]"
+    assert len(d.keys()) == 2
 
-        self.assertEqual(d, dd)
-        self.assertEqual(c, d)
-        self.assertEqual(c, dd)
 
-        self.assertIs(d, dd)
-        self.assertIsNot(c, d)
-        self.assertIsNot(c, dd)
+def test_dictvalues():
+    d = MyDict()
+    assert str(d.values()) == "dict_values[]"
 
-        d[1] = 'one'
-        dd[2] = 'two'
-        c[3] = 'three'
+    d[1] = "one"
+    d[2] = "two"
 
-        self.assertEqual(d, dd)
-        self.assertIs(d, dd)
-        self.assertNotEqual(c, d)
-        self.assertNotEqual(c, dd)
+    assert str(d.values()) == "dict_values[one, two]"
+    assert len(d.values()) == 2
 
-        c[3] = 'one'
-        c[4] = 'two'
 
-        self.assertIsNot(c, d)
-        self.assertNotEqual(c, d)
-        self.assertIsNot(c, dd)
-        self.assertNotEqual(c, dd)
-        self.assertIs(d, dd)
-        self.assertEqual(d, dd)
+def test_documentation():
+    d = MyDict()
 
-    def test_update(self):
-        d = MyDict()
-        d[1] = 'one'
-        d[2] = 'three'
+    assert d.__doc__ == "My own dictionary class"
 
-        d1 = MyDict()
-        d1[2] = 'two'
-        self.assertEqual(str(d), '{1: one, 2: three}')
+    items = d.items()
+    assert items.__doc__ == "My class for dictionary items"
 
-        d.update(d1)
-        self.assertEqual(str(d), '{1: one, 2: two}')
+    keys = d.keys()
+    assert keys.__doc__ == "My class for dictionary keys"
 
-        d1[3] = 'three'
-        d.update(d1)
-        self.assertEqual(str(d), '{1: one, 2: two, 3: three}')
+    values = d.values()
+    assert values.__doc__ == "My class for dictionary values"
 
 
-if __name__ == "__main__":
-    unittest.main()
+def test_eq():
+    d = MyDict()
+    dd = d
+    c = MyDict()
+
+    assert d == dd
+    assert c == d
+    assert c == dd
+
+    assert d is dd
+    assert c is not d
+    assert c is not dd
+
+    d[1] = 'one'
+    dd[2] = 'two'
+    c[3] = 'three'
+
+    assert d, dd
+    assert d is dd
+    assert c != d
+    assert c != dd
+
+    c[3] = 'one'
+    c[4] = 'two'
+
+    assert c is not d
+    assert c != d
+    assert c is not dd
+    assert c != dd
+    assert d is dd
+    assert d == dd
+
+
+def test_update():
+    d = MyDict()
+    d[1] = 'one'
+    d[2] = 'three'
+
+    d1 = MyDict()
+    d1[2] = 'two'
+    assert str(d) == '{1: one, 2: three}'
+
+    d.update(d1)
+    assert str(d) == '{1: one, 2: two}'
+
+    d1[3] = 'three'
+    d.update(d1)
+    assert str(d) == '{1: one, 2: two, 3: three}'
