@@ -1,5 +1,3 @@
-import pytest
-
 from findnumbers import find_numbers, find_numbers_2, find_numbers_sm
 
 
@@ -17,12 +15,10 @@ def test_findnumbers():
 
 def test_find_numbers2():
     nums = find_numbers_2('')
-    with pytest.raises(StopIteration):
-        next(nums)
+    assert list(nums) == []
 
     nums = find_numbers_2('no numbers here')
-    with pytest.raises(StopIteration):
-        next(nums)
+    assert list(nums) == []
 
     nums = find_numbers_2('0')
     assert list(nums) == [0]
