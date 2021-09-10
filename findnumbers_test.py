@@ -25,30 +25,22 @@ def test_find_numbers2():
         next(nums)
 
     nums = find_numbers_2('0')
-    assert next(nums) == 0
+    assert list(nums) == [0]
 
     nums = find_numbers_2('012')
-    assert next(nums) == 12
+    assert list(nums) == [12]
 
     nums = find_numbers_2('0 1 2')
-    assert next(nums) == 0
-    assert next(nums) == 1
-    assert next(nums) == 2
+    assert list(nums) == [0, 1, 2]
 
     nums = find_numbers_2('0, 1, 2,')
-    assert next(nums) == 0
-    assert next(nums) == 1
-    assert next(nums) == 2
+    assert list(nums) == [0, 1, 2]
 
     nums = find_numbers_2('(123)')
-    assert next(nums) == 123
+    assert list(nums) == [123]
 
     nums = find_numbers_2('2some34numbers56here78"')
-    assert next(nums) == 2
-    assert next(nums) == 34
-    assert next(nums) == 56
-    assert next(nums) == 78
+    assert list(nums) == [2, 34, 56, 78]
 
     nums = find_numbers_2('-1+2')
-    assert next(nums) == 1
-    assert next(nums) == 2
+    assert list(nums) == [1, 2]
