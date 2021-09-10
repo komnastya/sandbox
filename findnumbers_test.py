@@ -4,43 +4,20 @@ from findnumbers import find_numbers, find_numbers_2
 
 
 def test_findnumbers():
-    assert find_numbers("") == []
-    assert find_numbers("no numbers here") == []
-    assert find_numbers("0") == [0]
-    assert find_numbers("012") == [12]
-    assert find_numbers("0 1 2") == [0, 1, 2]
-    assert find_numbers("0,1,2,") == [0, 1, 2]
-    assert find_numbers("(123)") == [123]
-    assert find_numbers("12some34numbers56here78") == [12, 34, 56, 78]
-    assert find_numbers("-1+2") == [1, 2]
+    run_test_cases(find_numbers)
 
 
-def test_find_numbers2():
-    nums = find_numbers_2('')
-    with pytest.raises(StopIteration):
-        next(nums)
+def test_find_numbers_2():
+    run_test_cases(find_numbers_2)
 
-    nums = find_numbers_2('no numbers here')
-    with pytest.raises(StopIteration):
-        next(nums)
 
-    nums = find_numbers_2('0')
-    assert list(nums) == [0]
-
-    nums = find_numbers_2('012')
-    assert list(nums) == [12]
-
-    nums = find_numbers_2('0 1 2')
-    assert list(nums) == [0, 1, 2]
-
-    nums = find_numbers_2('0, 1, 2,')
-    assert list(nums) == [0, 1, 2]
-
-    nums = find_numbers_2('(123)')
-    assert list(nums) == [123]
-
-    nums = find_numbers_2('2some34numbers56here78"')
-    assert list(nums) == [2, 34, 56, 78]
-
-    nums = find_numbers_2('-1+2')
-    assert list(nums) == [1, 2]
+def run_test_cases(func):
+    assert func("") == []
+    assert func("no numbers here") == []
+    assert func("0") == [0]
+    assert func("012") == [12]
+    assert func("0 1 2") == [0, 1, 2]
+    assert func("0,1,2,") == [0, 1, 2]
+    assert func("(123)") == [123]
+    assert func("12some34numbers56here78") == [12, 34, 56, 78]
+    assert func("-1+2") == [1, 2]
