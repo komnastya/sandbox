@@ -82,11 +82,3 @@ def find_numbers_sm(s: str) -> Generator[int, None, None]:
                 state = S_TEXT
                 yield int(s[start:i])
             continue
-
-# def test(s):
-#     print(f"\"{s}\"", list(find_numbers_sm(s)))
-#
-# test("")
-# test("0")
-# test("1,2,3")
-# test("123a456b")
