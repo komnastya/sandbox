@@ -40,3 +40,53 @@ def find_numbers_2(s: str) -> Generator[int, None, None]:
             yield int(s[i:j])
             i = j
         i += 1
+
+
+def find_numbers_sm_bool(s: str) -> Generator[int, None, None]:
+    in_number = False  # False means text, True means number
+    start = 0
+    for i, c in enumerate(s + "\0"):
+        char: int = ord(c)
+        is_digit: bool = char >= 48 and char <= 57
+        if in_number:
+            if is_digit:
+                in_number = True
+                start = i
+        else:
+            if not is_digit:
+                in_number = False
+                yield int(s[start:i])
+
+
+S_TEXT = 1
+S_NUM = 2
+
+
+def find_numbers_sm(s: str) -> Generator[int, None, None]:
+    state = S_TEXT
+    start = 0
+    for i, c in enumerate(s + "\0"):
+        char: int = ord(c)
+        is_digit: bool = char >= 48 and char <= 57
+        if state == S_TEXT:
+            if is_digit:
+                state = S_NUM
+                start = i
+            if not is_digit:
+                continue  # change nothing
+            continue
+        if state == S_NUM:
+            if is_digit:
+                continue  # change nothing
+            if not is_digit:
+                state = S_TEXT
+                yield int(s[start:i])
+            continue
+
+# def test(s):
+#     print(f"\"{s}\"", list(find_numbers_sm(s)))
+#
+# test("")
+# test("0")
+# test("1,2,3")
+# test("123a456b")
