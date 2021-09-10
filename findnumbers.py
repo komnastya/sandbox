@@ -2,7 +2,7 @@ from typing import List
 
 
 # Finds all positive integers in the given string.
- 
+
 
 def find_numbers(s: str) -> List[int]:
     output = []
