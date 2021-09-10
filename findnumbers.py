@@ -1,4 +1,4 @@
-from typing import List
+from typing import Generator, List
 
 
 # Finds all positive integers in the given string.
@@ -26,8 +26,7 @@ def find_numbers(s: str) -> List[int]:
     return output
 
 
-def find_numbers_2(s: str) -> List[int]:
-    output = []
+def find_numbers_2(s: str) -> Generator[int, None, None]:
     i = 0
     while i < len(s):
         char = ord(s[i])
@@ -38,7 +37,6 @@ def find_numbers_2(s: str) -> List[int]:
                 if not (char >= 48 and char <= 57):
                     break
                 j += 1
-            output.append(int(s[i:j]))
+            yield int(s[i:j])
             i = j
         i += 1
-    return output
