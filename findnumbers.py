@@ -48,7 +48,7 @@ def find_numbers_sm_bool(s: str) -> Generator[int, None, None]:
     for i, c in enumerate(s + "\0"):
         char: int = ord(c)
         is_digit: bool = char >= 48 and char <= 57
-        if in_number:
+        if not in_number:
             if is_digit:
                 in_number = True
                 start = i
