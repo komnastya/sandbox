@@ -1,7 +1,7 @@
 from typing import Generator, List
 
 
-# Finds all positive integers in the given string.
+# Finds all positive integers in a given string.
 
 
 def find_numbers(s: str) -> List[int]:
@@ -46,8 +46,8 @@ def find_numbers_sm_bool(s: str) -> Generator[int, None, None]:
     in_number = False  # False means text, True means number
     start = 0
     for i, c in enumerate(s + "\0"):
-        char: int = ord(c)
-        is_digit: bool = 48 <= char <= 57
+        char = ord(c)
+        is_digit = 48 <= char <= 57
         if not in_number:
             if is_digit:
                 in_number = True
@@ -66,12 +66,13 @@ def find_numbers_sm(s: str) -> Generator[int, None, None]:
     state = S_TEXT
     start = 0
     for i, c in enumerate(s + "\0"):
-        char: int = ord(c)
-        is_digit: bool = 48 <= char <= 57
+        char = ord(c)
+        is_digit = 48 <= char <= 57
         if state == S_TEXT:
             if is_digit:
                 state = S_NUM
                 start = i
+                continue
             if not is_digit:
                 continue  # change nothing
             continue
@@ -81,4 +82,5 @@ def find_numbers_sm(s: str) -> Generator[int, None, None]:
             if not is_digit:
                 state = S_TEXT
                 yield int(s[start:i])
+                continue
             continue
