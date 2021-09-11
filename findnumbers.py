@@ -30,11 +30,11 @@ def find_numbers_2(s: str) -> Generator[int, None, None]:
     i = 0
     while i < len(s):
         char = ord(s[i])
-        if char >= 48 and char <= 57:
+        if 48 <= char <= 57:
             j = i + 1
             while j < len(s):
                 char = ord(s[j])
-                if not (char >= 48 and char <= 57):
+                if not (48 <= char <= 57):
                     break
                 j += 1
             yield int(s[i:j])
@@ -47,7 +47,7 @@ def find_numbers_sm_bool(s: str) -> Generator[int, None, None]:
     start = 0
     for i, c in enumerate(s + "\0"):
         char: int = ord(c)
-        is_digit: bool = char >= 48 and char <= 57
+        is_digit: bool = 48 <= char <= 57
         if not in_number:
             if is_digit:
                 in_number = True
@@ -67,7 +67,7 @@ def find_numbers_sm(s: str) -> Generator[int, None, None]:
     start = 0
     for i, c in enumerate(s + "\0"):
         char: int = ord(c)
-        is_digit: bool = char >= 48 and char <= 57
+        is_digit: bool = 48 <= char <= 57
         if state == S_TEXT:
             if is_digit:
                 state = S_NUM
