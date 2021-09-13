@@ -104,5 +104,8 @@ def element_by_index2(seq: CompressedSeq, index: int) -> Any:
         if index <= count:
             return seq[i][0]
         else:
-            count = count + seq[i + 1][1]
-            i = i + 1
+            try:
+                count = count + seq[i + 1][1]
+                i = i + 1
+            except IndexError:
+                raise ValueError
