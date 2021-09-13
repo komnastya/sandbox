@@ -57,7 +57,7 @@ def even_items(list):
     output = []
     for index, value in enumerate(list, start=1):
         if (
-                not index % 2
+            not index % 2
         ):  # check whether the remainder of dividing index by 2 is zero. If it is, then you append the item to values.
             output.append(value)
     return output

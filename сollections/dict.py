@@ -111,16 +111,16 @@ class MyDict:
 
     def __str__(self):
         return (
-                "{"
-                + ", ".join(
-            (
-                (str(key) + ": " + str(value))
-                for bucket in self.buckets
-                if bucket is not None
-                for key, value in bucket
+            "{"
+            + ", ".join(
+                (
+                    (str(key) + ": " + str(value))
+                    for bucket in self.buckets
+                    if bucket is not None
+                    for key, value in bucket
+                )
             )
-        )
-                + "}"
+            + "}"
         )
 
     def fromkeys(self, seq, v=None):

@@ -7,6 +7,7 @@
 
 # The first variant with print statement
 
+
 def print_nums(integers, fractionals, exps):
     def gen_nums_int():
         for integer in integers:
@@ -19,13 +20,20 @@ def print_nums(integers, fractionals, exps):
 
     def gen_nums_exp():
         for integer in integers:
-            for exp in ['e', 'E']:
-                for sign in ['', '+', '-']:
+            for exp in ["e", "E"]:
+                for sign in ["", "+", "-"]:
                     for exp_digit in exps:
                         print(str(integer) + exp + sign + str(exp_digit))
 
                         for fractional in fractionals:
-                            print(str(integer) + '.' + str(fractional) + exp + sign + str(exp_digit))
+                            print(
+                                str(integer)
+                                + "."
+                                + str(fractional)
+                                + exp
+                                + sign
+                                + str(exp_digit)
+                            )
 
     gen_nums_int()
     gen_nums_frac()

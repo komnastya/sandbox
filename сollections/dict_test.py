@@ -227,7 +227,10 @@ def test_copy():
 
 def test_fromkeys():
     assert str(MyDict().fromkeys([1, 2, 3])) == "{1: None, 2: None, 3: None}"
-    assert str(MyDict().fromkeys([1, 2, 3], "number")) == "{1: number, 2: number, 3: number}"
+    assert (
+        str(MyDict().fromkeys([1, 2, 3], "number"))
+        == "{1: number, 2: number, 3: number}"
+    )
 
 
 def test_dictitems():
@@ -291,17 +294,17 @@ def test_eq():
     assert c is not d
     assert c is not dd
 
-    d[1] = 'one'
-    dd[2] = 'two'
-    c[3] = 'three'
+    d[1] = "one"
+    dd[2] = "two"
+    c[3] = "three"
 
     assert d, dd
     assert d is dd
     assert c != d
     assert c != dd
 
-    c[3] = 'one'
-    c[4] = 'two'
+    c[3] = "one"
+    c[4] = "two"
 
     assert c is not d
     assert c != d
@@ -313,16 +316,16 @@ def test_eq():
 
 def test_update():
     d = MyDict()
-    d[1] = 'one'
-    d[2] = 'three'
+    d[1] = "one"
+    d[2] = "three"
 
     d1 = MyDict()
-    d1[2] = 'two'
-    assert str(d) == '{1: one, 2: three}'
+    d1[2] = "two"
+    assert str(d) == "{1: one, 2: three}"
 
     d.update(d1)
-    assert str(d) == '{1: one, 2: two}'
+    assert str(d) == "{1: one, 2: two}"
 
-    d1[3] = 'three'
+    d1[3] = "three"
     d.update(d1)
-    assert str(d) == '{1: one, 2: two, 3: three}'
+    assert str(d) == "{1: one, 2: two, 3: three}"
