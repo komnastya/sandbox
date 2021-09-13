@@ -15,7 +15,7 @@ CompressedSeq = Sequence[Tuple[int, Any]]
 
 
 def compress(seq: Union[List, str]) -> CompressedSeq:
-    output: List[Tuple[int, Any]] = []
+    output: List[Tuple[Any, int]] = []
     if len(seq) == 0:
         return output
     count = 1
