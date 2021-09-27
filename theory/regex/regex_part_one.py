@@ -302,7 +302,7 @@ assert search('<.*>', '%<foo> <bar> <baz>%').group() == "<foo> <bar> <baz>"
 
 # Since the * metacharacter is greedy, it dictates the longest possible match, which includes everything up
 # to and including the '>' character that follows 'baz'. You can see from the match object that this is
-# the match produced.If you want the shortest possible match instead, then use the non-greedy
+# the match produced. If you want the shortest possible match instead, then use the non-greedy
 # metacharacter sequence *?
 
 # If you want the shortest possible match instead, then use the non-greedy metacharacter sequence *?

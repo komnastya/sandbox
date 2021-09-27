@@ -1,0 +1,94 @@
+.       - Any Character Except New Line
+\d      - Digit (0-9)
+\D      - Not a Digit (0-9)
+\w      - Word Character (a-z, A-Z, 0-9, _)
+\W      - Not a Word Character
+\s      - Whitespace (space, tab, newline)
+\S      - Not Whitespace (space, tab, newline)
+
+\b      - Word Boundary
+\B      - Not a Word Boundary
+^       - Beginning of a String
+$       - End of a String
+
+[]      - Matches Characters in brackets
+[^ ]    - Matches Characters NOT in brackets
+|       - Either Or
+( )     - Group
+
+Quantifiers:
+*       - 0 or More
++       - 1 or More
+?       - 0 or One
+{3}     - Exact Number
+{3,4}   - Range of Numbers (Minimum, Maximum)
+
+
+#### Sample Regexs ####
+
+[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+
+
+
+REGEX in PYTHON
+NB!: All these functions are in re module!!!
+
+match_obj = search(<regex>, <string>)
+
+(?=<lookahead_regex>) creates a positive lookahead assertion.
+(?!<lookahead_regex>) creates a negative lookahead assertion.
+(?<=<lookbehind_regex>) creates a positive lookbehind assertion.
+(?<! <lookbehind_regex>) creates a negative lookbehind assertion.
+
+(?#...) specifies a comment inside the regex.
+
+search(<regex>, <string>, <flags>)
+flags:
+    - I or IGNORECASE
+    - M or MULTILINE
+    - S or DOTALL
+    - X or VERBOSE
+    - DEBUG
+    - A or ASCII / U or UNICODE (by default) / L or LOCALE
+
+(?<set_flags>-<remove_flags>:<regex>)
+
+
+re MODULE FUNCTIONS
+1. Searching functions:
+    search(<regex>, <string>, flags=0)
+    match(<regex>, <string>, flags=0)
+    fullmatch(<regex>, <string>, flags=0)
+    findall(<regex>, <string>, flags=0)
+    finditer(<regex>, <string>, flags=0)
+
+2. Substitution functions:
+    sub(<regex>, <repl>, <string>)
+    subn(<regex>, <repl>, <string>, count=0, flags=0)
+
+3. Utility functions
+    split(<regex>, <string>, maxsplit=0, flags=0)
+    escape(<regex>)
+
+match_obj.string
+match_obj.__getitem__(<grp>)
+match_obj.groups(default=None)
+match_obj.group()
+match_obj.group(<n>)
+match_obj.group(<n1>, <n2>)
+
+re_obj = re.compile(<regex>, flags=0)
+
+re_obj.search(<string>[, <pos>[, <endpos>]])
+re_obj.match(<string>[, <pos>[, <endpos>]])
+re_obj.fullmatch(<string>[, <pos>[, <endpos>]])
+re_obj.findall(<string>[, <pos>[, <endpos>]])
+re_obj.finditer(<string>[, <pos>[, <endpos>]])
+
+re_obj.split(<string>, maxsplit=0)
+re_obj.sub(<repl>, <string>, count=0)
+re_obj.subn(<repl>, <string>, count=0)
+
+re_obj.flags
+re_obj.groups
+re_obj.groupindex
+re_obj.pattern
