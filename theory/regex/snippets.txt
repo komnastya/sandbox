@@ -1,10 +1,10 @@
-.       - Any Character Except New Line
-\d      - Digit (0-9)
-\D      - Not a Digit (0-9)
-\w      - Word Character (a-z, A-Z, 0-9, _)
-\W      - Not a Word Character
-\s      - Whitespace (space, tab, newline)
-\S      - Not Whitespace (space, tab, newline)
+.       - Any Character Except New Line         [^\n]
+\d      - Digit (0-9)                           [0-9]
+\D      - Not a Digit (0-9)                     [^0-9]
+\w      - Word Character (a-z, A-Z, 0-9, _)     [a-zA-Z0-9_]
+\W      - Not a Word Character                  [^a-zA-Z0-9_]
+\s      - Whitespace (space, tab, newline)      [ \t\n]
+\S      - Not Whitespace (space, tab, newline)  [^ \t\n]
 
 \b      - Word Boundary
 \B      - Not a Word Boundary
@@ -19,7 +19,7 @@ $       - End of a String
 Quantifiers:
 *       - 0 or More
 +       - 1 or More
-?       - 0 or One
+?       - 0 or One (Optional)
 {3}     - Exact Number
 {3,4}   - Range of Numbers (Minimum, Maximum)
 
@@ -30,7 +30,7 @@ Quantifiers:
 
 
 REGEX in PYTHON
-NB!: All these functions are in re module!!!
+NB!: All these functions are in the re module!!!
 
 match_obj = search(<regex>, <string>)
 
