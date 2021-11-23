@@ -235,7 +235,6 @@ for i in range(3):
     closure = outer_func2(i)
     print(f"closure({i + 5}) = {closure(i + 5)}")
 
-
 # EVALUATION TIME
 # In some situations involving loops, the behavior of a Python lambda function as a closure may be counterintuitive.
 # It requires understanding when free variables are bound in the context of a lambda. The following examples
@@ -243,10 +242,14 @@ for i in range(3):
 # Test the scenario first using a regular function:
 
 print('Using a regular function')
+
+
 def wrap(n):
     def f():
         print(n)
+
     return f
+
 
 numbers = ['one', 'two', 'three']
 funcs = []
