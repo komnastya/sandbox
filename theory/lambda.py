@@ -1,4 +1,6 @@
 import dis
+import functools
+from functools import reduce
 
 
 # LAMBDA
@@ -283,3 +285,240 @@ for n in numbers:
 
 for f in funcs:
     f()
+
+
+# LAMBDA EXPRESSION ABUSES
+
+# The next sections illustrate a few examples of lambda usages that should be avoided. Those examples might be
+# situations where, in the context of Python lambda, the code exhibits the following pattern:
+
+# It doesn’t follow the Python style guide (PEP 8)
+# It’s cumbersome and difficult to read.
+# It’s unnecessarily clever at the cost of difficult readability.
+
+# RAISING AN EXCEPTION
+# Trying to raise an exception in a Python lambda should make you think twice. There are some clever ways to
+# do so, but even something like the following is better to avoid:
+
+def throw(ex):
+    raise ex
+
+
+a = lambda: throw(Exception('Something bad happened'))()
+
+# a() -> Exception: Something bad happened
+
+# Because a statement is not syntactically correct in a Python lambda body, the workaround in the example above
+# consists of abstracting the statement call with a dedicated function throw(). Using this type of workaround
+# should be avoided. If you encounter this type of code, you should consider refactoring the code to use a regular
+# function.
+
+# CRYPTIC STYLE
+
+# As in any programming languages, you will find Python code that can be difficult to read because of the style used.
+# Lambda functions, due to their conciseness, can be conducive to writing code that is difficult to read.
+
+# The following lambda example contains several bad style choices:
+
+assert (lambda _: list(map(lambda _: _ // 2, _)))([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) == [0, 1, 1, 2, 2, 3, 3, 4, 4, 5]
+
+# The underscore (_) refers to a variable that you don’t need to refer to explicitly. But in this example,
+# three _ refer to different variables. An initial upgrade to this lambda code could be to name the variables:
+
+assert (lambda some_list: list(map(lambda n: n // 2, some_list)))([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) == [0, 1, 1, 2, 2, 3,
+                                                                                                       3, 4, 4, 5]
+
+
+# Admittedly, it’s still difficult to read. By still taking advantage of a lambda, a regular function would go a
+# long way to render this code more readable, spreading the logic over a few lines and function calls:
+
+def div_items(some_list):
+    div_by_two = lambda n: n // 2
+    return map(div_by_two, some_list)
+
+
+assert list(div_items([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])) == [0, 1, 1, 2, 2, 3, 3, 4, 4, 5]
+
+
+# This is still not optimal but shows you a possible path to make code, and Python lambda functions in particular,
+# more readable.
+
+# my experiment
+
+def div_items_without_lambda(some_list):
+    def div(n):
+        return n // 2
+
+    return map(div, some_list)
+
+
+assert list(div_items_without_lambda([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])) == [0, 1, 1, 2, 2, 3, 3, 4, 4, 5]
+
+
+# PYTHON CLASSES
+# You can but should not write class methods as Python lambda functions. The following example is perfectly legal
+# Python code but exhibits unconventional Python code relying on lambda. For example, instead of implementing
+# __str__ as a regular function, it uses a lambda. Similarly, brand and year are properties also implemented with
+# lambda functions, instead of regular functions or decorators:
+
+class Car:
+    """Car with methods as lambda functions."""
+
+    def __init__(self, brand, year):
+        self.brand = brand
+        self.year = year
+
+    brand = property(lambda self: getattr(self, '_brand'),
+                     lambda self, value: setattr(self, '_brand', value))
+    # proper implementation:
+    # @property
+    # def brand(self):
+    #     return self._brand
+    #
+    # @brand.setter
+    # def brand(self, value):
+    #     self._brand = value
+
+    year = property(lambda self: getattr(self, '_year'),
+                    lambda self, value: setattr(self, '_year', value))
+
+    __str__ = lambda self: f'{self.brand} {self.year}'  # 1: error E731
+    # proper implementation:
+    # def __str__(self):
+    #     return f'{self.brand} {self.year}'
+
+    honk = lambda self: print('Honk!')  # 2: error E731
+
+
+# Running a tool like flake8, a style guide enforcement tool, will display the following errors for __str__ and honk:
+# E731 do not assign a lambda expression, use a def
+
+# As a general rule, in the context of code written in Python, prefer regular functions over lambda expressions.
+
+# APPROPRIATE USING OF LAMBDA EXPRESSION
+
+# Lambdas in Python tend to be the subject of controversies. The following examples illustrate scenarios where the
+# use of lambda functions is not only suitable but encouraged in Python code.
+
+# CLASSIC FUNCTIONAL CONSTRUCTS
+
+# Lambda functions are regularly used with the built-in functions map() and filter(), as well as functools.reduce(),
+# exposed in the module functools. The following three examples are respective illustrations of using those functions
+# with lambda expressions as companions:
+
+assert list(map(lambda x: x.upper(), ['cat', 'dog', 'cow'])) == ['CAT', 'DOG', 'COW']
+assert list(filter(lambda x: 'o' in x, ['cat', 'dog', 'cow'])) == ['dog', 'cow']
+
+assert reduce(lambda acc, x: f'{acc} | {x}', ['cat', 'dog', 'cow']) == 'cat | dog | cow'
+
+# KEY FUNCTIONS
+# Key functions in Python are higher-order functions that take a parameter key as a named argument. key receives a
+# function that can be a lambda. This function directly influences the algorithm driven by the key function itself.
+# Here are some key functions:
+
+# sort(): list method
+# sorted(), min(), max(): built-in functions
+# nlargest() and nsmallest(): in the Heap queue algorithm module heapq
+
+# Imagine that you want to sort a list of IDs represented as strings. Each ID is the concatenation of the string id and
+# a number. Sorting this list with the built-in function sorted(), by default, uses a lexicographic order as the
+# elements in the list are strings.
+
+# To influence the sorting execution, you can assign a lambda to the named argument key, such that the sorting will
+# use the number associated with the ID:
+
+ids = ['id1', 'id2', 'id30', 'id3', 'id22', 'id100']
+assert (sorted(ids)) == ['id1', 'id100', 'id2', 'id22', 'id3', 'id30']  # Lexicographic sort
+
+sorted_ids = sorted(ids, key=lambda x: int(x[2:]))  # Integer sort
+assert sorted_ids == ['id1', 'id2', 'id3', 'id22', 'id30', 'id100']
+
+# PYTHON INTERPRETER
+
+# It’s easy to craft a quick one-liner function to explore some snippets of code that will never see the light of day
+# outside of the interpreter. The lambdas written in the interpreter, for the sake of speedy discovery, are like scrap
+# paper that you can throw away after use.
+
+# timeit
+
+# In the same spirit as the experimentation in the Python interpreter, the module timeit provides functions to time
+# small code fragments. timeit.timeit() in particular can be called directly, passing some Python code in a string.
+# Here’s an example:
+
+from timeit import timeit
+
+print('Execution time of string version', timeit("factorial(999)", "from math import factorial", number=10))
+
+# When the statement is passed as a string, timeit() needs the full context. In the example above, this is provided
+# by the second argument that sets up the environment needed by the main function to be timed. Not doing so would
+# raise a NameError exception.
+
+# Another approach is to use a lambda:
+from math import factorial
+
+print('Execution time of lambda version', timeit(lambda: factorial(999), number=10))
+
+# This solution is cleaner, more readable, and quicker to type in the interpreter. Although the execution time was
+# slightly less for the lambda version, executing the functions again may show a slight advantage for the string
+# version. The execution time of the setup is excluded from the overall execution time and shouldn’t have any impact
+# on the result.
+
+# ALTERNATIVES TO USING LAMBDA
+
+# Higher-order functions like map(), filter(), and functools.reduce() can be converted to more elegant forms with
+# slight twists of creativity, in particular with list comprehensions or generator expressions.
+
+# MAP
+
+# The built-in function map() takes a function as a first argument and applies it to each of the elements of its
+# second argument, an iterable (which are strings, lists, or tuples).
+
+# map() returns an iterator corresponding to the transformed collection. As an example, if you wanted to transform a
+# list of strings to a new list with each string capitalized, you could use map(), as follows:
+
+assert list(map(lambda x: x.capitalize(), ['cat', 'dog', 'cow'])) == ['Cat', 'Dog', 'Cow']
+
+# Using a list comprehension eliminates the need for defining and invoking the lambda function:
+
+assert [x.capitalize() for x in ['cat', 'dog', 'cow']] == ['Cat', 'Dog', 'Cow']
+
+# FILTER
+
+# The built-in function filter(), another classic functional construct, can be converted into a list comprehension.
+# It takes a predicate as a first argument and an iterable as a second argument. It builds an iterator containing all
+# the elements of the initial collection that satisfies the predicate function. Here’s an example that filters all
+# the even numbers in a given list of integers:
+
+even = lambda x: x % 2 == 0
+assert list(filter(even, range(11))) == [0, 2, 4, 6, 8, 10]
+assert list(filter(lambda x: x % 2 == 1, range(11))) == [1, 3, 5, 7, 9]  # odd
+
+# Note that filter() returns an iterator, hence the need to invoke the built-in type list that constructs a list
+# given an iterator.
+
+# The implementation leveraging the list comprehension construct gives the following:
+assert [x for x in range(11) if x % 2 == 0] == [0, 2, 4, 6, 8, 10]
+
+# REDUCE
+
+# Since Python 3, reduce() has gone from a built-in function to a functools module function. As map() and filter(),
+# its first two arguments are respectively a function and an iterable. It may also take an initializer as a third
+# argument that is used as the initial value of the resulting accumulator. For each element of the iterable,
+# reduce() applies the function and accumulates the result that is returned when the iterable is exhausted.
+
+# To apply reduce() to a list of pairs and calculate the sum of the first item of each pair, you could write this:
+pairs = [(1, 'a'), (2, 'b'), (3, 'c')]
+assert functools.reduce(lambda acc, pair: acc + pair[0], pairs, 0) == 6
+
+# A more idiomatic approach using a generator expression, as an argument to sum() in the example, is the following:
+
+pairs = [(1, 'a'), (2, 'b'), (3, 'c')]
+assert sum(x[0] for x in pairs) == 6
+
+# A slightly different and possibly cleaner solution removes the need to explicitly access the first element of the
+# pair and instead use unpacking:
+
+pairs = [(1, 'a'), (2, 'b'), (3, 'c')]
+assert sum(x for x, _ in pairs) == 6
+# The use of underscore (_) is a Python convention indicating that you can ignore the second value of the pair.
+# sum() takes a unique argument, so the generator expression does not need to be in parentheses.
