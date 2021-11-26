@@ -138,3 +138,47 @@ def greet_two(name):
 
 
 greet_two('Bob')
+
+# DECORATORS WITH ARGUMENTS
+
+# Sometimes, it’s useful to pass arguments to your decorators. For instance, @do_twice could be extended to a
+# @repeat(num_times) decorator. The number of times to execute the decorated function could then be given as an
+# argument.
+
+print('\nDecorators with arguments:')
+
+
+def repeat(num_times):  # this is a decorator factory, a funciton which creates decorators
+    def decorator_repeat(func):  # this is the new decorator created by the factory
+        @functools.wraps(func)  # this is the funciton returned by the decorator
+        def wrap_repeat(*args, **kwargs):
+            for _ in range(num_times):
+                value = func(*args, **kwargs)
+            return value
+
+        return wrap_repeat
+
+    return decorator_repeat
+
+
+def greet_three(name):
+    print(f'Hello, {name}!')
+
+
+# How it works without decorator property:
+
+four_times = repeat(4)  # this is the link to the inner decorator - decorator_repeat
+decorator = four_times(greet_three)  # but the decorator property rewrite the function original name, so
+
+four_times = four_times(greet_three)  # this is the link to the wrap_repeat function
+four_times('Nastassia')  # here we call wrap_repeat function
+
+
+# We can do the same using the decorator with argument(s):
+
+@repeat(num_times=2)
+def hooray(name):
+    print(f'Hooray! {name} has understood it!')
+
+
+hooray('Nastya')
