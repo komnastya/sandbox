@@ -243,3 +243,41 @@ def greetings3(name):
 
 
 greetings3('George')
+
+
+# STATEFUL DECORATOR
+
+# Sometimes, it’s useful to have a decorator that can keep track of state. As a simple example, we will create a
+# decorator that counts the number of times a function is called.
+
+# Note: In the beginning of this guide, we talked about pure functions returning a value based on given arguments.
+# Stateful decorators are quite the opposite, where the return value will depend on the current state, as well as
+# the given arguments.
+
+# The state—the number of calls to the function—is stored in the function attribute .num_calls on the wrapper function.
+
+def count_calls(func):
+    @functools.wraps(func)
+    def wrapper_count_calls(*args, **kwargs):
+        wrapper_count_calls.num_calls += 1  # this is function attribute, which is assign outside of function
+        print(f"Call {wrapper_count_calls.num_calls} of {func.__name__!r}")
+        return func(*args, **kwargs)
+
+    wrapper_count_calls.num_calls = 0  # assigning of the function 'num_calls' attribute
+    return wrapper_count_calls
+
+
+@count_calls
+def say_whee():
+    """This is say_whee function"""
+    print("Whee!")
+
+
+print(f'Function name: "{say_whee.__name__}"')
+print(f'Function doc: "{say_whee.__doc__}"')
+print('Number of function calls by now', say_whee.num_calls)
+
+print('\nStateful decorator:')
+say_whee()
+say_whee()
+say_whee()
