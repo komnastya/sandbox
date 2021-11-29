@@ -83,7 +83,7 @@ tw.waste_time(250)
 # In the following example, the @timer decorator is applied to a class:
 
 @timer
-class TimeWaster_two:
+class TimeWasterTwo:
     def __init__(self, max_num):
         self.max_num = max_num
 
@@ -93,11 +93,11 @@ class TimeWaster_two:
 
 
 # Decorating a class does not decorate its methods. Recall that @timer is just shorthand
-# for TimeWaster_two = timer(TimeWaster_two).
+# for TimeWasterTwo = timer(TimeWasterTwo).
 
 # Here, @timer only measures the time it takes to instantiate the class:
 print("\nSee the effect of timer decorator to the whole class:\n")
-tw = TimeWaster_two(2500)
+tw = TimeWasterTwo(2500)
 tw.waste_time(99)
 
 
@@ -182,3 +182,64 @@ def hooray(name):
 
 
 hooray('Nastya')
+
+
+# DECORATORS BOTH WITH AND WITHOUT ARGUMENT
+
+# As you saw in the previous section, when a decorator uses arguments, you need to add an extra outer function.
+# The challenge is for your code to figure out if the decorator has been called with or without arguments.
+
+# Since the function to decorate is only passed in directly if the decorator is called without arguments, the function
+# must be an optional argument. This means that the decorator arguments must all be specified by keyword. You can
+# enforce this with the special * syntax, which means that all following parameters are keyword-only:
+
+def repeat3(_func=None, *, num_times=1):  # 1
+    def decorator_repeat(func):
+        @functools.wraps(func)
+        def wrapper_repeat(*args, **kwargs):
+            for _ in range(num_times):
+                value = func(*args, **kwargs)
+            return value
+
+        return wrapper_repeat
+
+    if _func is None:  # 2
+        return decorator_repeat
+    else:  # 3
+        return decorator_repeat(_func)
+
+
+def greetings(name):
+    print(f'Hello, hello, {name}!')
+
+
+print('\nUsing decorator with and without argument simultaneously:')
+repeat3(num_times=2)(greetings)('Nastya')
+repeat3(greetings)('Nastya Kamiakova')
+
+
+# Here, the _func argument acts as a marker, noting whether the decorator has been called with arguments or not:
+
+# 1 If REPEAT has been called without arguments, the decorated function will be passed in as _func. If it has been
+# called with arguments, then _func will be None, and some of the keyword arguments may have been changed from their
+# default values. The * in the argument list means that the remaining arguments can’t be called as positional arguments.
+
+# 2 In this case, the decorator was called with arguments. Return a decorator function that can read and return a
+# function.
+
+# 3 In this case, the decorator was called without arguments. Apply the decorator to the function immediately.
+
+@repeat3(num_times=3)
+def greetings2(name):
+    print(f'Hello, hello, {name}!')
+
+
+greetings2('Nastassia')
+
+
+@repeat3
+def greetings3(name):
+    print(f'Hello, hello, {name}!')
+
+
+greetings3('George')
