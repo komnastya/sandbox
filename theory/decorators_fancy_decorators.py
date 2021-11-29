@@ -281,3 +281,59 @@ print('\nStateful decorator:')
 say_whee()
 say_whee()
 say_whee()
+
+
+# CLASSES AS DECORATORS
+
+# The typical way to maintain state is by using classes. In this section, you’ll see how to rewrite the @count_calls
+# example from the previous section using a class as a decorator.
+
+# Recall that the decorator syntax @my_decorator is just an easier way of saying func = my_decorator(func). Therefore,
+# if my_decorator is a class, it needs to take func as an argument in its .__init__() method. Furthermore, the class
+# instance needs to be callable so that it can stand in for the decorated function.
+
+# For a class instance to be callable, you implement the special .__call__() method:
+class Counter():
+    def __init__(self, start=0):
+        self.count = start
+
+    def __call__(self):
+        self.count += 1
+        print(f'Current count is {self.count}!')
+
+
+print('\nRewrite count_calls function as class:')
+count = Counter()
+count()
+count()
+
+
+# Therefore, a typical implementation of a decorator class needs to implement .__init__() and .__call__():
+
+class CountCalls:
+    def __init__(self, func):
+        functools.update_wrapper(self, func)
+        self.func = func
+        self.num_calls = 0
+
+    def __call__(self, *args, **kwargs):
+        self.num_calls += 1
+        print(f"Call {self.num_calls} of {self.func.__name__!r}")
+        return self.func(*args, **kwargs)
+
+
+# The .__init__() method must store a reference to the function and can do any other necessary initialization.
+# The .__call__() method will be called instead of the decorated function. It does essentially the same thing as
+# the wrapper() function in our earlier examples. Note that you need to use the functools.update_wrapper() function
+# instead of @functools.wraps.
+
+# This @CountCalls decorator works the same as the one in the previous section:
+@CountCalls
+def say_whee2():
+    print("Whee!")
+
+
+print('\nUse class wrapper for the say_whee function:')
+say_whee2()
+say_whee2()
+say_whee2()
