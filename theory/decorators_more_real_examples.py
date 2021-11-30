@@ -76,7 +76,6 @@ def countdown_new(from_number):
 
 countdown_new(5)
 
-
 # CREATE SINGLETON
 
 print('\nCreate singleton:')
