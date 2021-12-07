@@ -102,7 +102,7 @@ p = pathlib.Path('.')
 for name in p.glob('*dir*.py'):
     files_with_dir_in_name.append(name.name)
 
-assert files_with_dir_in_name == ['directory_listing.py', 'making_directories.py']
+assert files_with_dir_in_name == ['1_directory_listing.py', '3_making_directories.py']
 
 # Calling p.glob('*dir*.py') returns a generator object that points to all python files in the current directory that
 # contain dir in their name.
