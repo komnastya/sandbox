@@ -1,9 +1,9 @@
 # https://realpython.com/primer-on-python-decorators/#more-real-world-examples
 import functools
 
-# CASHING RETURN VALUES
+# CACHING RETURN VALUES
 
-print('\nCashing return values:')
+print('\nCaching return values:')
 
 
 # Decorators can provide a nice mechanism for caching and memoization. As an example, let’s look at a recursive
