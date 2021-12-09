@@ -3,14 +3,16 @@ import pathlib
 
 # CREATING PATH
 
+assert pathlib.Path.cwd() == pathlib.Path(".").resolve() # convert "." to absolute path using CWD as a prefix
+
 # There are a few different ways of creating a path. First of all, there are classmethods like .cwd() (Current Working
 # Directory) and .home() (your user’s home directory):
 first_path = pathlib.Path.cwd()
-assert str(first_path) == 'C:\\Users\\root\\Projects\\sandbox\\theory'
+assert str(first_path) == r'C:\Users\root\Projects\sandbox\theory'
 
 # A path can also be explicitly created from its string representation:
 second_path = pathlib.Path(r'C:\Users\root\Projects\sandbox\theory')
-assert str(second_path) == 'C:\\Users\\root\\Projects\\sandbox\\theory'
+assert str(second_path) == r'C:\Users\root\Projects\sandbox\theory'
 
 # A little tip for dealing with Windows paths: on Windows, the path separator is a backslash, \. However, in many
 # contexts, backslash is also used as an escape character in order to represent non-printable characters. To avoid
@@ -20,12 +22,12 @@ assert str(second_path) == 'C:\\Users\\root\\Projects\\sandbox\\theory'
 # A third way to construct a path is to join the parts of the path using the special operator /. The forward slash
 # operator is used independently of the actual path separator on the platform:
 third_path = pathlib.Path.home() / 'Projects' / 'sandbox' / 'theory'
-assert str(third_path) == 'C:\\Users\\root\\Projects\\sandbox\\theory'
+assert str(third_path) == r'C:\Users\root\Projects\sandbox\theory'
 
 # The / can join several paths or a mix of paths and strings (as above) as long as there is at least one Path object.
 # If you do not like the special / notation, you can do the same thing with the .joinpath() method:
 fourth_path = pathlib.Path.home().joinpath('Projects', 'sandbox', 'theory')
-assert str(fourth_path) == 'C:\\Users\\root\\Projects\\sandbox\\theory'
+assert str(fourth_path) == r'C:\Users\root\Projects\sandbox\theory'
 
 
 # READING AND WRITING FILES
