@@ -1,6 +1,8 @@
 # https://realpython.com/working-with-files-in-python/#archiving
 import os
 import shutil
+import tarfile
+import time
 import zipfile
 
 # ARCHIVING
@@ -77,7 +79,6 @@ data_zip.close()  # close the ZIP archive
 os.remove('file1.py')
 shutil.rmtree('extract_dir')
 
-
 # EXTRACTING DATA FROM PASSWORD PROTECTED ARCHIVES
 
 with zipfile.ZipFile('secret.zip', 'r') as pwd_zip:
@@ -90,7 +91,6 @@ with zipfile.ZipFile('secret.zip', 'r') as pwd_zip:
 
 # Delete directory extracted in this example:
 shutil.rmtree('secret_dir')
-
 
 # CREATING NEW ZIP ARCHIVES
 
@@ -118,3 +118,141 @@ with zipfile.ZipFile('new.zip', 'a') as new_zip:
 
 # Delete the archive created in this example:
 os.remove('new.zip')
+
+# CREATING NEW TAR ARCHIVE
+
+files_to_archive = ['1_directory_listing.py', '2_getting_file_attributes.py']
+
+#  Opening an archive in write mode('w') enables you to write new files to the archive. Any existing files in the
+#  archive are deleted and a new archive is created:
+with tarfile.open('new.tar', mode='w') as new_tar:
+    for file in files_to_archive:
+        new_tar.add(file)
+
+# + theory
+#   ...
+#   new.tar (archive)
+#       - 1_...
+#       - 2_...
+
+# After the archive is created and populated, the with context manager automatically closes it and saves it to the
+# filesystem. The last three lines open the archive you just created and print out the names of the files contained
+# in it:
+members_name = []
+
+with tarfile.open('new.tar', mode='r') as t:
+    for member in t.getmembers():
+        members_name.append(member.name)
+
+assert members_name == ['1_directory_listing.py', '2_getting_file_attributes.py']
+
+# To add new files to an existing archive, open the archive in append mode ('a'):
+with tarfile.open('new.tar', 'a') as tar:
+    tar.add('3_making_directories.py')
+
+# + theory
+#   ...
+#   new.tar (archive)
+#       - 1_...
+#       - 2_...
+#       - 3_...
+
+
+# OPENING TAR ARCHIVES
+
+# TAR files are uncompressed file archives like ZIP. They can be compressed using gzip, bzip2, and lzma compression
+# methods. The TarFile class allows reading and writing of TAR archives.
+
+tar = tarfile.TarFile('new.tar', 'r')
+
+# Use the 'r', 'w' or 'a' modes to open an uncompressed TAR file for reading, writing, and appending, respectively.
+# .open() defaults to 'r' mode. To read an uncompressed TAR file and retrieve the names of the files in it,
+# use .getnames():
+assert tar.getnames() == ['1_directory_listing.py', '2_getting_file_attributes.py', '3_making_directories.py']
+
+# The metadata of each entry in the archive can be accessed using special attributes:
+for entry in tar.getmembers():
+    print()
+    print(entry.name)
+    print(' Modified:', time.ctime(entry.mtime))
+    print(' Size    :', entry.size, 'bytes')
+
+# In this example, you loop through the list of files returned by .getmembers() and print out each file’s attributes.
+# The objects returned by .getmembers() have attributes that can be accessed programmatically such as the name, size,
+# and last modified time of each of the files in the archive. After reading or writing to the archive, it must be
+# closed to free up system resources.
+
+
+# EXTRACTING FILES FROM A TAR ARCHIVE
+
+# To extract a single file from a TAR archive, use extract(), passing in the filename:
+tar.extract('1_directory_listing.py', path=r'.\new_folder')
+
+# + theory
+#   ...
+#   new.tar (archive)
+#       - 1_...
+#       - 2_...
+#       - 3_...
+#   + new_folder
+#       - 1_...
+
+# To unpack or extract everything from the archive, use .extractall():
+tar.extractall(path='tar_archive/')
+
+# + theory
+#   ...
+#   new.tar (archive)
+#       - 1_...
+#       - 2_...
+#       - 3_...
+#   + new_folder
+#       - 1_...
+#   + tar_archive (folder)
+#       - 1_...
+#       - 2_...
+#       - 3_...
+
+# .extractall() has an optional path argument to specify where extracted files should go. Here, the archive is unpacked
+# into the tar_archive directory.
+
+# To extract a file object for reading or writing, use .extractfile(), which takes a filename or TarInfo object to
+# extract as an argument. .extractfile() returns a file-like object that can be read and used:
+
+f = tar.extractfile('1_directory_listing.py')
+f.read()
+tar.close()
+
+# Opened archives should always be closed after they have been read or written to. To close an archive, call .close()
+# on the archive file handle or use the with statement when creating tarfile objects to automatically close the archive
+# when you’re done. This frees up system resources and writes any changes you made to the archive to the filesystem.
+
+# Delete file and directory created in this example:
+os.remove('new.tar')
+shutil.rmtree('new_folder')
+shutil.rmtree('tar_archive')
+
+# WORKING WITH COMPRESSED ARCHIVES
+
+# tarfile can also read and write TAR archives compressed using gzip, bzip2, and lzma compression. To read or write to
+# a compressed archive, use tarfile.open(), passing in the appropriate mode for the compression type.
+
+# For example, to read or write data to a TAR archive compressed using gzip, use the 'r:gz' or 'w:gz' modes
+# respectively:
+
+# >>> files = ['app.py', 'config.py', 'tests.py']
+# >>> with tarfile.open('packages.tar.gz', mode='w:gz') as tar:
+# ...     tar.add('app.py')
+# ...     tar.add('config.py')
+# ...     tar.add('tests.py')
+
+# >>> with tarfile.open('packages.tar.gz', mode='r:gz') as t:
+# ...     for member in t.getmembers():
+# ...         print(member.name)
+# app.py
+# config.py
+# tests.py
+
+# The 'w:gz' mode opens the archive for gzip compressed writing and 'r:gz' opens the archive for gzip compressed
+# reading. Opening compressed archives in append mode is not possible. To add files to a compressed archive, you have
+# to create a new archive.
