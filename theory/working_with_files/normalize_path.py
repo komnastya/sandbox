@@ -1,10 +1,10 @@
 def normalize(path: str) -> str:
     """Simplifies path by removing unnecessary fragments from it."""
-    parts = path.split('/')
     new_parts = []
-    for part in parts:
+    for part in path.split('/'):
         if part == '..':
-            new_parts.pop()
+            if new_parts != []:
+                new_parts.pop()
         elif part == '' or part == '.':
             continue
         else:
