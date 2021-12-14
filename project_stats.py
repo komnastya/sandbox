@@ -1,3 +1,4 @@
+import glob
 import pathlib
 
 
@@ -7,7 +8,7 @@ import pathlib
 # Prints the sum of all lines in all files in current project +
 # Count all lines, even empty ones +
 # Prints 10 files with the most line count TODO!
-# Rewrite function using glob module TODO!
+# Rewrite function using glob module +
 
 
 def count_lines(path):
@@ -15,30 +16,26 @@ def count_lines(path):
     comment_lines = 0
     code_lines = 0
     python_files = 0
-    for entry in path.iterdir():
-        if entry.is_file and entry.name.endswith('.py'):
-            python_files += 1
-            with open(entry, 'r', encoding="utf-8") as f:
-                for line in f.readlines():
-                    line = line.strip()  # remove spaces at the beginning and in the end
-                    if line == '':
-                        empty_lines += 1
-                    elif line.startswith('#'):
-                        comment_lines += 1
-                    else:
-                        code_lines += 1
-        elif entry.is_dir():
-            empty, comments, code, p_files = count_lines(entry)
-            empty_lines += empty
-            comment_lines += comments
-            code_lines += code
-            python_files += p_files
-
-    return empty_lines, comment_lines, code_lines, python_files
+    for entry in glob.glob(f'{path}/**/*.py', recursive=True):
+        python_files += 1
+        with open(entry, 'r', encoding="utf-8") as f:
+            for line in f.readlines():
+                line = line.strip()  # remove spaces at the beginning and in the end
+                if line == '':
+                    empty_lines += 1
+                elif line.startswith('#'):
+                    comment_lines += 1
+                else:
+                    code_lines += 1
+    return f'''    
+    Directory -------------------- {path}
+    Empty lines ------------------ {empty_lines} 
+    Comment lines ---------------- {comment_lines} 
+    Code lines ------------------- {code_lines} 
+    Total number of Python files - {python_files}\n'''
 
 
-print('Empty lines: {} \nComment lines: {} \nCode lines: {} \nTotal count of Python files: {}'.format(
-    *count_lines(pathlib.Path(__file__).parent)))
+print(count_lines(pathlib.Path(__file__).parent))
 
 # -------------------------------------------------------------------------------------------------------------------#
 
