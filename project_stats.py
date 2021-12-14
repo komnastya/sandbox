@@ -46,6 +46,28 @@ def count_lines(path):
 
     return path, empty_total, comments_total, code_total, python_files, biggest_ten
 
+
+def represent(path, empty_lines, comment_lines, code_lines, python_files, biggest_ten):
+    return f'''    
+    Directory -------------------- {path}
+    Empty lines ------------------ {empty_lines} 
+    Comment lines ---------------- {comment_lines} 
+    Code lines ------------------- {code_lines} 
+    Total number of Python files - {python_files}
+     
+    Ten biggest files: {biggest_ten[0][2]}: {biggest_ten[0][0]} code lines ({biggest_ten[0][1]} total lines)  
+                       {biggest_ten[1][2]}: {biggest_ten[1][0]} code lines ({biggest_ten[1][1]} total lines) 
+                       {biggest_ten[2][2]}: {biggest_ten[2][0]} code lines ({biggest_ten[2][1]} total lines) 
+                       {biggest_ten[3][2]}: {biggest_ten[3][0]} code lines ({biggest_ten[3][1]} total lines) 
+                       {biggest_ten[4][2]}: {biggest_ten[4][0]} code lines ({biggest_ten[4][1]} total lines) 
+                       {biggest_ten[5][2]}: {biggest_ten[5][0]} code lines ({biggest_ten[5][1]} total lines) 
+                       {biggest_ten[6][2]}: {biggest_ten[6][0]} code lines ({biggest_ten[6][1]} total lines) 
+                       {biggest_ten[7][2]}: {biggest_ten[7][0]} code lines ({biggest_ten[7][1]} total lines) 
+                       {biggest_ten[8][2]}: {biggest_ten[8][0]} code lines ({biggest_ten[8][1]} total lines) 
+                       {biggest_ten[9][2]}: {biggest_ten[9][0]} code lines ({biggest_ten[9][1]} total lines)'''
+
+print(represent(*count_lines(pathlib.Path(__file__).parent)))
+
 # -------------------------------------------------------------------------------------------------------------------#
 
 # what is a byte? it is the smallest unit of information in a computer.
