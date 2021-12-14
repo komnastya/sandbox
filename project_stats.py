@@ -7,35 +7,44 @@ import pathlib
 # For each such file counts the number of text lines in it +
 # Prints the sum of all lines in all files in current project +
 # Count all lines, even empty ones +
-# Prints 10 files with the most line count TODO!
+# Prints 10 files with the most line count +
 # Rewrite function using glob module +
 
 
 def count_lines(path):
-    empty_lines = 0
-    comment_lines = 0
-    code_lines = 0
+    empty_total = 0
+    comments_total = 0
+    code_total = 0
     python_files = 0
+
+    mapping = set()
+
     for entry in glob.glob(f'{path}/**/*.py', recursive=True):
         python_files += 1
+
         with open(entry, 'r', encoding="utf-8") as f:
+            code_inside = 0
+            comment_inside = 0
+            empty_inside = 0
+
             for line in f.readlines():
-                line = line.strip()  # remove spaces at the beginning and in the end
+                line = line.strip()
                 if line == '':
-                    empty_lines += 1
+                    empty_inside += 1
                 elif line.startswith('#'):
-                    comment_lines += 1
+                    comment_inside += 1
                 else:
-                    code_lines += 1
-    return f'''    
-    Directory -------------------- {path}
-    Empty lines ------------------ {empty_lines} 
-    Comment lines ---------------- {comment_lines} 
-    Code lines ------------------- {code_lines} 
-    Total number of Python files - {python_files}\n'''
+                    code_inside += 1
 
+            empty_total += empty_inside
+            comments_total += comment_inside
+            code_total += code_inside
 
-print(count_lines(pathlib.Path(__file__).parent))
+            mapping.add((code_inside, sum((empty_inside, comment_inside, code_inside)), pathlib.Path(entry).name))
+
+    biggest_ten = [item for item in sorted(mapping, reverse=True)[:10]]
+
+    return path, empty_total, comments_total, code_total, python_files, biggest_ten
 
 # -------------------------------------------------------------------------------------------------------------------#
 
