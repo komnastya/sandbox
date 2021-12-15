@@ -48,25 +48,20 @@ def count_lines(path):
 
 
 def represent(path, empty_lines, comment_lines, code_lines, python_files, biggest_ten):
-    return f'''    
+    result = f'''    
     Directory -------------------- {path}
     Empty lines ------------------ {empty_lines} 
     Comment lines ---------------- {comment_lines} 
     Code lines ------------------- {code_lines} 
-    Total number of Python files - {python_files}
-     
-    Ten biggest files: {biggest_ten[0][2]}: {biggest_ten[0][0]} code lines ({biggest_ten[0][1]} total lines)  
-                       {biggest_ten[1][2]}: {biggest_ten[1][0]} code lines ({biggest_ten[1][1]} total lines) 
-                       {biggest_ten[2][2]}: {biggest_ten[2][0]} code lines ({biggest_ten[2][1]} total lines) 
-                       {biggest_ten[3][2]}: {biggest_ten[3][0]} code lines ({biggest_ten[3][1]} total lines) 
-                       {biggest_ten[4][2]}: {biggest_ten[4][0]} code lines ({biggest_ten[4][1]} total lines) 
-                       {biggest_ten[5][2]}: {biggest_ten[5][0]} code lines ({biggest_ten[5][1]} total lines) 
-                       {biggest_ten[6][2]}: {biggest_ten[6][0]} code lines ({biggest_ten[6][1]} total lines) 
-                       {biggest_ten[7][2]}: {biggest_ten[7][0]} code lines ({biggest_ten[7][1]} total lines) 
-                       {biggest_ten[8][2]}: {biggest_ten[8][0]} code lines ({biggest_ten[8][1]} total lines) 
-                       {biggest_ten[9][2]}: {biggest_ten[9][0]} code lines ({biggest_ten[9][1]} total lines)'''
+    Total number of Python files - {python_files}'''
+    print(result)
+    print('\nThe ten biggest files are:')
+    for file_infa in biggest_ten:
+        for code, total, name in [file_infa]:
+            print('\t{}\t {} code lines ({} lines in total)'.format(name, code, total).expandtabs(35))
 
-print(represent(*count_lines(pathlib.Path(__file__).parent)))
+
+represent(*count_lines(pathlib.Path(__file__).parent))
 
 # -------------------------------------------------------------------------------------------------------------------#
 
