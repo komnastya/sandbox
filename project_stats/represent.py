@@ -32,7 +32,7 @@ def represent(data):
         else:
             empty_percent = 0
 
-        print(f"{print_row.count:>{3}}.{files_type:<{w}}{file:^{w}}{file_percent:^{w}.2%}"
+        print(f"{print_row.count:>{3}}.{files_type:<{w}}{file:^{w}}{file_percent:^{w}.1%}"
               f"{code:^{w}}{code_percent:^{w}.1%}"
               f"{comments:^{w}}{comments_percent:^{w}.1%}"
               f"{empty:^{w}}{empty_percent:^{w}.1%}")

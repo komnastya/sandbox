@@ -30,6 +30,8 @@ def count_lines(path):
         'ten_biggest_css_files': 0,
 
         'zip_files': 0,
+
+        'other_files': 0
     }
     _all_python_files = set()
 
@@ -80,7 +82,9 @@ def count_lines(path):
             data['css_files'] += 1
         elif p(entry).name.endswith('.zip'):
             data['zip_files'] += 1
+        else:
+            data['other_files'] += 1
 
     data['python_ten_biggest_by_code_lines'] = [item for item in sorted(_all_python_files, reverse=True)[:10]]
-
+    data['all_files'] = data['all_files'] - data['other_files']
     return data
