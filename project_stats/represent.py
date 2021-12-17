@@ -12,12 +12,30 @@ def represent(data):
               f"{'Empty':^{w}}{'%':^{w}}")
         print('-' * 95)
 
-    def print_row(language, file, file_percent, code, code_percent, comments, comments_percent, empty, empty_percent):
+    def print_row(files_type, file, code, comments, empty):
         print_row.count += 1
-        print(f"{print_row.count:>{3}}.{language:<{w}}{file:^{w}}{file_percent:^{w}.2%}"
-              f"{code:^{w}}{code_percent:^{w}.2%}"
-              f"{comments:^{w}}{comments_percent:^{w}.2%}"
-              f"{empty:^{w}}{empty_percent:^{w}.2%}")
+
+        file_percent = file / data['all_files']
+
+        if code != 0:
+            code_percent = code / data['total_code']
+        else:
+            code_percent = 0
+
+        if comments != 0:
+            comments_percent = comments / data['total_comments']
+        else:
+            comments_percent = 0
+
+        if empty != 0:
+            empty_percent = empty / data['total_empty']
+        else:
+            empty_percent = 0
+
+        print(f"{print_row.count:>{3}}.{files_type:<{w}}{file:^{w}}{file_percent:^{w}.2%}"
+              f"{code:^{w}}{code_percent:^{w}.1%}"
+              f"{comments:^{w}}{comments_percent:^{w}.1%}"
+              f"{empty:^{w}}{empty_percent:^{w}.1%}")
 
     print_row.count = 0
 
@@ -68,24 +86,18 @@ def represent(data):
             print_no_files()
 
     if data['python_files']:
-        percentage = data['python_files'] / data['all_files']
-        print_row('Python', data['python_files'], percentage, data['code_lines_in_python_files'], 0,
-                  data['comment_lines_in_python_files'], 0, data['empty_lines_in_python_files'], 0)
+        print_row('Python', data['python_files'], data['code_lines_in_python_files'],
+                  data['comment_lines_in_python_files'], data['empty_lines_in_python_files'])
     if data['txt_files']:
-        percentage = data['txt_files'] / data['all_files']
-        print_row('Only text', data['txt_files'], percentage, 0, 0, 0, 0, 0, 0)
+        print_row('Only text', data['txt_files'], 0, 0, 0)
     if data['md_files']:
-        percentage = data['md_files'] / data['all_files']
-        print_row('Markdown', data['md_files'], percentage, 0, 0, 0, 0, 0, 0)
+        print_row('Markdown', data['md_files'], 0, 0, 0)
     if data['html_files']:
-        percentage = data['html_files'] / data['all_files']
-        print_row('HTML', data['html_files'], percentage, 0, 0, 0, 0, 0, 0)
+        print_row('HTML', data['html_files'], 0, 0, 0)
     if data['css_files']:
-        percentage = data['css_files'] / data['all_files']
-        print_row('CSS', data['css_files'], percentage, 0, 0, 0, 0, 0, 0)
+        print_row('CSS', data['css_files'], 0, 0, 0)
     if data['zip_files']:
-        percentage = data['zip_files'] / data['all_files']
-        print_row('ZIP', data['zip_files'], percentage, 0, 0, 0, 0, 0, 0)
+        print_row('ZIP', data['zip_files'], 0, 0, 0)
 
     print_sum_total()
 

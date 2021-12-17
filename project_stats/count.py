@@ -6,6 +6,10 @@ def count_lines(path):
     data = {
         'path': path,
         'all_files': 0,
+        'total_code': 0,
+        'total_comments': 0,
+        'total_empty': 0,
+
         'python_files': 0,
         'python_test_files': 0,
         'python_code_files': 0,
@@ -14,14 +18,18 @@ def count_lines(path):
         'comment_lines_in_python_files': 0,
         'empty_lines_in_python_files': 0,
         'python_ten_biggest_by_code_lines': None,
+
         'txt_files': 0,
+
         'md_files': 0,
+
         'html_files': 0,
-        'ten_biggest_html_files': 0,  # ------
+        'ten_biggest_html_files': 0,
+
         'css_files': 0,
-        'ten_biggest_css_files': 0,  # ---------
+        'ten_biggest_css_files': 0,
+
         'zip_files': 0,
-        'other_files': 0
     }
     _all_python_files = set()
 
@@ -47,10 +55,13 @@ def count_lines(path):
                     line = line.strip()
                     if line == '':
                         empty_inside += 1
+                        data['total_empty'] += 1
                     elif line.startswith('#'):
                         comment_inside += 1
+                        data['total_comments'] += 1
                     else:
                         code_inside += 1
+                        data['total_code'] += 1
 
                 data['code_lines_in_python_files'] += code_inside
                 data['comment_lines_in_python_files'] += comment_inside
