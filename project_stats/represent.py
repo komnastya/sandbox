@@ -31,7 +31,7 @@ def represent(data):
               f"{code:^{w * 3}}{test:^{w * 3}}{all:^{w * 3}}\n"
               f"{code / all:^{w * 3}.1%}{test / all:^{w * 3}.1%}{'100%':^{w * 3}}\n")
 
-    def print_biggest_header(file_name):
+    def print_ten_biggest_files(file_name, lst):
         print(f"{f'TEN BIGGEST {file_name} FILES':^{95}}")
         print('-' * 95)
         print(
@@ -42,12 +42,14 @@ def represent(data):
             f"{'TOTAL':^{15}}")
         print('-' * 95)
 
-    def print_biggest_row(code, comments, empty, total, name):
-        print_biggest_row.count += 1
-        print(
-            f"{print_biggest_row.count:>{3}}.{name:<{31}}{code:^{10}}{code / total:<{5}.1%}{comments:^{10}}{comments / total:<{5}.1%}{empty:^{10}}{empty / total:<{5}.1%}{total:^{15}}")
-
-    print_biggest_row.count = 0
+        count = 0
+        for code, comments, empty, total, name in lst:
+            count += 1
+            print(f"{count:>{3}}.{name:<{31}}"
+                  f"{code:^{10}}{code / total:<{5}.1%}"
+                  f"{comments:^{10}}{comments / total:<{5}.1%}"
+                  f"{empty:^{10}}{empty / total:<{5}.1%}"
+                  f"{total:^{15}}")
 
     def print_no_files():
         print(f"{'THERE IS NOT ANY FILE IN PROJECT':^{90}}")
@@ -91,6 +93,4 @@ def represent(data):
         python_files_structure()
 
     if data['python_ten_biggest_by_code_lines']:
-        print_biggest_header('PYTHON')
-        for row in data['python_ten_biggest_by_code_lines']:
-            print_biggest_row(*row)
+        print_ten_biggest_files('PYTHON', data['python_ten_biggest_by_code_lines'])
