@@ -12,6 +12,10 @@ class FileStats:
         self.comment_line_count = comment_line_count
         self.empty_line_count = empty_line_count
 
+    @classmethod
+    def sum(entries: List[FileEntry]) -> FileEntry:
+        pass
+
 
 # Type, which combines file name with its stats.
 FileEntry = Tuple[
@@ -20,7 +24,7 @@ FileEntry = Tuple[
 ]
 
 
-def _code_file_stats(path: Path, comment: str) -> FileStats:
+def py_stats(path: Path, comment: str) -> FileStats:
     with open(path, 'r', encoding="utf-8") as f:
         total_lines = 0
         empty_lines = 0
@@ -38,7 +42,7 @@ def _code_file_stats(path: Path, comment: str) -> FileStats:
     return FileStats(total_lines, code_lines, comment_lines, empty_lines)
 
 
-def _plaintext_file_stats(path: Path) -> FileStats:
+def txt_stats(path: Path) -> FileStats:
     lines = 0
     with open(path, 'r', encoding="utf-8") as f:
         for _ in f.readlines():
@@ -46,31 +50,11 @@ def _plaintext_file_stats(path: Path) -> FileStats:
     return FileStats(lines, 0, 0, 0)
 
 
-def py_stats(path: Path) -> FileStats:
-    return _code_file_stats(path, '#')
-
-
-def html_stats(path: Path) -> FileStats:
-    return _code_file_stats(path, '<!--')
-
-
-def css_stats(path: Path) -> FileStats:
-    return _code_file_stats(path, '/*')
-
-
-def txt_stats(path: Path) -> FileStats:
-    return _plaintext_file_stats(path)
-
-
-def md_stats(path: Path) -> FileStats:
-    return _plaintext_file_stats(path)
-
-
 FILE_TYPES = {
     '.py': py_stats,
-    '.html': html_stats,
-    '.css': css_stats,
-    '.md': md_stats,
+    '.html': txt_stats,
+    '.css': txt_stats,
+    '.md': txt_stats,
     '.txt': txt_stats,
 }
 
@@ -99,11 +83,6 @@ def by_test_not_test(entry: FileEntry) -> str:
 
 # Groups files and gathers stats about file group
 def group_by(entries: List[FileEntry], key_of: Callable[[FileEntry], str]) -> Dict[str, List[FileEntry]]:
-    pass
-
-
-# Combines multiple stats into one
-def summary(entries: Dict[str, List[FileEntry]]) -> Dict[str, FileStats]:
     pass
 
 
