@@ -86,7 +86,14 @@ def by_main_or_test(entry: FileCodeStats) -> str:
 
 # Groups files and gathers stats about file group
 def group_by(entries: List[FileCodeStats], key_of: Callable[[FileCodeStats], str]) -> Dict[str, List[FileCodeStats]]:
-    pass
+    data = dict()
+    for entry in entries:
+        key = key_of(entry)
+        if not data.get(key):
+            data[key] = [entry]
+        else:
+            data[key].append(entry)
+    return data
 
 
 all_files = scan_files(Path(__file__).parent.parent)  # all files in sandbox project
