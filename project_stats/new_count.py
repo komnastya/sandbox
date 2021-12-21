@@ -17,7 +17,16 @@ class CodeStats:
         pass
 
     def __str__(self):
-        return f"{self.total_line_count}"
+        w = 10
+        code_percent = self.code_line_count / self.total_line_count
+        comment_percent = self.comment_line_count / self.total_line_count
+        empty_percent = self.empty_line_count / self.total_line_count
+        return f"{'-' * 50}\n" \
+               f"{'Total lines':<{w * 2}}{self.total_line_count:<{w}}{'100%':<{w}}\n" \
+               f"{'Code lines':<{w * 2}}{self.code_line_count:<{w}}{code_percent:<{w}.1%}\n" \
+               f"{'Comment lines':<{w * 2}}{self.comment_line_count:<{w}}{comment_percent:<{w}.1%}\n" \
+               f"{'Empty lines':<{w * 2}}{self.empty_line_count:<{w}}{empty_percent:<{w}.1%}\n" \
+               f"{'-' * 50}"
 
 
 # Type, which combines file name with its stats.
