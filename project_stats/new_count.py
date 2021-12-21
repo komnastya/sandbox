@@ -13,16 +13,16 @@ class CodeStats:
         self.empty_line_count = empty_line_count
 
     @classmethod
-    def sum(cls, entries: List[FileCodeStats]) -> CodeStats:
+    def sum(cls, entries: List[CodeStats]) -> CodeStats:
         total_lines = 0
         code_lines = 0
         comment_lines = 0
         empty_lines = 0
         for entry in entries:
-            total_lines += entry[1].total_line_count
-            code_lines += entry[1].code_line_count
-            comment_lines += entry[1].comment_line_count
-            empty_lines += entry[1].empty_line_count
+            total_lines += entry.total_line_count
+            code_lines += entry.code_line_count
+            comment_lines += entry.comment_line_count
+            empty_lines += entry.empty_line_count
         return CodeStats(total_lines, code_lines, comment_lines, empty_lines)
 
     def __str__(self):
@@ -127,4 +127,4 @@ py_files = by_suffix_dict['.py']  # python files
 py_files_by_main_or_test = group_by(py_files, by_main_or_test)  # python files by test/code
 py_main_files = py_files_by_main_or_test['main']  # python main files
 py_test_files = py_files_by_main_or_test['test']  # python test files
-print(CodeStats.sum(py_main_files))
+print(CodeStats.sum([file[1] for file in all_files]))
