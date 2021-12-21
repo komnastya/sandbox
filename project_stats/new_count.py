@@ -27,9 +27,16 @@ class CodeStats:
 
     def __str__(self):
         w = 10
-        code_percent = self.code_line_count / self.total_line_count
-        comment_percent = self.comment_line_count / self.total_line_count
-        empty_percent = self.empty_line_count / self.total_line_count
+
+        if self.total_line_count:
+            code_percent = self.code_line_count / self.total_line_count
+            comment_percent = self.comment_line_count / self.total_line_count
+            empty_percent = self.empty_line_count / self.total_line_count
+        else:
+            code_percent = 0
+            comment_percent = 0
+            empty_percent = 0
+
         return f"{'-' * 50}\n" \
                f"{'Total lines':<{w * 2}}{self.total_line_count:<{w}}{'100%':<{w}}\n" \
                f"{'Code lines':<{w * 2}}{self.code_line_count:<{w}}{code_percent:<{w}.1%}\n" \
