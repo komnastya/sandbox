@@ -11,6 +11,14 @@ class CodeStats:
         self.code_line_count = code_line_count
         self.comment_line_count = comment_line_count
         self.empty_line_count = empty_line_count
+        if self.total_line_count:
+            self.code_percentage = self.code_line_count / self.total_line_count
+            self.comment_percentage = self.comment_line_count / self.total_line_count
+            self.empty_percentage = self.empty_line_count / self.total_line_count
+        else:
+            self.code_percentage = 0
+            self.comment_percentage = 0
+            self.empty_percentage = 0
 
     @classmethod
     def sum(cls, entries: List[CodeStats]) -> CodeStats:
@@ -27,21 +35,11 @@ class CodeStats:
 
     def __str__(self):
         w = 10
-
-        if self.total_line_count:
-            code_percent = self.code_line_count / self.total_line_count
-            comment_percent = self.comment_line_count / self.total_line_count
-            empty_percent = self.empty_line_count / self.total_line_count
-        else:
-            code_percent = 0
-            comment_percent = 0
-            empty_percent = 0
-
         return f"{'-' * 50}\n" \
                f"{'Total lines':<{w * 2}}{self.total_line_count:<{w}}{'100%':<{w}}\n" \
-               f"{'Code lines':<{w * 2}}{self.code_line_count:<{w}}{code_percent:<{w}.1%}\n" \
-               f"{'Comment lines':<{w * 2}}{self.comment_line_count:<{w}}{comment_percent:<{w}.1%}\n" \
-               f"{'Empty lines':<{w * 2}}{self.empty_line_count:<{w}}{empty_percent:<{w}.1%}\n" \
+               f"{'Code lines':<{w * 2}}{self.code_line_count:<{w}}{self.code_percentage:<{w}.1%}\n" \
+               f"{'Comment lines':<{w * 2}}{self.comment_line_count:<{w}}{self.comment_percentage:<{w}.1%}\n" \
+               f"{'Empty lines':<{w * 2}}{self.empty_line_count:<{w}}{self.empty_percentage:<{w}.1%}\n" \
                f"{'-' * 50}"
 
 
@@ -119,12 +117,3 @@ def group_by(entries: List[FileCodeStats], key_of: Callable[[FileCodeStats], str
         else:
             data[key].append(entry)
     return data
-
-
-all_files = scan_files(Path(__file__).parent.parent)  # all files in sandbox project
-by_suffix_dict = group_by(all_files, by_suffix)  # files grouped by file type
-py_files = by_suffix_dict['.py']  # python files
-py_files_by_main_or_test = group_by(py_files, by_main_or_test)  # python files by test/code
-py_main_files = py_files_by_main_or_test['main']  # python main files
-py_test_files = py_files_by_main_or_test['test']  # python test files
-print(CodeStats.sum([file[1] for file in all_files]))
