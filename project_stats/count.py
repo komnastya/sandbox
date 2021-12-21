@@ -1,5 +1,5 @@
 import glob
-from pathlib import Path as p
+from pathlib import Path
 
 
 def count_lines(path):
@@ -38,10 +38,12 @@ def count_lines(path):
     for entry in glob.glob(f'{path}/**/*', recursive=True):
         data['all_files'] += 1
 
-        if p(entry).name.endswith('py'):
+        p = Path(entry)
+
+        if p.name.endswith('py'):
             data['python_files'] += 1
 
-            if p(entry).name.endswith('_test.py'):
+            if p.name.endswith('_test.py') or p.name.startswith('test_'):
                 data['python_test_files'] += 1
             else:
                 data['python_code_files'] += 1
@@ -70,17 +72,17 @@ def count_lines(path):
                 data['empty_lines_in_python_files'] += empty_inside
                 data['all_lines_in_python_files'] += total_inside
 
-                _all_python_files.add((code_inside, comment_inside, empty_inside, total_inside, p(entry).name))
+                _all_python_files.add((code_inside, comment_inside, empty_inside, total_inside, p.name))
 
-        elif p(entry).name.endswith('.txt'):
+        elif p.name.endswith('.txt'):
             data['txt_files'] += 1
-        elif p(entry).name.endswith('.md'):
+        elif p.name.endswith('.md'):
             data['md_files'] += 1
-        elif p(entry).name.endswith('.html'):
+        elif p.name.endswith('.html'):
             data['html_files'] += 1
-        elif p(entry).name.endswith('.css'):
+        elif p.name.endswith('.css'):
             data['css_files'] += 1
-        elif p(entry).name.endswith('.zip'):
+        elif p.name.endswith('.zip'):
             data['zip_files'] += 1
         else:
             data['other_files'] += 1
