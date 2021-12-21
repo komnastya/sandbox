@@ -13,8 +13,17 @@ class CodeStats:
         self.empty_line_count = empty_line_count
 
     @classmethod
-    def sum(cls, entries: List[FileCodeStats]) -> FileCodeStats:
-        pass
+    def sum(cls, entries: List[FileCodeStats]) -> CodeStats:
+        total_lines = 0
+        code_lines = 0
+        comment_lines = 0
+        empty_lines = 0
+        for entry in entries:
+            total_lines += entry[1].total_line_count
+            code_lines += entry[1].code_line_count
+            comment_lines += entry[1].comment_line_count
+            empty_lines += entry[1].empty_line_count
+        return CodeStats(total_lines, code_lines, comment_lines, empty_lines)
 
     def __str__(self):
         w = 10
