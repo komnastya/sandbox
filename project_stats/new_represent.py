@@ -1,4 +1,4 @@
-from new_count import CodeStats, by_main_or_test, by_suffix, group_by, scan_files
+from new_count import CodeStats, by_main_or_test, by_suffix, group_by, python_biggest_ten, scan_files
 
 
 def represent(dir_to_scan):
@@ -14,6 +14,7 @@ def represent(dir_to_scan):
 
     if python_files:
         python_stats = CodeStats.sum([python_file[1] for python_file in python_files])
+        big_ten = python_biggest_ten(python_files)
 
     w = 12
 
@@ -89,6 +90,7 @@ def represent(dir_to_scan):
 
             if test_python_files:
                 test_stats = CodeStats.sum([test[1] for test in test_python_files])
+
                 print(f"{'Test files':<{w}}{len(test_python_files):^{w}}"
                       f"{len(test_python_files) / len(python_files) :^{w}.1%}"
                       f"{test_stats.code_line_count:^{w}}"

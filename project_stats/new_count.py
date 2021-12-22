@@ -117,3 +117,7 @@ def group_by(entries: List[FileCodeStats], key_of: Callable[[FileCodeStats], str
         else:
             data[key].append(entry)
     return data
+
+
+def python_biggest_ten(files: List[FileCodeStats]) -> (List[FileCodeStats], str):
+    return sorted(files, key=lambda file_data: file_data[1].code_line_count, reverse=True)[:10]
