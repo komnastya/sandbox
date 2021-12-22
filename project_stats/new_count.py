@@ -109,7 +109,7 @@ def by_main_or_test(entry: FileCodeStats) -> str:
 
 # Groups files and gathers stats about file group
 def group_by(entries: List[FileCodeStats], key_of: Callable[[FileCodeStats], str]) -> Dict[str, List[FileCodeStats]]:
-    data = dict()
+    data: Dict[str, List[FileCodeStats]] = dict()
     for entry in entries:
         key = key_of(entry)
         if not data.get(key):
@@ -119,5 +119,5 @@ def group_by(entries: List[FileCodeStats], key_of: Callable[[FileCodeStats], str
     return data
 
 
-def python_biggest_ten(files: List[FileCodeStats]) -> (List[FileCodeStats], str):
+def python_biggest_ten(files: List[FileCodeStats]) -> List[FileCodeStats]:
     return sorted(files, key=lambda file_data: file_data[1].code_line_count, reverse=True)[:10]
