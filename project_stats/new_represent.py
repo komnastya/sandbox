@@ -1,9 +1,7 @@
-import pathlib
-
 from new_count import CodeStats, by_main_or_test, by_suffix, group_by, scan_files
 
 
-def represent_new(dir_to_scan):
+def represent(dir_to_scan):
     all_files = scan_files(dir_to_scan)
     files_group = group_by(all_files, by_suffix)
     # >>> Dict[.py: List[FileCodeStats], .txt: List[FileCodeStats], ... ]
@@ -111,8 +109,5 @@ def represent_new(dir_to_scan):
                 f"{python_stats.empty_line_count / python_stats.empty_line_count:^{w}.1%}"
                 f"{python_stats.total_line_count:^{w}}\n")
 
-
     dir_structure()
     python_files_structure()
-
-represent_new(pathlib.Path(__file__).parent.parent)
