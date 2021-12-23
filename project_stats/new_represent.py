@@ -1,7 +1,6 @@
 import pathlib
-from typing import Dict, List
 
-from new_count import CodeStats, FileCodeStats, by_main_or_test, by_suffix, group_by, scan_files
+from new_count import CodeStats, by_main_or_test, by_suffix, group_by, scan_files
 
 
 def represent(dir_to_scan: pathlib.Path) -> None:
@@ -21,35 +20,37 @@ def represent(dir_to_scan: pathlib.Path) -> None:
         'main': 'Main files'
     }
 
-    def _print_rows(files_groups: Dict[str, List[FileCodeStats]], files_lists) -> None:
-        groups_stats = CodeStats.sum([file[1] for file in files_lists])
+    def _print_rows(files_list, by_parameter) -> None:
 
-        for group_name, files_list in files_groups.items():
+        files_list_stats = CodeStats.sum([file[1] for file in files_list])
+        file_groups = group_by(files_list, by_parameter)
 
-            group_stats = CodeStats.sum([file[1] for file in files_list])
+        for group_name, group_files in file_groups.items():
+
+            group_stats = CodeStats.sum([file[1] for file in group_files])
 
             name = names.get(group_name, group_name)
 
             if group_stats.total_line_count > 0 and group_stats.code_line_count == \
                     group_stats.comment_line_count == group_stats.empty_line_count == 0:
-                print(f"{name:<{w}}{len(files_list):^{w}}{len(files_list) / len(files_lists):^{w}.2%}"
+                print(f"{name:<{w}}{len(group_files):^{w}}{len(group_files) / len(files_list):^{w}.2%}"
                       f"{'':^{w * 6}}"
                       f"{group_stats.plain_text_count:^{w}}{group_stats.plain_text_percentage:^{w}.0%}"
                       f"{group_stats.total_line_count:^{w}}")
             else:
-                print(f"{name:<{w}}{len(files_list):^{w}}{len(files_list) / len(files_lists):^{w}.2%}"
+                print(f"{name:<{w}}{len(group_files):^{w}}{len(group_files) / len(files_list):^{w}.2%}"
                       f"{group_stats.code_line_count:^{w}}{group_stats.code_percentage:^{w}.2%}"
                       f"{group_stats.comment_line_count:^{w}}{group_stats.comment_percentage:^{w}.2%}"
                       f"{group_stats.empty_line_count:^{w}}{group_stats.empty_percentage:^{w}.2%}"
                       f"{'':^{w * 2}}"
                       f"{group_stats.total_line_count:^{w}}")
 
-        print(f"\n{'Total':<{w}}{len(files_lists):^{w}}{1:^{w}.0%}"
-              f"{groups_stats.code_line_count:^{w}}{'-//-':^{w}}"
-              f"{groups_stats.comment_line_count:^{w}}{'-//-':^{w}}"
-              f"{groups_stats.empty_line_count:^{w}}{'-//-':^{w}}"
-              f"{groups_stats.plain_text_count:^{w}}{'-//-':^{w}}"
-              f"{groups_stats.total_line_count:^{w}}")
+        print(f"\n{'Total':<{w}}{len(files_list):^{w}}{1:^{w}.0%}"
+              f"{files_list_stats.code_line_count:^{w}}{'-//-':^{w}}"
+              f"{files_list_stats.comment_line_count:^{w}}{'-//-':^{w}}"
+              f"{files_list_stats.empty_line_count:^{w}}{'-//-':^{w}}"
+              f"{files_list_stats.plain_text_count:^{w}}{'-//-':^{w}}"
+              f"{files_list_stats.total_line_count:^{w}}")
 
     def dir_structure():
 
@@ -67,7 +68,7 @@ def represent(dir_to_scan: pathlib.Path) -> None:
                   f"\n{'-' * w * 12}")
 
             # print directory structure
-            _print_rows(files_groups, all_files)
+            _print_rows(all_files, by_suffix)
 
         else:
             # print statement which says that directory is empty
@@ -75,13 +76,10 @@ def represent(dir_to_scan: pathlib.Path) -> None:
             print(f"\n{statement:^{w * 12}}"
                   f"\n{'-' * w * 12}\n")
 
-    def python_files_structure():
-        python_files = files_groups.get('.py')  # List[FileCodeStats]
+    def files_group_structure(files):
 
-        if python_files:
+        if files:
             # >>> List[(file_name, CodeStats)]]
-
-            python_stats = CodeStats.sum([python_file[1] for python_file in python_files])
 
             print(f"\n{'PYTHON FILES STRUCTURE':^{w * 12}}")
             print('-' * w * 12)
@@ -91,8 +89,8 @@ def represent(dir_to_scan: pathlib.Path) -> None:
                   f"{'Total':^{w}}"
                   f"\n{'-' * w * 12}")
 
-            python_files_group = group_by(python_files, by_main_or_test)
-            _print_rows(python_files_group, python_files)
+            _print_rows(files, by_main_or_test)
 
     dir_structure()
-    python_files_structure()
+    python_files = files_groups.get('.py')  # List[FileCodeStats]
+    files_group_structure(python_files)
