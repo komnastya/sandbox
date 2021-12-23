@@ -1,6 +1,6 @@
 import pathlib
 
-from new_count import CodeStats, by_main_or_test, by_suffix, group_by, scan_files
+from new_count import CodeStats, big_ten, by_main_or_test, by_suffix, group_by, scan_files
 
 
 def represent(dir_to_scan: pathlib.Path) -> None:
@@ -91,6 +91,34 @@ def represent(dir_to_scan: pathlib.Path) -> None:
 
             _print_rows(files, by_main_or_test)
 
+    def ten_biggest_files(files, group_name):
+
+        if files:
+
+            big_10 = big_ten(files)
+
+            header = f'TEN BIGGEST {group_name.upper()} FILES by QUANTITY of CODE LINES'
+            print(f"\n{header:^{w * 12}}")
+            print("-" * w * 12)
+
+            print(
+                f"{'FILE NAME':^{w * 5}}"
+                f"{'Code lines':^{w}}{'%':^{w}}"
+                f"{'Comments':^{w}}{'%':^{w}}"
+                f"{'Empty':^{w}}{'%':^{w}}"
+                f"{'Total':^{w}}\n"
+                f"{'-' * w * 12}"
+            )
+
+            for name, stats in big_10:
+                print(f"{pathlib.Path(name).name:<{w * 5}}"
+                      f"{stats.code_line_count:^{w}}{stats.code_percentage:^{w}.1%}"
+                      f"{stats.code_line_count:^{w}}{stats.comment_percentage:^{w}.1%}"
+                      f"{stats.empty_line_count:^{w}}{stats.empty_percentage:^{w}.1%}"
+                      f"{stats.total_line_count:^{w}}"
+                      )
+
     dir_structure()
     python_files = files_groups.get('.py')  # List[FileCodeStats]
     files_group_structure(python_files)
+    ten_biggest_files(python_files, 'python')
