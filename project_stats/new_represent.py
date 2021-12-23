@@ -110,7 +110,7 @@ def represent(dir_to_scan: pathlib.Path) -> None:
             )
 
             for name, stats in big_10:
-                print(f"{pathlib.Path(name).name:<{w * 5}}"
+                print(f"{name:<{w * 5}}"
                       f"{stats.code_line_count:^{w}}{stats.code_percentage:^{w}.1%}"
                       f"{stats.code_line_count:^{w}}{stats.comment_percentage:^{w}.1%}"
                       f"{stats.empty_line_count:^{w}}{stats.empty_percentage:^{w}.1%}"

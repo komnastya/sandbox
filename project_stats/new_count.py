@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import glob
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Callable, Dict, List, Tuple
 
 
@@ -98,7 +98,7 @@ def scan_files(dir: Path) -> List[FileCodeStats]:
         path = Path(entry)
         stats = FILE_TYPES.get(path.suffix)
         if stats is not None:
-            result.append((str(path), stats(path)))
+            result.append((str(PurePosixPath(path).relative_to(dir)), stats(path)))
     return result
 
 
