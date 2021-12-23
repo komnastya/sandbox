@@ -6,19 +6,23 @@ from typing import Callable, Dict, List, Tuple
 
 
 class CodeStats:
-    def __init__(self, total_line_count: int, code_line_count: int, comment_line_count: int, empty_line_count: int):
+    def __init__(self, total_line_count: int, code_line_count: int, comment_line_count: int, empty_line_count: int,
+                 plain_text: int):
         self.total_line_count = total_line_count
         self.code_line_count = code_line_count
         self.comment_line_count = comment_line_count
         self.empty_line_count = empty_line_count
+        self.plain_text_count = plain_text
         if self.total_line_count:
             self.code_percentage = self.code_line_count / self.total_line_count
             self.comment_percentage = self.comment_line_count / self.total_line_count
             self.empty_percentage = self.empty_line_count / self.total_line_count
+            self.plain_text_percentage = self.plain_text_count / self.total_line_count
         else:
             self.code_percentage = 0
             self.comment_percentage = 0
             self.empty_percentage = 0
+            self.plain_text_percentage = 0
 
     @classmethod
     def sum(cls, entries: List[CodeStats]) -> CodeStats:
@@ -26,12 +30,14 @@ class CodeStats:
         code_lines = 0
         comment_lines = 0
         empty_lines = 0
+        plain_text = 0
         for entry in entries:
             total_lines += entry.total_line_count
             code_lines += entry.code_line_count
             comment_lines += entry.comment_line_count
             empty_lines += entry.empty_line_count
-        return CodeStats(total_lines, code_lines, comment_lines, empty_lines)
+            plain_text += entry.plain_text_count
+        return CodeStats(total_lines, code_lines, comment_lines, empty_lines, plain_text)
 
     def __str__(self):
         w = 10
@@ -65,7 +71,7 @@ def py_stats(path: Path) -> CodeStats:
                 comment_lines += 1
             else:
                 code_lines += 1
-    return CodeStats(lines, code_lines, comment_lines, empty_lines)
+    return CodeStats(lines, code_lines, comment_lines, empty_lines, 0)
 
 
 def txt_stats(path: Path) -> CodeStats:
@@ -73,7 +79,8 @@ def txt_stats(path: Path) -> CodeStats:
     with open(path, 'r', encoding="utf-8") as f:
         for _ in f.readlines():
             lines += 1
-    return CodeStats(lines, 0, 0, 0)
+    total_lines = lines
+    return CodeStats(total_lines, 0, 0, 0, lines)
 
 
 FILE_TYPES = {
