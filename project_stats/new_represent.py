@@ -1,16 +1,17 @@
 import pathlib
+from typing import Callable, Dict, List, Optional
 
-from new_count import CodeStats, big_ten, by_main_or_test, by_suffix, group_by, scan_files
+from new_count import CodeStats, FileCodeStats, big_ten, by_main_or_test, by_suffix, group_by, scan_files
 
 
 def represent(dir_to_scan: pathlib.Path) -> None:
-    all_files = scan_files(dir_to_scan)
+    all_files: List[FileCodeStats] = scan_files(dir_to_scan)
     files_groups = group_by(all_files, by_suffix)
     # >>> Dict[.py: List[FileCodeStats], .txt: List[FileCodeStats], ... ]
 
     w = 10
 
-    names = {
+    names: Dict[str, str] = {
         '.py': 'Python',
         '.txt': 'Text',
         '.md': 'Markdown',
@@ -20,7 +21,7 @@ def represent(dir_to_scan: pathlib.Path) -> None:
         'main': 'Main files'
     }
 
-    def _print_rows(files_list, by_parameter) -> None:
+    def _print_rows(files_list: List[FileCodeStats], by_parameter: Callable[[FileCodeStats], str]) -> None:
 
         files_list_stats = CodeStats.sum([file[1] for file in files_list])
         file_groups = group_by(files_list, by_parameter)
@@ -52,7 +53,7 @@ def represent(dir_to_scan: pathlib.Path) -> None:
               f"{files_list_stats.plain_text_count:^{w}}{'-//-':^{w}}"
               f"{files_list_stats.total_line_count:^{w}}")
 
-    def dir_structure():
+    def dir_structure() -> None:
 
         if all_files:
 
@@ -76,11 +77,9 @@ def represent(dir_to_scan: pathlib.Path) -> None:
             print(f"\n{statement:^{w * 12}}"
                   f"\n{'-' * w * 12}\n")
 
-    def files_group_structure(files):
+    def files_group_structure(files: Optional[List[FileCodeStats]]) -> None:
 
         if files:
-            # >>> List[(file_name, CodeStats)]]
-
             print(f"\n{'PYTHON FILES STRUCTURE':^{w * 12}}")
             print('-' * w * 12)
 
@@ -91,7 +90,7 @@ def represent(dir_to_scan: pathlib.Path) -> None:
 
             _print_rows(files, by_main_or_test)
 
-    def ten_biggest_files(files, group_name):
+    def ten_biggest_files(files: Optional[List[FileCodeStats]], group_name: str) -> None:
 
         if files:
 
@@ -119,6 +118,6 @@ def represent(dir_to_scan: pathlib.Path) -> None:
                       )
 
     dir_structure()
-    python_files = files_groups.get('.py')  # List[FileCodeStats]
+    python_files = files_groups.get('.py')
     files_group_structure(python_files)
     ten_biggest_files(python_files, 'python')
