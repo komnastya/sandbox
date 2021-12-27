@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import glob
 from pathlib import Path
-from typing import Callable, Dict, List, Tuple
+from typing import Callable, Dict, Iterator, List, Tuple
 
 
 class CodeStats:
@@ -92,7 +92,7 @@ FILE_TYPES = {
 }
 
 
-def scan_files(dir: Path) -> List[FileCodeStats]:
+def scan_files(dir: Path) -> Iterator[Tuple[str, CodeStats]]:
     for entry in glob.glob(f'{dir}/**/*', recursive=True):
         path = Path(entry)
         stats = FILE_TYPES.get(path.suffix)
