@@ -1,7 +1,7 @@
 import pathlib
 from typing import Callable, Dict, List, Optional
 
-from new_count import CodeStats, FileCodeStats, big_ten, by_main_or_test, by_suffix, group_by, scan_files
+from count import CodeStats, FileCodeStats, big_ten, by_main_or_test, by_suffix, group_by, scan_files
 
 
 def represent(dir_to_scan: pathlib.Path) -> None:
