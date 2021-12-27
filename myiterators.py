@@ -1,5 +1,8 @@
+from typing import Iterable, Iterator
+
+
 # Returns the first `count` elements from the given iterable.
-def head(it, count):
+def head(it: Iterable, count: int) -> Iterator:
     it = iter(it)
     while count > 0:
         try:
@@ -10,7 +13,7 @@ def head(it, count):
 
 
 # Skips the first `count` elements from the given iterable and returns all the remaining elements.
-def skip(it, count):
+def skip(it: Iterable, count: int) -> Iterator:
     it = iter(it)
     while True:
         try:
@@ -25,7 +28,7 @@ def skip(it, count):
 
 # From the given iterable returns elements in even positions.
 # [a, b, c, d, e, f] -> [a, c, e]
-def even(it):
+def even(it: Iterable[int]) -> Iterator:
     it = iter(it)
     while True:
         try:
@@ -37,7 +40,7 @@ def even(it):
 
 # From the given iterable returns elements in odd positions.
 # [a, b, c, d, e, f] -> [b, d, f]
-def odd(it):
+def odd(it: Iterable) -> Iterator:
     it = iter(it)
     while True:
         try:

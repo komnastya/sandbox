@@ -1,5 +1,5 @@
-# Tasks
-#
+from typing import Iterator
+
 # сделать итератор, который возвращает итераторы, которые генерируют числовые последовательности 1,2,3,...
 # есть внешний итератор, который генерирует вложенные итераторы
 # каждый следующий вложенный итератор генерирует последовательность длинны равной индексу этого итератора
@@ -13,10 +13,9 @@ l = [
     # ... and so on
 ]
 
+
 # `count` is the number of iterators to generate, None for infinite number.
-
-
-def triangle(count=None):
+def triangle(count: int = None) -> Iterator[range]:
     """Generates a sequence of iterators of number of increasing length."""
     outer = 1
     while count is None or outer <= count:

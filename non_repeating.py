@@ -1,3 +1,6 @@
+from typing import Iterable, Iterator
+
+
 # [1,2,3,4,5] -> [1,2,3,4,5]
 # [1,2,1,2,1] -> [1,2,1,2,1]
 # [1,1,1,1,1] -> [1]
@@ -6,7 +9,9 @@
 # If `it` is sorted, then obviously this function generates only unique elements.
 # If `it` is not sorted, then the generated elements are not unique in the whole sequence,
 # but there are no equal consecutive elements.
-def non_repeating_one(it):
+
+
+def non_repeating_one(it: Iterable[int]) -> Iterator[int]:
     it = iter(it)
     x = next(it, None)
     while x is not None:
@@ -16,7 +21,7 @@ def non_repeating_one(it):
             yield y
 
 
-def non_repeating_two(it):
+def non_repeating_two(it: Iterable[int]) -> Iterator[int]:
     it = iter(it)
     x = next(it, None)
     y = next(it, None)
@@ -29,7 +34,7 @@ def non_repeating_two(it):
         yield x
 
 
-def non_repeating_better(it):
+def non_repeating_better(it: Iterable) -> Iterator:
     it = iter(it)
     last = object()
     while True:

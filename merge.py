@@ -1,3 +1,5 @@
+from typing import Iterable, Iterator
+
 from pushback import PushBackIterator
 
 
@@ -19,7 +21,7 @@ from pushback import PushBackIterator
 # Without PushBackIterator
 
 
-def merge_ugly(a, b):
+def merge_ugly(a: Iterable, b: Iterable) -> Iterator:
     a = iter(a)
     b = iter(b)
     x = next(a, None)
@@ -42,7 +44,7 @@ def merge_ugly(a, b):
 # Using PushBackIterator
 
 
-def merge(a, b):
+def merge(a: Iterable, b: Iterable) -> Iterator:
     a = PushBackIterator(iter(a))
     b = PushBackIterator(iter(b))
     while True:
@@ -68,7 +70,7 @@ def merge(a, b):
 # Using PushBackIterator with implemented has_next method
 
 
-def merge_better(a, b):
+def merge_better(a: Iterable, b: Iterable) -> Iterator:
     a = PushBackIterator(iter(a))
     b = PushBackIterator(iter(b))
     while a.has_next() and b.has_next():

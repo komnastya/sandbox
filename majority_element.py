@@ -1,3 +1,6 @@
+from typing import List, Optional
+
+
 # Given an array nums of size n, return the majority element.
 # The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
 # Example 1:
@@ -5,7 +8,7 @@
 # Output: 3
 
 
-def majority_element_for(nums):
+def majority_element_for(nums: List) -> Optional[int]:
     if len(nums) == 0:
         return None
     major = 0
@@ -21,7 +24,7 @@ def majority_element_for(nums):
     return major
 
 
-def majority_element_while(nums):
+def majority_element_while(nums: List) -> Optional[int]:
     if len(nums) == 0:
         return None
     major = 0
@@ -42,14 +45,15 @@ def majority_element_while(nums):
     return major
 
 
-def majority_element_count(nums):
+def majority_element_count(nums: List) -> Optional[int]:
     for element in nums:
         counter = nums.count(element)
         if counter > len(nums) / 2:
             return element
+    return None
 
 
-def majority_element_dict(nums):
+def majority_element_dict(nums: List) -> Optional[int]:
     counters = {nums.count(element): element for element in nums}
     major = max(counters.keys())
     return counters.get(major)
@@ -58,7 +62,7 @@ def majority_element_dict(nums):
 # Boyer–Moore majority vote algorithm
 
 
-def majority_element(nums):
+def majority_element(nums: List) -> Optional[int]:
     counter = 0
     for x in nums:
         if counter == 0:
