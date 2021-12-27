@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import glob
 from pathlib import Path
-from typing import Callable, Dict, Iterator, List, Tuple
+from typing import Callable, Dict, Iterable, Iterator, List, Tuple
 
 
 class CodeStats:
@@ -113,7 +113,8 @@ def by_main_or_test(entry: FileCodeStats) -> str:
 
 
 # Groups files and gathers stats about file group
-def group_by(entries: List[FileCodeStats], key_of: Callable[[FileCodeStats], str]) -> Dict[str, List[FileCodeStats]]:
+def group_by(entries: Iterable[FileCodeStats], key_of: Callable[[FileCodeStats], str]) -> Dict[
+    str, List[FileCodeStats]]:
     data: Dict[str, List[FileCodeStats]] = dict()
     for entry in entries:
         key = key_of(entry)
@@ -124,5 +125,5 @@ def group_by(entries: List[FileCodeStats], key_of: Callable[[FileCodeStats], str
     return data
 
 
-def big_ten(files: List[FileCodeStats]) -> List[FileCodeStats]:
+def big_ten(files: Iterable[FileCodeStats]) -> Iterable[FileCodeStats]:
     return sorted(files, key=lambda file_data: file_data[1].code_line_count, reverse=True)[:10]
