@@ -5,7 +5,7 @@ from new_count import CodeStats, FileCodeStats, big_ten, by_main_or_test, by_suf
 
 
 def represent(dir_to_scan: pathlib.Path) -> None:
-    all_files: List[FileCodeStats] = scan_files(dir_to_scan)
+    all_files = list(scan_files(dir_to_scan))
     files_groups = group_by(all_files, by_suffix)
     # >>> Dict[.py: List[FileCodeStats], .txt: List[FileCodeStats], ... ]
 

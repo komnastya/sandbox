@@ -93,13 +93,11 @@ FILE_TYPES = {
 
 
 def scan_files(dir: Path) -> List[FileCodeStats]:
-    result = []
     for entry in glob.glob(f'{dir}/**/*', recursive=True):
         path = Path(entry)
         stats = FILE_TYPES.get(path.suffix)
         if stats is not None:
-            result.append((str(path.relative_to(dir)), stats(path)))
-    return result
+            yield ((str(path.relative_to(dir)), stats(path)))
 
 
 def by_suffix(entry: FileCodeStats) -> str:
