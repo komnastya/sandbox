@@ -83,7 +83,7 @@ def txt_stats(path: Path) -> CodeStats:
     return CodeStats(total_lines, 0, 0, 0, lines)
 
 
-FILE_TYPES = {
+FILE_TYPES: Dict[str, Callable[[Path], CodeStats]] = {
     '.py': py_stats,
     '.html': txt_stats,
     '.css': txt_stats,
@@ -125,5 +125,5 @@ def group_by(entries: Iterable[FileCodeStats], key_of: Callable[[FileCodeStats],
     return data
 
 
-def big_ten(files: Iterable[FileCodeStats]) -> Iterable[FileCodeStats]:
+def big_ten(files: Iterable[FileCodeStats]) -> List[FileCodeStats]:
     return sorted(files, key=lambda file_data: file_data[1].code_line_count, reverse=True)[:10]
